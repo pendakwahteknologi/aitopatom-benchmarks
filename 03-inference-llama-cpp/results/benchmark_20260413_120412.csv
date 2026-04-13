@@ -1,0 +1,17 @@
+model,quant,test,tokens,tok_s
+qwen2 7B Q4_K - Medium,Q4_K_M,PP,128,2557.26
+qwen2 7B Q4_K - Medium,Q4_K_M,PP,256,3224.44
+qwen2 7B Q4_K - Medium,Q4_K_M,PP,512,3333.82
+qwen2 7B Q4_K - Medium,Q4_K_M,TG,128,42.56
+qwen3 8B Q4_K - Medium,Q4_K_M,PP,128,2576.46
+qwen3 8B Q4_K - Medium,Q4_K_M,PP,256,2954.05
+qwen3 8B Q4_K - Medium,Q4_K_M,PP,512,3018.26
+qwen3 8B Q4_K - Medium,Q4_K_M,TG,128,38.26
+qwen2 32B Q4_K - Medium,Q4_K_M,PP,128,682.66
+qwen2 32B Q4_K - Medium,Q4_K_M,PP,256,722.97
+qwen2 32B Q4_K - Medium,Q4_K_M,PP,512,715.95
+qwen2 32B Q4_K - Medium,Q4_K_M,TG,128,9.56
+qwen2 70B Q4_K - Medium,Q4_K_M,PP,128,305.83
+qwen2 70B Q4_K - Medium,Q4_K_M,PP,256,313.69
+qwen2 70B Q4_K - Medium,Q4_K_M,PP,512,305.41
+qwen2 70B Q4_K - Medium,Q4_K_M,TG,128,4.04

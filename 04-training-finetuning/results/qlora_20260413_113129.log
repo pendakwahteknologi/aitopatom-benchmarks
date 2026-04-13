@@ -1,0 +1,122 @@
+
+╭─────────────────────────────────── CUDA Fine-Tuning Benchmark ───────────────────────────────────╮
+│                                                                                                  │
+│  Machine:      atom                                                                              │
+│  GPU:          NVIDIA GB10 (120 GB)                                                              │
+│  Mode:         QLoRA                                                                             │
+│  Model:        Qwen/Qwen2.5-7B-Instruct                                                          │
+│  Dataset:      databricks/databricks-dolly-15k                                                   │
+│  Steps:        5                                                                                 │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+DRY RUN: 5 steps, no evaluation
+
+                                   Run Configuration                                   
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                      ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ mode                           │ qlora                                              │
+│ model_name                     │ Qwen/Qwen2.5-7B-Instruct                           │
+│ max_steps                      │ 5                                                  │
+│ seq_len                        │ 1024                                               │
+│ micro_batch_size               │ 2                                                  │
+│ gradient_accumulation_steps    │ 16                                                 │
+│ learning_rate                  │ 0.0002                                             │
+│ dtype                          │ bfloat16                                           │
+│ attn_implementation            │ sdpa                                               │
+│ seed                           │ 42                                                 │
+│ gradient_checkpointing         │ True                                               │
+│ lora_r                         │ 16                                                 │
+│ lora_alpha                     │ 32                                                 │
+│ lora_dropout                   │ 0.05                                               │
+│ qlora_bits                     │ 4                                                  │
+│ qlora_quant_type               │ nf4                                                │
+└────────────────────────────────┴────────────────────────────────────────────────────┘
+
+
+──────────────────────────────────────── System Information ────────────────────────────────────────
+
+  Hostname:  noc
+  OS:        Linux 6.17.0-1014-nvidia
+  CPU:       Cortex-X925 + Cortex-A725
+  RAM:       119.7 GB
+  PyTorch:   2.11.0+cu130
+  CUDA:      13.0
+  C2C Mode:  Enabled
+
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Dataset:     databricks/databricks-dolly-15k
+  Train:       13,509 samples
+  Validation:  750 samples
+  Test:        752 samples
+
+
+─────────────────────── Loading Model QLoRA mode - Qwen/Qwen2.5-7B-Instruct ────────────────────────
+
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]Loading weights:   0%|          | 1/339 [00:07<43:46,  7.77s/it]Loading weights:   1%|          | 2/339 [00:14<41:06,  7.32s/it]Loading weights:   1%|          | 4/339 [00:15<16:43,  3.00s/it]Loading weights:   1%|▏         | 5/339 [00:16<13:01,  2.34s/it]Loading weights:   2%|▏         | 6/339 [00:17<10:26,  1.88s/it]Loading weights:   3%|▎         | 10/339 [00:17<03:53,  1.41it/s]Loading weights:   5%|▍         | 16/339 [00:18<02:04,  2.60it/s]Loading weights:   5%|▌         | 17/339 [00:19<02:22,  2.26it/s]Loading weights:   5%|▌         | 18/339 [00:20<02:41,  1.99it/s]Loading weights:   6%|▋         | 22/339 [00:20<01:33,  3.40it/s]Loading weights:   7%|▋         | 24/339 [00:20<01:16,  4.12it/s]Loading weights:   8%|▊         | 28/339 [00:21<01:12,  4.31it/s]Loading weights:   9%|▉         | 30/339 [00:22<01:26,  3.57it/s]Loading weights:  10%|█         | 34/339 [00:22<00:57,  5.30it/s]Loading weights:  11%|█         | 36/339 [00:22<00:49,  6.08it/s]Loading weights:  12%|█▏        | 40/339 [00:23<00:55,  5.40it/s]Loading weights:  12%|█▏        | 41/339 [00:24<01:19,  3.76it/s]Loading weights:  12%|█▏        | 42/339 [00:25<01:44,  2.84it/s]Loading weights:  14%|█▎        | 46/339 [00:25<01:02,  4.71it/s]Loading weights:  14%|█▍        | 48/339 [00:25<00:52,  5.54it/s]Loading weights:  15%|█▌        | 52/339 [00:26<00:56,  5.06it/s]Loading weights:  16%|█▌        | 53/339 [00:27<01:20,  3.56it/s]Loading weights:  16%|█▌        | 54/339 [00:28<01:45,  2.71it/s]Loading weights:  17%|█▋        | 58/339 [00:28<01:00,  4.66it/s]Loading weights:  19%|█▉        | 64/339 [00:29<00:49,  5.52it/s]Loading weights:  19%|█▉        | 65/339 [00:29<01:09,  3.96it/s]Loading weights:  19%|█▉        | 66/339 [00:30<01:30,  3.01it/s]Loading weights:  21%|██        | 70/339 [00:30<00:56,  4.80it/s]Loading weights:  21%|██        | 72/339 [00:31<00:47,  5.61it/s]Loading weights:  23%|██▎       | 77/339 [00:32<00:46,  5.58it/s]Loading weights:  23%|██▎       | 78/339 [00:32<01:07,  3.88it/s]Loading weights:  24%|██▍       | 82/339 [00:33<00:44,  5.77it/s]Loading weights:  25%|██▍       | 84/339 [00:33<00:38,  6.55it/s]Loading weights:  26%|██▌       | 88/339 [00:34<00:44,  5.59it/s]Loading weights:  26%|██▋       | 89/339 [00:35<01:05,  3.81it/s]Loading weights:  27%|██▋       | 90/339 [00:35<01:27,  2.85it/s]Loading weights:  28%|██▊       | 94/339 [00:36<00:51,  4.73it/s]Loading weights:  28%|██▊       | 96/339 [00:36<00:43,  5.59it/s]Loading weights:  29%|██▉       | 100/339 [00:37<00:47,  5.08it/s]Loading weights:  30%|██▉       | 101/339 [00:37<01:07,  3.55it/s]Loading weights:  30%|███       | 102/339 [00:38<01:27,  2.70it/s]Loading weights:  31%|███▏      | 106/339 [00:38<00:50,  4.62it/s]Loading weights:  32%|███▏      | 108/339 [00:39<00:41,  5.52it/s]Loading weights:  33%|███▎      | 112/339 [00:40<00:44,  5.09it/s]Loading weights:  33%|███▎      | 113/339 [00:40<01:04,  3.53it/s]Loading weights:  34%|███▎      | 114/339 [00:41<01:23,  2.70it/s]Loading weights:  35%|███▍      | 118/339 [00:41<00:48,  4.58it/s]Loading weights:  35%|███▌      | 120/339 [00:42<00:39,  5.50it/s]Loading weights:  37%|███▋      | 124/339 [00:42<00:42,  5.02it/s]Loading weights:  37%|███▋      | 125/339 [00:43<01:00,  3.54it/s]Loading weights:  37%|███▋      | 126/339 [00:44<01:18,  2.70it/s]Loading weights:  39%|███▉      | 132/339 [00:44<00:36,  5.67it/s]Loading weights:  40%|████      | 136/339 [00:45<00:38,  5.22it/s]Loading weights:  41%|████      | 138/339 [00:47<01:05,  3.06it/s]Loading weights:  42%|████▏     | 142/339 [00:47<00:44,  4.47it/s]Loading weights:  42%|████▏     | 144/339 [00:47<00:37,  5.16it/s]Loading weights:  44%|████▎     | 148/339 [00:48<00:38,  4.94it/s]Loading weights:  44%|████▍     | 149/339 [00:49<00:52,  3.59it/s]Loading weights:  45%|████▌     | 154/339 [00:49<00:31,  5.83it/s]Loading weights:  46%|████▌     | 156/339 [00:49<00:28,  6.53it/s]Loading weights:  47%|████▋     | 160/339 [00:50<00:31,  5.64it/s]Loading weights:  47%|████▋     | 161/339 [00:51<00:45,  3.90it/s]Loading weights:  48%|████▊     | 162/339 [00:52<01:00,  2.94it/s]Loading weights:  49%|████▉     | 166/339 [00:52<00:36,  4.79it/s]Loading weights:  50%|████▉     | 168/339 [00:52<00:30,  5.65it/s]Loading weights:  51%|█████     | 172/339 [00:53<00:32,  5.09it/s]Loading weights:  51%|█████     | 173/339 [00:54<00:46,  3.56it/s]Loading weights:  51%|█████▏    | 174/339 [00:55<01:00,  2.73it/s]Loading weights:  53%|█████▎    | 178/339 [00:55<00:34,  4.63it/s]Loading weights:  53%|█████▎    | 180/339 [00:55<00:29,  5.47it/s]Loading weights:  54%|█████▍    | 184/339 [00:56<00:30,  5.09it/s]Loading weights:  55%|█████▍    | 185/339 [00:57<00:43,  3.55it/s]Loading weights:  55%|█████▍    | 186/339 [00:58<00:56,  2.70it/s]Loading weights:  57%|█████▋    | 192/339 [00:58<00:25,  5.70it/s]Loading weights:  58%|█████▊    | 196/339 [00:59<00:26,  5.41it/s]Loading weights:  58%|█████▊    | 198/339 [01:01<00:47,  2.97it/s]Loading weights:  60%|█████▉    | 202/339 [01:01<00:32,  4.27it/s]Loading weights:  61%|██████▏   | 208/339 [01:01<00:18,  7.19it/s]Loading weights:  62%|██████▏   | 211/339 [01:03<00:34,  3.74it/s]Loading weights:  63%|██████▎   | 214/339 [01:03<00:27,  4.57it/s]Loading weights:  64%|██████▎   | 216/339 [01:03<00:24,  5.10it/s]Loading weights:  65%|██████▍   | 220/339 [01:05<00:26,  4.52it/s]Loading weights:  65%|██████▌   | 222/339 [01:07<00:46,  2.50it/s]Loading weights:  67%|██████▋   | 226/339 [01:07<00:31,  3.63it/s]Loading weights:  67%|██████▋   | 228/339 [01:07<00:26,  4.18it/s]Loading weights:  68%|██████▊   | 232/339 [01:08<00:27,  3.91it/s]Loading weights:  69%|██████▊   | 233/339 [01:09<00:36,  2.91it/s]Loading weights:  69%|██████▉   | 234/339 [01:10<00:47,  2.22it/s]Loading weights:  70%|███████   | 238/339 [01:11<00:27,  3.65it/s]Loading weights:  71%|███████   | 240/339 [01:11<00:23,  4.30it/s]Loading weights:  72%|███████▏  | 244/339 [01:12<00:22,  4.20it/s]Loading weights:  72%|███████▏  | 245/339 [01:13<00:29,  3.19it/s]Loading weights:  73%|███████▎  | 246/339 [01:13<00:36,  2.53it/s]Loading weights:  74%|███████▎  | 250/339 [01:14<00:20,  4.34it/s]Loading weights:  74%|███████▍  | 252/339 [01:14<00:16,  5.17it/s]Loading weights:  76%|███████▌  | 256/339 [01:15<00:16,  4.91it/s]Loading weights:  76%|███████▌  | 257/339 [01:16<00:23,  3.48it/s]Loading weights:  76%|███████▌  | 258/339 [01:16<00:30,  2.67it/s]Loading weights:  77%|███████▋  | 262/339 [01:17<00:16,  4.55it/s]Loading weights:  78%|███████▊  | 264/339 [01:17<00:13,  5.44it/s]Loading weights:  79%|███████▉  | 268/339 [01:18<00:14,  5.07it/s]Loading weights:  79%|███████▉  | 269/339 [01:18<00:20,  3.49it/s]Loading weights:  80%|███████▉  | 270/339 [01:19<00:25,  2.67it/s]Loading weights:  81%|████████  | 274/339 [01:20<00:14,  4.56it/s]Loading weights:  81%|████████▏ | 276/339 [01:20<00:11,  5.41it/s]Loading weights:  83%|████████▎ | 280/339 [01:21<00:12,  4.87it/s]Loading weights:  83%|████████▎ | 281/339 [01:22<00:18,  3.19it/s]Loading weights:  85%|████████▍ | 288/339 [01:22<00:08,  6.32it/s]Loading weights:  86%|████████▌ | 292/339 [01:23<00:08,  5.26it/s]Loading weights:  86%|████████▋ | 293/339 [01:24<00:12,  3.58it/s]Loading weights:  87%|████████▋ | 294/339 [01:25<00:16,  2.65it/s]Loading weights:  88%|████████▊ | 298/339 [01:25<00:09,  4.11it/s]Loading weights:  90%|████████▉ | 305/339 [01:26<00:06,  4.95it/s]Loading weights:  90%|█████████ | 306/339 [01:27<00:09,  3.55it/s]Loading weights:  91%|█████████▏| 310/339 [01:28<00:05,  4.97it/s]Loading weights:  92%|█████████▏| 312/339 [01:28<00:04,  5.54it/s]Loading weights:  93%|█████████▎| 316/339 [01:29<00:04,  4.71it/s]Loading weights:  94%|█████████▎| 317/339 [01:30<00:06,  3.35it/s]Loading weights:  94%|█████████▍| 318/339 [01:31<00:07,  2.65it/s]Loading weights:  95%|█████████▍| 322/339 [01:31<00:03,  4.36it/s]Loading weights:  96%|█████████▌| 324/339 [01:31<00:02,  5.19it/s]Loading weights:  97%|█████████▋| 328/339 [01:32<00:02,  4.95it/s]Loading weights:  97%|█████████▋| 329/339 [01:33<00:02,  3.52it/s]Loading weights:  97%|█████████▋| 330/339 [01:34<00:03,  2.69it/s]Loading weights:  99%|█████████▊| 334/339 [01:34<00:01,  4.55it/s]Loading weights:  99%|█████████▉| 336/339 [01:34<00:00,  5.39it/s]Loading weights: 100%|██████████| 339/339 [01:34<00:00,  3.59it/s]
+  Quantization:         4-bit nf4
+  Double quantization:  True
+  Total parameters:     7,625,709,056
+  Trainable parameters: 10,092,544 (0.13%)
+  LoRA rank:            16
+  LoRA alpha:           32
+
+
+────────────────────────────────────────── Preparing Data ──────────────────────────────────────────
+
+  Train samples: 13,509
+  Val samples:   750
+
+─────────────────────────────────────── Setting Up Optimizer ───────────────────────────────────────
+
+  Optimizer:        AdamW
+  LR schedule:      cosine
+  Warmup steps:     0
+  Max steps:        5
+  Timing warmup:    1 steps (excluded from metrics)
+
+
+──────────────────────────────────────── Training Steps 1-5 ────────────────────────────────────────
+
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+  Step     1/5 ( 20.0%) (warmup)  Loss: 2.2735  LR: 1.81e-04  Step: 60.34s  Elapsed: 1m 00s  ETA: 4m
+01s  GPU: 12.7/120GB
+  Step     2/5 ( 40.0%)  Loss: 2.2595  LR: 1.31e-04  Step: 59.80s  Elapsed: 2m 00s  ETA: 2m 59s  
+GPU: 12.8/120GB  Tok/s: 79  Samp/s: 0.0
+  Step     3/5 ( 60.0%)  Loss: 2.0224  LR: 6.91e-05  Step: 59.91s  Elapsed: 3m 00s  ETA: 1m 59s  
+GPU: 12.8/120GB  Tok/s: 75  Samp/s: 0.0
+  Step     4/5 ( 80.0%)  Loss: 2.0729  LR: 1.91e-05  Step: 59.89s  Elapsed: 4m 00s  ETA: 60s  GPU: 
+12.8/120GB  Tok/s: 84  Samp/s: 0.0
+  Step     5/5 (100.0%)  Loss: 1.8798  LR: 0.00e+00  Step: 59.75s  Elapsed: 4m 59s  ETA: --:--  GPU:
+12.8/120GB  Tok/s: 75  Samp/s: 0.0
+
+                             Final Benchmark Results                             
+┌─────────────────────────────┬─────────────────────────────────────────────────┐
+│  Machine                    │  atom                                           │
+│  Mode                       │  qlora                                          │
+│  Status                     │  success                                        │
+│  Steps Completed            │  5 / 5                                          │
+│  Total Time                 │  4m 59s                                         │
+│  Avg Step Time              │  59.8358s                                       │
+│  Median Step Time           │  59.8456s                                       │
+│  P95 Step Time              │  59.9055s                                       │
+│  Peak GPU Memory            │  12.82 GB                                       │
+│  Final Loss                 │  1.8798                                         │
+│  Tokens/sec                 │  74.6                                           │
+│  Samples/sec                │  0.03                                           │
+└─────────────────────────────┴─────────────────────────────────────────────────┘
+
+
+╭──────────────────────────────────────────── SUCCESS ─────────────────────────────────────────────╮
+│                                                                                                  │
+│  Benchmark completed successfully!                                                               │
+│                                                                                                  │
+│  Results saved to: ./results/atom_qlora_20260413_114628                                          │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04/13/26 11:53:07] INFO     Benchmark complete: status=success                                     
+                             run_dir=./results/atom_qlora_20260413_114628                           

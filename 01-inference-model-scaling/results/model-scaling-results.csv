@@ -1,0 +1,8 @@
+model,size,download_gb,tok_s,ttft_ms,total_time_s,tokens_generated,gpu_temp_c
+qwen3:8b,8B,,40.68,93.9,6.543974,256,65
+qwen3.5:9b,9B,,34.61,53.7,7.685315,256,70
+deepseek-coder-v2:16b,16B,,0,0,67.463069,0,56
+devstral:latest,14B,,13.83,115.1,18.892925,256,69
+mistral-small3.2:latest,15B,,13.82,105.4,18.868393,256,72
+qwen2.5-coder:32b,32B,,10.02,133.7,25.952015,256,74
+qwen2.5:72b,72B,,4.29,314.2,61.459913,256,74

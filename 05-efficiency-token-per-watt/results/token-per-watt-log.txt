@@ -1,0 +1,29 @@
+============================================
+  ATOM Benchmark #05: Token-Per-Watt
+  TG: 512 tokens | Reps: 3
+  Mon 13 Apr 2026 12:10:32 PM +08
+============================================
+
+=== qwen2.5-7B ===
+  TG: 39.144801 tok/s | Power: 44.55W | Efficiency: 0.879 tok/W
+
+=== qwen3-8B ===
+  TG: 36.284850 tok/s | Power: 48.50W | Efficiency: 0.748 tok/W
+
+=== qwen2.5-coder-32B ===
+  TG: 9.099950 tok/s | Power: 47.65W | Efficiency: 0.191 tok/W
+
+=== qwen2.5-72B ===
+  TG: 3.867645 tok/s | Power: 36.77W | Efficiency: 0.105 tok/W
+
+============================================
+  Benchmark Complete!
+  Results: /home/atom/ai/benchmarks/05-efficiency-token-per-watt/results_20260413_121032.csv
+============================================
+
+RESULTS:
+model,tg_tokens,tg_tok_sec,avg_power_w,tokens_per_watt,joules_per_token
+qwen2.5-7B,512,39.144801,44.55,0.879,1.138
+qwen3-8B,512,36.284850,48.50,0.748,1.337
+qwen2.5-coder-32B,512,9.099950,47.65,0.191,5.236
+qwen2.5-72B,512,3.867645,36.77,0.105,9.507

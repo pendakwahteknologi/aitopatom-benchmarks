@@ -1,0 +1,5 @@
+model,tg_tokens,tg_tok_sec,avg_power_w,tokens_per_watt,joules_per_token
+qwen2.5-7B,512,39.144801,44.55,0.879,1.138
+qwen3-8B,512,36.284850,48.50,0.748,1.337
+qwen2.5-coder-32B,512,9.099950,47.65,0.191,5.236
+qwen2.5-72B,512,3.867645,36.77,0.105,9.507

@@ -1,0 +1,274 @@
+============================================
+  ATOM Benchmark #06: Embedding Throughput
+  Mon 13 Apr 2026 11:57:52 AM +08
+  Reps per config: 3
+============================================
+
+[Phase 1] Collecting system metadata...
+  Metadata saved to metadata_20260413_115752.json
+{
+  "benchmark": "06-inference-embedding",
+  "title": "Embedding Throughput",
+  "timestamp": "20260413_115752",
+  "n_reps": 3,
+  "system": {
+    "hostname": "noc",
+    "os": "Ubuntu 24.04.4 LTS",
+    "kernel": "6.17.0-1014-nvidia",
+    "arch": "aarch64",
+    "cpu_model": "Cortex-X925",
+    "cpu_cores": 20,
+    "ram_total_gb": 119.7
+  },
+  "gpu": {
+    "name": "NVIDIA GB10",
+    "driver": "580.142",
+    "cuda_version": "13.0",
+    "compute_capability": "12.1",
+    "memory_total_mb": "[N/A]"
+  },
+  "model": {
+    "name": "mesolitica/mistral-embedding-191m-8k-contrastive",
+    "parameters": "191M",
+    "embedding_dim": 768,
+    "max_seq_length": 8192,
+    "language": "Bahasa Melayu"
+  },
+  "test_params": {
+    "chunk_counts": [
+      100,
+      500,
+      1000,
+      5000
+    ],
+    "batch_sizes": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "devices": [
+      "cuda",
+      "cpu"
+    ],
+    "cpu_max_chunks": 1000,
+    "cpu_max_batch": 64
+  },
+  "software": {
+    "python": "3.10.18",
+    "torch": "2.11.0+cu130",
+    "sentence_transformers": "5.4.0"
+  }
+}
+
+[Phase 2] Running embedding benchmark (3 reps per config)...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading Mesolitica Mistral-Embedding 191M...
+Loading weights:   0%|          | 0/146 [00:00<?, ?it/s]Loading weights: 100%|██████████| 146/146 [00:00<00:00, 5258.64it/s]
+[1mMistralModel LOAD REPORT[0m from: mesolitica/mistral-embedding-191m-8k-contrastive
+Key                | Status     |  | 
+-------------------+------------+--+-
+dense_layer.weight | UNEXPECTED |  | 
+dense_layer.bias   | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+
+============================================================
+  Device: CUDA
+============================================================
+
+  Warmup (cuda)...
+  Warmup complete.
+
+  100 chunks, batch=32:
+    Run 1/3: 0.049s (2026.8 chunks/s) GPU: 56C, -1MB, 20.5W
+    Run 2/3: 0.039s (2563.7 chunks/s) GPU: 60C, -1MB, 21.8W
+    Run 3/3: 0.083s (1208.4 chunks/s) GPU: 60C, -1MB, 23.3W
+    => Mean: 1933.0 chunks/s (stddev: 682.5)
+
+  100 chunks, batch=64:
+    Run 1/3: 0.063s (1598.1 chunks/s) GPU: 60C, -1MB, 24.9W
+    Run 2/3: 0.031s (3236.8 chunks/s) GPU: 60C, -1MB, 26.2W
+    Run 3/3: 0.062s (1605.0 chunks/s) GPU: 60C, -1MB, 27.7W
+    => Mean: 2146.6 chunks/s (stddev: 944.1)
+
+  100 chunks, batch=128:
+    Run 1/3: 0.049s (2036.7 chunks/s) GPU: 60C, -1MB, 29.1W
+    Run 2/3: 0.031s (3222.9 chunks/s) GPU: 60C, -1MB, 30.5W
+    Run 3/3: 0.030s (3329.7 chunks/s) GPU: 60C, -1MB, 31.6W
+    => Mean: 2863.1 chunks/s (stddev: 717.7)
+
+  100 chunks, batch=256:
+    Run 1/3: 0.040s (2508.1 chunks/s) GPU: 60C, -1MB, 30.1W
+    Run 2/3: 0.040s (2503.7 chunks/s) GPU: 60C, -1MB, 28.1W
+    Run 3/3: 0.042s (2406.7 chunks/s) GPU: 60C, -1MB, 27.9W
+    => Mean: 2472.8 chunks/s (stddev: 57.3)
+
+  500 chunks, batch=32:
+    Run 1/3: 0.212s (2360.1 chunks/s) GPU: 61C, -1MB, 31.6W
+    Run 2/3: 0.179s (2789.3 chunks/s) GPU: 61C, -1MB, 35.0W
+    Run 3/3: 0.195s (2558.9 chunks/s) GPU: 61C, -1MB, 38.5W
+    => Mean: 2569.4 chunks/s (stddev: 214.8)
+
+  500 chunks, batch=64:
+    Run 1/3: 0.153s (3257.5 chunks/s) GPU: 61C, -1MB, 41.5W
+    Run 2/3: 0.151s (3304.0 chunks/s) GPU: 61C, -1MB, 43.7W
+    Run 3/3: 0.154s (3253.4 chunks/s) GPU: 61C, -1MB, 44.7W
+    => Mean: 3271.6 chunks/s (stddev: 28.1)
+
+  500 chunks, batch=128:
+    Run 1/3: 0.153s (3275.8 chunks/s) GPU: 61C, -1MB, 46.0W
+    Run 2/3: 0.148s (3373.0 chunks/s) GPU: 65C, -1MB, 45.8W
+    Run 3/3: 0.145s (3445.5 chunks/s) GPU: 65C, -1MB, 46.1W
+    => Mean: 3364.8 chunks/s (stddev: 85.1)
+
+  500 chunks, batch=256:
+    Run 1/3: 0.163s (3071.0 chunks/s) GPU: 65C, -1MB, 46.6W
+    Run 2/3: 0.164s (3050.5 chunks/s) GPU: 65C, -1MB, 46.2W
+    Run 3/3: 0.157s (3175.8 chunks/s) GPU: 65C, -1MB, 46.4W
+    => Mean: 3099.1 chunks/s (stddev: 67.2)
+
+  1000 chunks, batch=32:
+    Run 1/3: 0.387s (2584.1 chunks/s) GPU: 65C, -1MB, 46.9W
+    Run 2/3: 0.388s (2575.7 chunks/s) GPU: 62C, -1MB, 46.7W
+    Run 3/3: 0.386s (2588.0 chunks/s) GPU: 64C, -1MB, 44.8W
+    => Mean: 2582.6 chunks/s (stddev: 6.3)
+
+  1000 chunks, batch=64:
+    Run 1/3: 0.318s (3147.7 chunks/s) GPU: 63C, -1MB, 46.7W
+    Run 2/3: 0.308s (3248.0 chunks/s) GPU: 63C, -1MB, 48.4W
+    Run 3/3: 0.308s (3249.9 chunks/s) GPU: 66C, -1MB, 50.4W
+    => Mean: 3215.2 chunks/s (stddev: 58.5)
+
+  1000 chunks, batch=128:
+    Run 1/3: 0.298s (3358.2 chunks/s) GPU: 66C, -1MB, 51.6W
+    Run 2/3: 0.296s (3373.3 chunks/s) GPU: 66C, -1MB, 52.0W
+    Run 3/3: 0.302s (3310.2 chunks/s) GPU: 66C, -1MB, 53.1W
+    => Mean: 3347.2 chunks/s (stddev: 32.9)
+
+  1000 chunks, batch=256:
+    Run 1/3: 0.312s (3206.8 chunks/s) GPU: 66C, -1MB, 52.9W
+    Run 2/3: 0.312s (3206.1 chunks/s) GPU: 67C, -1MB, 53.4W
+    Run 3/3: 0.310s (3226.8 chunks/s) GPU: 67C, -1MB, 53.8W
+    => Mean: 3213.2 chunks/s (stddev: 11.8)
+
+  5000 chunks, batch=32:
+    Run 1/3: 1.915s (2610.4 chunks/s) GPU: 66C, -1MB, 48.4W
+    Run 2/3: 1.888s (2648.6 chunks/s) GPU: 67C, -1MB, 49.2W
+    Run 3/3: 1.922s (2601.1 chunks/s) GPU: 67C, -1MB, 49.0W
+    => Mean: 2620.0 chunks/s (stddev: 25.2)
+
+  5000 chunks, batch=64:
+    Run 1/3: 1.541s (3245.0 chunks/s) GPU: 68C, -1MB, 55.1W
+    Run 2/3: 1.532s (3264.6 chunks/s) GPU: 68C, -1MB, 55.6W
+    Run 3/3: 1.502s (3328.4 chunks/s) GPU: 70C, -1MB, 56.3W
+    => Mean: 3279.3 chunks/s (stddev: 43.6)
+
+  5000 chunks, batch=128:
+    Run 1/3: 1.483s (3371.2 chunks/s) GPU: 69C, -1MB, 57.9W
+    Run 2/3: 1.494s (3346.5 chunks/s) GPU: 71C, -1MB, 57.6W
+    Run 3/3: 1.503s (3326.9 chunks/s) GPU: 70C, -1MB, 57.5W
+    => Mean: 3348.2 chunks/s (stddev: 22.2)
+
+  5000 chunks, batch=256:
+    Run 1/3: 1.550s (3226.5 chunks/s) GPU: 71C, -1MB, 58.0W
+    Run 2/3: 1.518s (3293.6 chunks/s) GPU: 70C, -1MB, 59.3W
+    Run 3/3: 1.545s (3235.4 chunks/s) GPU: 72C, -1MB, 58.8W
+    => Mean: 3251.8 chunks/s (stddev: 36.4)
+
+============================================================
+  Device: CPU
+============================================================
+
+  Warmup (cpu)...
+  Warmup complete.
+
+  100 chunks, batch=32:
+    Run 1/3: 1.299s (77.0 chunks/s) GPU: 62C, -1MB, 13.9W
+    Run 2/3: 1.326s (75.4 chunks/s) GPU: 62C, -1MB, 13.9W
+    Run 3/3: 1.323s (75.6 chunks/s) GPU: 62C, -1MB, 13.9W
+    => Mean: 76.0 chunks/s (stddev: 0.9)
+
+  100 chunks, batch=64:
+    Run 1/3: 0.996s (100.4 chunks/s) GPU: 62C, -1MB, 13.8W
+    Run 2/3: 1.037s (96.4 chunks/s) GPU: 62C, -1MB, 13.8W
+    Run 3/3: 1.001s (99.9 chunks/s) GPU: 62C, -1MB, 13.9W
+    => Mean: 98.9 chunks/s (stddev: 2.2)
+
+  500 chunks, batch=32:
+    Run 1/3: 6.438s (77.7 chunks/s) GPU: 63C, -1MB, 13.8W
+    Run 2/3: 6.515s (76.7 chunks/s) GPU: 63C, -1MB, 13.8W
+    Run 3/3: 6.579s (76.0 chunks/s) GPU: 63C, -1MB, 13.8W
+    => Mean: 76.8 chunks/s (stddev: 0.9)
+
+  500 chunks, batch=64:
+    Run 1/3: 5.005s (99.9 chunks/s) GPU: 63C, -1MB, 13.8W
+    Run 2/3: 4.847s (103.2 chunks/s) GPU: 63C, -1MB, 14.0W
+    Run 3/3: 4.931s (101.4 chunks/s) GPU: 63C, -1MB, 13.8W
+    => Mean: 101.5 chunks/s (stddev: 1.7)
+
+  1000 chunks, batch=32:
+    Run 1/3: 13.168s (75.9 chunks/s) GPU: 63C, -1MB, 13.9W
+    Run 2/3: 12.812s (78.1 chunks/s) GPU: 63C, -1MB, 14.0W
+    Run 3/3: 13.224s (75.6 chunks/s) GPU: 64C, -1MB, 14.0W
+    => Mean: 76.5 chunks/s (stddev: 1.4)
+
+  1000 chunks, batch=64:
+    Run 1/3: 9.579s (104.4 chunks/s) GPU: 64C, -1MB, 13.9W
+    Run 2/3: 9.734s (102.7 chunks/s) GPU: 64C, -1MB, 14.0W
+    Run 3/3: 9.842s (101.6 chunks/s) GPU: 64C, -1MB, 14.0W
+    => Mean: 102.9 chunks/s (stddev: 1.4)
+
+=== Writing raw results ===
+  Raw results: results_20260413_115752.csv (66 rows)
+
+=== Computing summary statistics ===
+  Summary: summary_20260413_115752.csv
+
+====================================================================================================
+Device Chunks   Batch  Mean CPS     StdDev     Min        Max        GPU C   Mem MB   Watts
+----------------------------------------------------------------------------------------------------
+cpu    100      32     76.0         0.9        75.4       77.0       62      -1       13.9
+cpu    100      64     98.9         2.2        96.4       100.4      62      -1       13.8
+cpu    500      32     76.8         0.9        76.0       77.7       63      -1       13.8
+cpu    500      64     101.5        1.7        99.9       103.2      63      -1       13.9
+cpu    1000     32     76.5         1.4        75.6       78.1       63      -1       14.0
+cpu    1000     64     102.9        1.4        101.6      104.4      64      -1       14.0
+cuda   100      32     1933.0       682.5      1208.4     2563.7     59      -1       21.9
+cuda   100      64     2146.6       944.1      1598.1     3236.8     60      -1       26.3
+cuda   100      128    2863.1       717.7      2036.7     3329.7     60      -1       30.4
+cuda   100      256    2472.8       57.3       2406.7     2508.1     60      -1       28.7
+cuda   500      32     2569.4       214.8      2360.1     2789.3     61      -1       35.0
+cuda   500      64     3271.6       28.1       3253.4     3304.0     61      -1       43.3
+cuda   500      128    3364.8       85.1       3275.8     3445.5     64      -1       46.0
+cuda   500      256    3099.1       67.2       3050.5     3175.8     65      -1       46.4
+cuda   1000     32     2582.6       6.3        2575.7     2588.0     64      -1       46.1
+cuda   1000     64     3215.2       58.5       3147.7     3249.9     64      -1       48.5
+cuda   1000     128    3347.2       32.9       3310.2     3373.3     66      -1       52.2
+cuda   1000     256    3213.2       11.8       3206.1     3226.8     67      -1       53.4
+cuda   5000     32     2620.0       25.2       2601.1     2648.6     67      -1       48.9
+cuda   5000     64     3279.3       43.6       3245.0     3328.4     69      -1       55.7
+cuda   5000     128    3348.2       22.2       3326.9     3371.2     70      -1       57.7
+cuda   5000     256    3251.8       36.4       3226.5     3293.6     71      -1       58.7
+
+=== PEAK PERFORMANCE ===
+  GPU peak (mean): 3364.8 chunks/s (chunks=500, batch=128)
+  CPU peak (mean): 102.9 chunks/s (chunks=1000, batch=64)
+  GPU speedup: 32.7x over CPU
+
+============================================
+  Benchmark Complete!
+  Raw results:  /home/atom/ai/benchmarks/06-inference-embedding/results_20260413_115752.csv
+  Summary:      /home/atom/ai/benchmarks/06-inference-embedding/summary_20260413_115752.csv
+  Metadata:     /home/atom/ai/benchmarks/06-inference-embedding/metadata_20260413_115752.json
+============================================
+
+[Phase 3] Generating HTML report...
+Report generated: report_20260413_115752.html
+  Raw rows: 66
+  Summary configs: 22
+  Report: /home/atom/ai/benchmarks/06-inference-embedding/report_20260413_115752.html
+
+All done!

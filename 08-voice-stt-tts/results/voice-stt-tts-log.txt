@@ -1,0 +1,108 @@
+============================================
+  ATOM Benchmark #08: Voice STT & TTS
+  Mon 13 Apr 2026 12:02:00 PM +08
+  Reps per config: 3
+============================================
+
+[Setup] Stopping non-essential services...
+  Done.
+  Installing faster-whisper...
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[12:03:31] ============================================================
+[12:03:31]   ATOM Benchmark #08: Voice STT & TTS
+[12:03:31]   Reps per config: 3
+[12:03:31] ============================================================
+[12:03:31] 
+[12:03:31] [Phase 0] Loading TTS model (facebook/mms-tts-zlm)...
+Loading weights:   0%|          | 0/762 [00:00<?, ?it/s]Loading weights:  73%|███████▎  | 556/762 [00:00<00:00, 5525.15it/s]Loading weights: 100%|██████████| 762/762 [00:00<00:00, 6596.38it/s]
+[12:03:46]   TTS model loaded in 14.00s
+[12:03:46] [Phase 0] Loading Whisper large-v3...
+[12:03:46]   Note: CTranslate2 has no CUDA support, using CPU (int8)
+[12:06:12]   Whisper loaded in 145.81s
+[12:06:12] 
+[12:06:12] ============================================================
+[12:06:12] [Phase 1] TTS Benchmark — MMS-TTS Malay
+[12:06:12] ============================================================
+[12:06:12] 
+  Test: tts_short (25 chars)
+[12:06:16]     Run 1: 3.431s → 2.30s audio (7 chars/s, RTF=1.489)
+[12:06:16]     Run 2: 0.120s → 2.24s audio (208 chars/s, RTF=0.054)
+[12:06:16]     Run 3: 0.224s → 2.32s audio (112 chars/s, RTF=0.096)
+[12:06:16] 
+  Test: tts_medium (234 chars)
+[12:06:17]     Run 1: 0.274s → 16.48s audio (855 chars/s, RTF=0.017)
+[12:06:17]     Run 2: 0.155s → 16.05s audio (1505 chars/s, RTF=0.010)
+[12:06:17]     Run 3: 0.190s → 16.74s audio (1229 chars/s, RTF=0.011)
+[12:06:17] 
+  Test: tts_long (558 chars)
+[12:06:18]     Run 1: 0.296s → 36.99s audio (1883 chars/s, RTF=0.008)
+[12:06:18]     Run 2: 0.290s → 36.96s audio (1924 chars/s, RTF=0.008)
+[12:06:18]     Run 3: 0.289s → 36.98s audio (1934 chars/s, RTF=0.008)
+[12:06:18] 
+  Test: tts_very_long (1199 chars)
+[12:06:19]     Run 1: 0.671s → 79.49s audio (1787 chars/s, RTF=0.008)
+[12:06:20]     Run 2: 0.647s → 79.31s audio (1854 chars/s, RTF=0.008)
+[12:06:21]     Run 3: 0.644s → 79.17s audio (1863 chars/s, RTF=0.008)
+[12:06:21] 
+[12:06:21] ============================================================
+[12:06:21] [Phase 2] STT Benchmark — Whisper large-v3
+[12:06:21] ============================================================
+[12:06:21] 
+  Generating 5s test audio...
+[12:06:21]     Generated 3.6s audio → stt_input_5s.wav
+[12:06:37]     Run 1: 16.09s for 3.6s audio (RTF=4.436, 0.2x realtime)
+[12:06:54]     Run 2: 16.67s for 3.6s audio (RTF=4.594, 0.2x realtime)
+[12:07:10]     Run 3: 16.12s for 3.6s audio (RTF=4.442, 0.2x realtime)
+[12:07:10] 
+  Generating 15s test audio...
+[12:07:11]     Generated 10.9s audio → stt_input_15s.wav
+[12:07:37]     Run 1: 25.75s for 10.9s audio (RTF=2.365, 0.4x realtime)
+[12:08:04]     Run 2: 26.92s for 10.9s audio (RTF=2.473, 0.4x realtime)
+[12:08:19]     Run 3: 14.70s for 10.9s audio (RTF=1.350, 0.7x realtime)
+[12:08:19] 
+  Generating 30s test audio...
+[12:08:19]     Generated 21.8s audio → stt_input_30s.wav
+[12:08:31]     Run 1: 11.96s for 21.8s audio (RTF=0.549, 1.8x realtime)
+[12:08:44]     Run 2: 13.02s for 21.8s audio (RTF=0.598, 1.7x realtime)
+[12:08:58]     Run 3: 13.49s for 21.8s audio (RTF=0.620, 1.6x realtime)
+[12:08:58] 
+  Generating 60s test audio...
+[12:08:58]     Generated 43.5s audio → stt_input_60s.wav
+[12:09:30]     Run 1: 32.08s for 43.5s audio (RTF=0.737, 1.4x realtime)
+[12:10:06]     Run 2: 36.02s for 43.5s audio (RTF=0.827, 1.2x realtime)
+[12:10:45]     Run 3: 38.58s for 43.5s audio (RTF=0.886, 1.1x realtime)
+[12:10:45] 
+  Generating 120s test audio...
+[12:10:50]     Generated 87.1s audio → stt_input_120s.wav
+[12:16:36]     Run 1: 345.91s for 87.1s audio (RTF=3.973, 0.3x realtime)
+[12:24:27]     Run 2: 470.72s for 87.1s audio (RTF=5.406, 0.2x realtime)
+[12:27:38]     Run 3: 190.73s for 87.1s audio (RTF=2.190, 0.5x realtime)
+[12:27:38] 
+  Generating 300s test audio...
+[12:27:41]     Generated 217.7s audio → stt_input_300s.wav
+[12:33:18]     Run 1: 336.61s for 217.7s audio (RTF=1.546, 0.6x realtime)
+[12:37:27]     Run 2: 249.52s for 217.7s audio (RTF=1.146, 0.9x realtime)
+[12:42:02]     Run 3: 274.92s for 217.7s audio (RTF=1.263, 0.8x realtime)
+[12:42:02] 
+[12:42:02] ============================================================
+[12:42:02] [Phase 3] Writing results...
+[12:42:02] ============================================================
+[12:42:02]   Results: results_20260413_120331.csv
+[12:42:02]   Summary: summary_20260413_120331.csv
+[12:42:02]   Metadata: metadata_20260413_120331.json
+[12:42:02] 
+[12:42:02] Benchmark complete!
+
+[Phase 4] Generating HTML report...
+  Report generated: report_20260413_120200.html
+
+[Cleanup] Restarting ComfyUI...
+  Done.
+
+============================================
+  Benchmark Complete!
+  Results: /home/atom/ai/benchmarks/08-voice-stt-tts/results_20260413_120331.csv
+  Summary: /home/atom/ai/benchmarks/08-voice-stt-tts/summary_20260413_120331.csv
+  Report:  /home/atom/ai/benchmarks/08-voice-stt-tts/report_20260413_120200.html
+============================================

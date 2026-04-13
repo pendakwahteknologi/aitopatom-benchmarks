@@ -1,0 +1,74 @@
+============================================
+  ATOM Benchmark #03: llama.cpp Inference
+  Machine: Gigabyte GB10 (ATOM)
+  GPU: NVIDIA GB10 | CUDA 13.0
+  Memory: 119Gi Unified
+  Backend: llama.cpp (CUDA + Flash Attention)
+  PP: 128,256,512 tokens | TG: 128 tokens
+  Reps: 3
+  Mon 13 Apr 2026 12:04:12 PM +08
+============================================
+
+=== [1/4] qwen2.5-7B-Q4_K_M ===
+  File: 4.4G
+  Running llama-bench (PP: 128,256,512, TG: 128, reps: 3)...
+ggml_cuda_init: GGML_CUDA_FORCE_MMQ:    no
+ggml_cuda_init: GGML_CUDA_FORCE_CUBLAS: no
+ggml_cuda_init: found 1 CUDA devices:
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,embeddings,no_op_offload,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730","qwen2 7B Q4_K - Medium","4677120000","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","128","0","0","2026-04-13T04:04:15Z","50065018","920796","2557.257190","47.452643"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730","qwen2 7B Q4_K - Medium","4677120000","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","256","0","0","2026-04-13T04:04:15Z","79402362","1021276","3224.441044","41.471362"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730","qwen2 7B Q4_K - Medium","4677120000","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","512","0","0","2026-04-13T04:04:15Z","153581234","941457","3333.824226","20.458963"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730","qwen2 7B Q4_K - Medium","4677120000","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","128","0","2026-04-13T04:04:16Z","3007503056","8899416","42.560471","0.125731"
+  DONE
+
+=== [2/4] qwen3-8B-Q4_K_M ===
+  File: 4.9G
+  Running llama-bench (PP: 128,256,512, TG: 128, reps: 3)...
+ggml_cuda_init: GGML_CUDA_FORCE_MMQ:    no
+ggml_cuda_init: GGML_CUDA_FORCE_CUBLAS: no
+ggml_cuda_init: found 1 CUDA devices:
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,embeddings,no_op_offload,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f","qwen3 8B Q4_K - Medium","5219418112","8190735360","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","128","0","0","2026-04-13T04:04:26Z","49680935","171339","2576.461454","8.892459"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f","qwen3 8B Q4_K - Medium","5219418112","8190735360","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","256","0","0","2026-04-13T04:04:26Z","86666961","900542","2954.048880","30.720389"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f","qwen3 8B Q4_K - Medium","5219418112","8190735360","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","512","0","0","2026-04-13T04:04:27Z","169681200","3489269","3018.264959","61.397519"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f","qwen3 8B Q4_K - Medium","5219418112","8190735360","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","128","0","2026-04-13T04:04:27Z","3345419208","22590117","38.262434","0.257859"
+  DONE
+
+=== [3/4] qwen2.5-coder-32B-Q4_K_M ===
+  File: 19G
+  Running llama-bench (PP: 128,256,512, TG: 128, reps: 3)...
+ggml_cuda_init: GGML_CUDA_FORCE_MMQ:    no
+ggml_cuda_init: GGML_CUDA_FORCE_CUBLAS: no
+ggml_cuda_init: found 1 CUDA devices:
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,embeddings,no_op_offload,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-ac3d1ba8aa77755dab3806d9024e9c385ea0d5b412d6bdf9157f8a4a7e9fc0d9","qwen2 32B Q4_K - Medium","19845357568","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","128","0","0","2026-04-13T04:04:39Z","187503037","153241","682.655910","0.555620"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-ac3d1ba8aa77755dab3806d9024e9c385ea0d5b412d6bdf9157f8a4a7e9fc0d9","qwen2 32B Q4_K - Medium","19845357568","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","256","0","0","2026-04-13T04:04:40Z","354096534","592600","722.968042","1.209531"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-ac3d1ba8aa77755dab3806d9024e9c385ea0d5b412d6bdf9157f8a4a7e9fc0d9","qwen2 32B Q4_K - Medium","19845357568","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","512","0","0","2026-04-13T04:04:42Z","715142670","3311865","715.951309","3.320565"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-ac3d1ba8aa77755dab3806d9024e9c385ea0d5b412d6bdf9157f8a4a7e9fc0d9","qwen2 32B Q4_K - Medium","19845357568","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","128","0","2026-04-13T04:04:44Z","13386900299","14836885","9.561594","0.010603"
+  DONE
+
+=== [4/4] qwen2.5-72B-Q4_K_M ===
+  File: 45G
+  Running llama-bench (PP: 128,256,512, TG: 128, reps: 3)...
+ggml_cuda_init: GGML_CUDA_FORCE_MMQ:    no
+ggml_cuda_init: GGML_CUDA_FORCE_CUBLAS: no
+ggml_cuda_init: found 1 CUDA devices:
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,embeddings,no_op_offload,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-6e7fdda508e91cb0f63de5c15ff79ac63a1584ccafd751c07ca12b7f442101b8","qwen2 70B Q4_K - Medium","47409725440","72706203648","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","128","0","0","2026-04-13T04:06:27Z","418562486","4144905","305.828467","3.012257"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-6e7fdda508e91cb0f63de5c15ff79ac63a1584ccafd751c07ca12b7f442101b8","qwen2 70B Q4_K - Medium","47409725440","72706203648","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","256","0","0","2026-04-13T04:06:28Z","816139091","7450625","313.689378","2.851567"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-6e7fdda508e91cb0f63de5c15ff79ac63a1584ccafd751c07ca12b7f442101b8","qwen2 70B Q4_K - Medium","47409725440","72706203648","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","512","0","0","2026-04-13T04:06:32Z","1676429397","5602891","305.413288","1.021318"
+"3b337b01a","6589","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-6e7fdda508e91cb0f63de5c15ff79ac63a1584ccafd751c07ca12b7f442101b8","qwen2 70B Q4_K - Medium","47409725440","72706203648","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","128","0","2026-04-13T04:06:38Z","31668170123","117544604","4.041951","0.015027"
+  DONE
+
+============================================
+  Benchmark Complete!
+  Results: /home/atom/ai/benchmarks/03-inference-llama-cpp/results/benchmark_20260413_120412.csv
+============================================
+
+RESULTS:
+model,quant,pp_tokens,pp_tok_sec,tg_tokens,tg_tok_sec

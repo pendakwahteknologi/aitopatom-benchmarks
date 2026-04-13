@@ -1,0 +1,57 @@
+============================================
+  ATOM Benchmark: Serving Engine Comparison
+  Machine: Gigabyte GB10 (ATOM)
+  Model: Qwen2.5-7B on all engines
+  Mon 13 Apr 2026 03:39:06 AM +08
+============================================
+
+=== ENGINE 1: OLLAMA ===
+  Warming up...
+  Run 1/3...
+    tok/s: 43.94 | TTFT: 33.2ms | Total: 6.14s | GPU: 61C
+  Run 2/3...
+    tok/s: 43.89 | TTFT: 24.0ms | Total: 6.11s | GPU: 63C
+  Run 3/3...
+    tok/s: 43.85 | TTFT: 24.5ms | Total: 6.11s | GPU: 65C
+
+=== ENGINE 2: vLLM ===
+  Starting vLLM container with Qwen/Qwen2.5-7B-Instruct...
+7c2ef75b8704456c0b24e5015a26928694e23b993cfd2268ad7ab327aa55d181
+  Waiting for vLLM to be ready...
+  Still waiting... (30s)
+  Still waiting... (60s)
+  Still waiting... (90s)
+  Still waiting... (120s)
+  Still waiting... (150s)
+  Still waiting... (180s)
+  Still waiting... (210s)
+  Still waiting... (240s)
+  Still waiting... (270s)
+  Still waiting... (300s)
+  ERROR: vLLM failed to start within 300s
+  Container logs:
+[0;36m(APIServer pid=1)[0;0m INFO 04-12 19:39:42 [api_server.py:1354] vLLM API server version 0.13.0+faa43dbf.nv26.01
+[0;36m(APIServer pid=1)[0;0m INFO 04-12 19:39:42 [utils.py:253] non-default args: {'model': 'Qwen/Qwen2.5-7B-Instruct', 'max_model_len': 4096}
+[0;36m(APIServer pid=1)[0;0m INFO 04-12 19:39:44 [model.py:514] Resolved architecture: Qwen2ForCausalLM
+[0;36m(APIServer pid=1)[0;0m INFO 04-12 19:39:44 [model.py:1661] Using max model len 4096
+[0;36m(APIServer pid=1)[0;0m INFO 04-12 19:39:44 [scheduler.py:230] Chunked prefill is enabled with max_num_batched_tokens=2048.
+/usr/local/lib/python3.12/dist-packages/torchvision/io/image.py:14: UserWarning: Failed to load image Python extension: 'Could not load this library: /usr/local/lib/python3.12/dist-packages/torchvision/image.so'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+[0;36m(EngineCore_DP0 pid=101)[0;0m INFO 04-12 19:39:48 [core.py:93] Initializing a V1 LLM engine (v0.13.0+faa43dbf.nv26.01) with config: model='Qwen/Qwen2.5-7B-Instruct', speculative_config=None, tokenizer='Qwen/Qwen2.5-7B-Instruct', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_fallback=False, disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False), seed=0, served_model_name=Qwen/Qwen2.5-7B-Instruct, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'level': None, 'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'splitting_ops': ['vllm::unified_attention', 'vllm::unified_attention_with_output', 'vllm::unified_mla_attention', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::gdn_attention_core', 'vllm::kda_attention', 'vllm::sparse_attn_indexer'], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_split_points': [2048], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'eliminate_noops': True, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False}, 'local_cache_dir': None}
+[0;36m(EngineCore_DP0 pid=101)[0;0m /usr/local/lib/python3.12/dist-packages/torch/library.py:357: UserWarning: Warning only once for all operators,  other operators may also be overridden.
+[0;36m(EngineCore_DP0 pid=101)[0;0m   Overriding a previously registered kernel for the same operator and the same dispatch key
+[0;36m(EngineCore_DP0 pid=101)[0;0m   operator: flash_attn::_flash_attn_backward(Tensor dout, Tensor q, Tensor k, Tensor v, Tensor out, Tensor softmax_lse, Tensor(a6!)? dq, Tensor(a7!)? dk, Tensor(a8!)? dv, float dropout_p, float softmax_scale, bool causal, SymInt window_size_left, SymInt window_size_right, float softcap, Tensor? alibi_slopes, bool deterministic, Tensor? rng_state=None) -> Tensor
+[0;36m(EngineCore_DP0 pid=101)[0;0m     registered at /usr/local/lib/python3.12/dist-packages/torch/_library/custom_ops.py:926
+[0;36m(EngineCore_DP0 pid=101)[0;0m   dispatch key: ADInplaceOrView
+[0;36m(EngineCore_DP0 pid=101)[0;0m   previous kernel: no debug info
+[0;36m(EngineCore_DP0 pid=101)[0;0m        new kernel: registered at /usr/local/lib/python3.12/dist-packages/torch/_library/custom_ops.py:926 (Triggered internally at /opt/pytorch/pytorch/aten/src/ATen/core/dispatch/OperatorEntry.cpp:208.)
+[0;36m(EngineCore_DP0 pid=101)[0;0m   self.m.impl(
+[0;36m(EngineCore_DP0 pid=101)[0;0m INFO 04-12 19:39:49 [parallel_state.py:1203] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://172.17.0.2:51977 backend=nccl
+[0;36m(EngineCore_DP0 pid=101)[0;0m INFO 04-12 19:39:49 [parallel_state.py:1411] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank 0
+[0;36m(EngineCore_DP0 pid=101)[0;0m INFO 04-12 19:39:49 [gpu_model_runner.py:3562] Starting to load model Qwen/Qwen2.5-7B-Instruct...
+[0;36m(EngineCore_DP0 pid=101)[0;0m INFO 04-12 19:40:00 [cuda.py:351] Using FLASH_ATTN attention backend out of potential backends: ('FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION')
+  Stopping vLLM container...
+
+=== ENGINE 3: llama.cpp ===
+  Running llama-bench with Qwen2.5-7B GGUF...
+  Model file: /usr/share/ollama/.ollama/models/blobs/sha256-2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730
