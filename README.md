@@ -8,6 +8,10 @@
 
 ---
 
+<img src="charts/00-overview.png" width="800" alt="ATOM Benchmark Suite — Performance Overview"/>
+
+<sub>Performance overview across all benchmarks (log scale)</sub>
+
 </div>
 
 ---
@@ -47,6 +51,10 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 
 > Every available model tested via Ollama. **The 72B model runs** — most desktop GPUs cannot even load it.
 
+<div align="center">
+<img src="charts/01-model-scaling.png" width="800" alt="Model Scaling — tok/s by model size"/>
+</div>
+
 | Model | Size | tok/s | TTFT | GPU |
 |-------|-----:|------:|-----:|----:|
 | Qwen3 | 8B | **40.7** | 94ms | 65C |
@@ -71,6 +79,10 @@ See [`01-inference-model-scaling/results/model-scaling-results.csv`](01-inferenc
 
 > Same model (Qwen2.5-7B), three engines. **Ollama wins.** vLLM failed to start — the stock NVIDIA container does not support SM 12.1.
 
+<div align="center">
+<img src="charts/02-engine-comparison.png" width="600" alt="Engine Comparison — Ollama vs llama.cpp vs vLLM"/>
+</div>
+
 | Engine | Runtime | tok/s | GPU |
 |--------|---------|------:|----:|
 | **Ollama** | Native systemd | **43.9** | 61-65C |
@@ -93,14 +105,18 @@ See [`02-inference-engine-comparison/results/engine-comparison-results.csv`](02-
 
 > Q4_K_M quantization across 4 model sizes (extracted from Ollama blobs). All models fit in memory.
 
-| Model | Quant | Prompt Processing | Text Generation |
-|-------|-------|------------------:|----------------:|
-| **Qwen2.5-7B** | Q4_K_M | 3,334 tok/s | 42.6 tok/s |
-| **Qwen3-8B** | Q4_K_M | 3,018 tok/s | 38.3 tok/s |
-| **Qwen2.5-32B** | Q4_K_M | 723 tok/s | 9.6 tok/s |
-| **Qwen2.5-72B** | Q4_K_M | 314 tok/s | 4.0 tok/s |
+<div align="center">
+<img src="charts/03-llamacpp-inference.png" width="800" alt="llama.cpp Prompt Processing and Text Generation"/>
+</div>
 
-<sub>Prompt Processing shows peak PP value across PP128/PP256/PP512. See raw CSV for all measurements.</sub>
+| Model | Quant | PP 128 | PP 256 | PP 512 | TG 128 |
+|-------|-------|-------:|-------:|-------:|-------:|
+| **Qwen2.5-7B** | Q4_K_M | 2,557 | 3,224 | **3,334** | **42.6** |
+| **Qwen3-8B** | Q4_K_M | 2,577 | 2,954 | 3,018 | 38.3 |
+| **Qwen2.5-32B** | Q4_K_M | 683 | **723** | 716 | 9.6 |
+| **Qwen2.5-72B** | Q4_K_M | 306 | **314** | 305 | 4.0 |
+
+<sub>All benchmarks run with Flash Attention enabled, all layers on GPU (ngl=99), 3 repetitions averaged.</sub>
 
 <details>
 <summary>Raw data</summary>
@@ -113,6 +129,11 @@ See [`03-inference-llama-cpp/results/benchmark_20260413_120412.csv`](03-inferenc
 ## 04 — Training: Fine-Tuning
 
 > Three fine-tuning methods compared on **Qwen2.5-7B-Instruct**, same dataset (Dolly 15k), same hyperparameters (dry-run, 5 steps). Full Fine-Tune uses **90.9 GB of 128 GB unified memory** — only possible because of the GB10's shared CPU+GPU memory pool.
+
+<div align="center">
+<img src="charts/04-training-comparison.png" width="800" alt="Training comparison — Memory, Throughput, and Loss"/>
+<br><sub>QLoRA uses 7x less memory than Full FT. LoRA achieves the highest throughput.</sub>
+</div>
 
 | Mode | Time | Peak Memory | tok/s | Final Loss |
 |------|-----:|------------:|------:|-----------:|
@@ -132,6 +153,10 @@ See [`04-training-finetuning/results/all_runs_summary.csv`](04-training-finetuni
 
 > How much does it cost to run inference? Measured with real-time GPU power monitoring during generation.
 
+<div align="center">
+<img src="charts/05-token-per-watt.png" width="800" alt="Token-per-Watt efficiency — Speed vs Power and Efficiency ranking"/>
+</div>
+
 | Model | tok/s | Avg Power | tok/W | Cost per 1M tokens |
 |-------|------:|----------:|------:|--------------------:|
 | **Qwen2.5-7B** | 39.1 | 44.6W | **0.879** | RM 0.17 |
@@ -146,6 +171,10 @@ See [`04-training-finetuning/results/all_runs_summary.csv`](04-training-finetuni
 ## 06 — Inference: Embedding Throughput
 
 > Mesolitica Mistral 191M embedding model — **GPU is 33x faster than CPU**.
+
+<div align="center">
+<img src="charts/06-embedding-throughput.png" width="700" alt="Embedding Throughput — GPU vs CPU"/>
+</div>
 
 | Device | Batch Size | Chunks/s | Power |
 |--------|----------:|---------:|------:|
@@ -175,7 +204,7 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 
 > **SKIPPED** — no ComfyUI models were installed on the ATOM machine at the time of benchmarking.
 
-Scripts are included in `07-image-video-generation/` for future use. See the [GX10 benchmark results](https://github.com/AitopAtom/gx10-benchmarks) for reference numbers on the same hardware platform.
+Scripts are included in `07-image-video-generation/` for future use. See the [GX10 benchmark results](https://github.com/pendakwahteknologi/gx10-benchmarks) for reference numbers on the same hardware platform.
 
 ---
 
@@ -183,22 +212,28 @@ Scripts are included in `07-image-video-generation/` for future use. See the [GX
 
 > **MMS-TTS Malay** (text-to-speech, GPU) and **Whisper large-v3** (speech-to-text, CPU).
 
+<div align="center">
+<img src="charts/08-voice-stt-tts.png" width="800" alt="Voice STT and TTS performance"/>
+</div>
+
 ### TTS — MMS-TTS Malay
 
-facebook/mms-tts-zlm on GPU.
+facebook/mms-tts-zlm on GPU. Generates speech **up to 125x faster than realtime**.
 
-| Text | Chars | Synthesis | Chars/s |
-|------|------:|----------:|--------:|
-| Short | 25 | 0.12s | 208 |
-| Medium | 234 | 0.16s | 1,505 |
-| Long | 558 | 0.29s | **1,924** |
-| Very Long | 1,199 | 0.65s | 1,863 |
+| Text | Chars | Synthesis | Audio Output | Chars/s | RTF |
+|------|------:|----------:|-------------:|--------:|----:|
+| Short | 25 | 0.12s | 2.3s | 208 | 0.054 |
+| Medium | 234 | 0.16s | 16.0s | 1,505 | 0.010 |
+| Long | 558 | 0.29s | 37.0s | **1,924** | 0.008 |
+| Very Long | 1,199 | 0.65s | 79.3s | 1,863 | **0.008** |
+
+<sub>RTF = Real-Time Factor. RTF 0.008 means 1 second of audio is synthesized in 8 milliseconds.</sub>
 
 > Audio samples: [`08-voice-stt-tts/samples/`](08-voice-stt-tts/samples/) — listen to the Malay speech output.
 
 ### STT — Whisper large-v3
 
-faster-whisper with CTranslate2 on CPU (int8). Malay language.
+faster-whisper with CTranslate2 on CPU (int8). Malay language, beam size 5.
 
 | Audio | Transcribe Time | Speed | RTF |
 |------:|----------------:|------:|----:|
@@ -209,7 +244,7 @@ faster-whisper with CTranslate2 on CPU (int8). Malay language.
 | 87.1s | 345.9s | 0.3x | 3.97 |
 | 217.7s | 274.9s | 0.8x | 1.26 |
 
-<sub>CTranslate2 on aarch64 lacks CUDA wheels, so Whisper runs on CPU. The 87.1s test shows degraded performance likely due to memory pressure at scale.</sub>
+<sub>CTranslate2 on aarch64 lacks CUDA wheels, so Whisper runs on CPU. GPU inference would be significantly faster. The 87.1s test shows degraded performance likely due to memory pressure at scale.</sub>
 
 ---
 
@@ -217,6 +252,7 @@ faster-whisper with CTranslate2 on CPU (int8). Malay language.
 
 ```
 aitopatom-benchmarks/
+├── charts/                            Performance visualization charts
 ├── 01-inference-model-scaling/        Ollama · 7 models · 8B to 72B
 ├── 02-inference-engine-comparison/    Ollama vs llama.cpp vs vLLM (failed)
 ├── 03-inference-llama-cpp/            Q4_K_M · 7B to 72B
@@ -232,6 +268,7 @@ Each benchmark includes:
 - **run.sh / benchmark.py** — fully reproducible scripts
 - **results/** — raw CSVs, JSON metadata, HTML reports, logs
 - **samples/** — generated audio (benchmark 08)
+- **charts/** — performance visualization charts
 
 ## Reproducibility
 
