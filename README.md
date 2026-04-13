@@ -8,7 +8,7 @@
 
 ---
 
-*All images below were generated on this machine.*
+*All images below were generated on this machine in under 15 seconds each.*
 
 <table>
 <tr>
@@ -62,10 +62,6 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 
 > Every available model tested via Ollama. **The 72B model runs** — most desktop GPUs cannot even load it.
 
-<div align="center">
-<img src="charts/01-model-scaling.png" width="800" alt="Model Scaling — tok/s by model size"/>
-</div>
-
 | Model | Size | tok/s | TTFT | GPU |
 |-------|-----:|------:|-----:|----:|
 | Qwen3 | 8B | **40.7** | 94ms | 65C |
@@ -90,10 +86,6 @@ See [`01-inference-model-scaling/results/model-scaling-results.csv`](01-inferenc
 
 > Same model (Qwen2.5-7B), three engines. **Ollama wins.** vLLM failed to start — the stock NVIDIA container does not support SM 12.1.
 
-<div align="center">
-<img src="charts/02-engine-comparison.png" width="600" alt="Engine Comparison — Ollama vs llama.cpp vs vLLM"/>
-</div>
-
 | Engine | Runtime | tok/s | GPU |
 |--------|---------|------:|----:|
 | **Ollama** | Native systemd | **43.9** | 61-65C |
@@ -116,10 +108,6 @@ See [`02-inference-engine-comparison/results/engine-comparison-results.csv`](02-
 
 > Q4_K_M quantization across 4 model sizes (extracted from Ollama blobs). All models fit in memory.
 
-<div align="center">
-<img src="charts/03-llamacpp-inference.png" width="800" alt="llama.cpp Prompt Processing and Text Generation"/>
-</div>
-
 | Model | Quant | PP 128 | PP 256 | PP 512 | TG 128 |
 |-------|-------|-------:|-------:|-------:|-------:|
 | **Qwen2.5-7B** | Q4_K_M | 2,557 | 3,224 | **3,334** | **42.6** |
@@ -141,16 +129,25 @@ See [`03-inference-llama-cpp/results/benchmark_20260413_120412.csv`](03-inferenc
 
 > Three fine-tuning methods compared on **Qwen2.5-7B-Instruct**, same dataset (Dolly 15k), same hyperparameters (dry-run, 5 steps). Full Fine-Tune uses **90.9 GB of 128 GB unified memory** — only possible because of the GB10's shared CPU+GPU memory pool.
 
-<div align="center">
-<img src="charts/04-training-comparison.png" width="800" alt="Training comparison — Memory, Throughput, and Loss"/>
-<br><sub>QLoRA uses 7x less memory than Full FT. LoRA achieves the highest throughput.</sub>
-</div>
-
 | Mode | Time | Peak Memory | tok/s | Final Loss |
 |------|-----:|------------:|------:|-----------:|
 | **LoRA** | 2m 25s | 83.3 GB | **156** | 1.83 |
 | **Full FT** | 2m 44s | 90.9 GB | 137 | **1.57** |
 | **QLoRA** | 4m 59s | **12.8 GB** | 75 | 1.88 |
+
+### Training Loss Curves
+
+<div align="center">
+<img src="04-training-finetuning/results/cross_comparison/loss_curves.png" width="700" alt="Training loss curves for LoRA, QLoRA, and Full Fine-Tune"/>
+<br><sub>Full Fine-Tune achieves the lowest loss. QLoRA converges slowest but uses 7x less memory.</sub>
+</div>
+
+### GPU Memory Usage
+
+<div align="center">
+<img src="04-training-finetuning/results/cross_comparison/gpu_memory.png" width="700" alt="GPU memory usage comparison — QLoRA at 12.8GB vs Full FT at 90.9GB"/>
+<br><sub>QLoRA: 12.8 GB · LoRA: 83.3 GB · Full FT: 90.9 GB — all fit in the GB10's 128 GB unified memory.</sub>
+</div>
 
 <details>
 <summary>Run details</summary>
@@ -163,10 +160,6 @@ See [`04-training-finetuning/results/all_runs_summary.csv`](04-training-finetuni
 ## 05 — Efficiency: Token per Watt
 
 > How much does it cost to run inference? Measured with real-time GPU power monitoring during generation.
-
-<div align="center">
-<img src="charts/05-token-per-watt.png" width="800" alt="Token-per-Watt efficiency — Speed vs Power and Efficiency ranking"/>
-</div>
 
 | Model | tok/s | Avg Power | tok/W | Cost per 1M tokens |
 |-------|------:|----------:|------:|--------------------:|
@@ -182,10 +175,6 @@ See [`04-training-finetuning/results/all_runs_summary.csv`](04-training-finetuni
 ## 06 — Inference: Embedding Throughput
 
 > Mesolitica Mistral 191M embedding model — **GPU is 33x faster than CPU**.
-
-<div align="center">
-<img src="charts/06-embedding-throughput.png" width="700" alt="Embedding Throughput — GPU vs CPU"/>
-</div>
 
 | Device | Batch Size | Chunks/s | Power |
 |--------|----------:|---------:|------:|
@@ -322,10 +311,6 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 
 > **MMS-TTS Malay** (text-to-speech, GPU) and **Whisper large-v3** (speech-to-text, CPU).
 
-<div align="center">
-<img src="charts/08-voice-stt-tts.png" width="800" alt="Voice STT and TTS performance"/>
-</div>
-
 ### TTS — MMS-TTS Malay
 
 facebook/mms-tts-zlm on GPU. Generates speech **up to 125x faster than realtime**.
@@ -362,11 +347,10 @@ faster-whisper with CTranslate2 on CPU (int8). Malay language, beam size 5.
 
 ```
 aitopatom-benchmarks/
-├── charts/                            Performance visualization charts
 ├── 01-inference-model-scaling/        Ollama · 7 models · 8B to 72B
 ├── 02-inference-engine-comparison/    Ollama vs llama.cpp vs vLLM (failed)
 ├── 03-inference-llama-cpp/            Q4_K_M · 7B to 72B
-├── 04-training-finetuning/            LoRA · QLoRA · Full FT (dry run)
+├── 04-training-finetuning/            LoRA · QLoRA · Full FT · with charts
 ├── 05-efficiency-token-per-watt/      Power monitoring · cost analysis
 ├── 06-inference-embedding/            CPU vs GPU · batch size sweep
 ├── 07-image-video-generation/         Z-Image-Turbo · Wan 2.2 T2V · samples
@@ -377,8 +361,7 @@ Each benchmark includes:
 - **README.md** — methodology and configuration
 - **run.sh / benchmark.py** — fully reproducible scripts
 - **results/** — raw CSVs, JSON metadata, HTML reports, logs
-- **samples/** — generated audio (benchmark 08)
-- **charts/** — performance visualization charts
+- **samples/** — generated images, video frames, or audio
 
 ## Reproducibility
 
