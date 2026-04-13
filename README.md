@@ -4,7 +4,7 @@
 
 ### 8 AI Benchmarks on the NVIDIA Grace Blackwell Superchip
 
-**Inference** · **Training** · **Efficiency** · **Image Generation** · **Video Generation** · **Voice**
+**Inference** · **Training** · **Efficiency** · **Image Generation** · **Video Generation** · **Voice** · **Coding**
 
 ---
 
@@ -55,6 +55,7 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 | 06 | **Embedding Throughput** | 3,365 chunks/s GPU · 33x faster than CPU | [Details](#06--inference-embedding-throughput) |
 | 07 | **Image & Video Gen** | 5.9 images/min · video at 1.16 fps | [Details](#07--image--video-generation) |
 | 08 | **Voice STT & TTS** | TTS: 1,924 chars/s · STT: 1.8x realtime | [Details](#08--voice-stt--tts) |
+| 09 | **Coding LLM Webpage** | Qwen3-Coder-Next 46 tok/s · full webpage in 123s | [Details](#09--coding-llm-webpage-generation) |
 
 ---
 
@@ -343,6 +344,49 @@ faster-whisper with CTranslate2 on CPU (int8). Malay language, beam size 5.
 
 ---
 
+## 09 — Coding LLM: Webpage Generation
+
+> Can a local coding LLM generate a complete, working interactive webpage? Three top coding models, one prompt, three runs each. **Qwen3-Coder-Next produces a full 3D solar system in 123 seconds.**
+
+The prompt asks each model to build an interactive 3D solar system visualization — pure HTML/CSS/JS, no libraries — with orbiting planets, click-to-inspect info cards, speed controls, view toggles, and a starfield background.
+
+| Model | Params | VRAM | tok/s | Gen Time | Output |
+|-------|-------:|-----:|------:|---------:|-------:|
+| **Qwen3-Coder-Next** | 51B | 51 GB | **46.1** | **123s** | 22.3 KB |
+| DeepCoder | 14B | 9 GB | 21.7 | 119s | 8.3 KB |
+| Devstral | 24B | 14 GB | 13.6 | 170s | 8.6 KB |
+
+**Key findings:**
+- Qwen3-Coder-Next is **3.4x faster** than Devstral in tok/s and generates the richest output (650+ lines, most features implemented)
+- All 9 runs (3 models x 3 each) produced valid, runnable HTML
+- Warm time-to-first-token under 250ms for all models (after initial load)
+- Even the largest model (51B, 51 GB) leaves **69 GB of headroom** in the GB10's unified memory
+
+<details>
+<summary>All runs (raw data)</summary>
+
+| Model | Run | tok/s | Gen Time | Tokens | HTML Size |
+|-------|----:|------:|---------:|-------:|----------:|
+| Qwen3-Coder-Next | 1 | 46.4 | 136.9s | 5,832 | 24,609 B |
+| Qwen3-Coder-Next | 2 | 46.1 | 123.9s | 5,629 | 22,400 B |
+| Qwen3-Coder-Next | 3 | 45.8 | 123.0s | 5,556 | 21,799 B |
+| Devstral:24B | 1 | 13.6 | 203.0s | 2,644 | 8,834 B |
+| Devstral:24B | 2 | 13.6 | 170.0s | 2,303 | 7,271 B |
+| Devstral:24B | 3 | 13.6 | 214.1s | 2,895 | 9,788 B |
+| DeepCoder:14B | 1 | 21.8 | 120.8s | 2,498 | 7,860 B |
+| DeepCoder:14B | 2 | 21.6 | 151.6s | 3,246 | 9,938 B |
+| DeepCoder:14B | 3 | 21.8 | 118.7s | 2,557 | 7,132 B |
+
+</details>
+
+<details>
+<summary>Generated outputs</summary>
+
+Download the HTML files from [`09-coding-llm-webpage/outputs/`](09-coding-llm-webpage/outputs/) and open them in a browser to see each model's generated 3D solar system.
+</details>
+
+---
+
 ## Repository Structure
 
 ```
@@ -354,7 +398,8 @@ aitopatom-benchmarks/
 ├── 05-efficiency-token-per-watt/      Power monitoring · cost analysis
 ├── 06-inference-embedding/            CPU vs GPU · batch size sweep
 ├── 07-image-video-generation/         Z-Image-Turbo · Wan 2.2 T2V · samples
-└── 08-voice-stt-tts/                  Whisper STT · MMS-TTS · audio samples
+├── 08-voice-stt-tts/                  Whisper STT · MMS-TTS · audio samples
+└── 09-coding-llm-webpage/            3 coding LLMs · webpage generation · live outputs
 ```
 
 Each benchmark includes:

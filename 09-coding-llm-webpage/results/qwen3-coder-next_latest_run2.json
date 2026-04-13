@@ -1,0 +1,23 @@
+{
+    "model": "qwen3-coder-next:latest",
+    "run": 2,
+    "timestamp": "2026-04-13T18:31:50+08:00",
+    "metrics": {
+        "total_duration_sec": 123.85,
+        "model_load_sec": .13,
+        "prompt_eval_sec": .443,
+        "generation_sec": 122.15,
+        "ttft_sec": .578,
+        "tokens_generated": 5629,
+        "tokens_per_sec": 46.07,
+        "prompt_tokens": 372
+    },
+    "output": {
+        "html_size_bytes": 22400,
+        "html_lines": 611,
+        "has_doctype": 1,
+        "has_closing_html": 1,
+        "has_canvas": 0,
+        "has_script": 1
+    }
+}
