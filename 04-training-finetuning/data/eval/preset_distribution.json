@@ -1,0 +1,23 @@
+{
+  "total_questions": 80,
+  "category_counts": {
+    "brainstorming": 10,
+    "classification": 10,
+    "closed_qa": 10,
+    "creative_writing": 10,
+    "general_qa": 10,
+    "information_extraction": 10,
+    "open_qa": 10,
+    "summarization": 10
+  },
+  "categories": [
+    "brainstorming",
+    "classification",
+    "closed_qa",
+    "creative_writing",
+    "general_qa",
+    "information_extraction",
+    "open_qa",
+    "summarization"
+  ]
+}

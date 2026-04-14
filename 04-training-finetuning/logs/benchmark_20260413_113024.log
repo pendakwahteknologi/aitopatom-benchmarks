@@ -1,0 +1,273 @@
+
+================================================================
+  PHASE 1: PRE-FLIGHT CHECKS
+================================================================
+
+[2026-04-13 11:30:25] Machine label:  atom
+[2026-04-13 11:30:25] Max steps:      500
+[2026-04-13 11:30:25] Modes:          lora qlora fullft
+[2026-04-13 11:30:25] Results dir:    ./results
+[2026-04-13 11:30:25] Skip training:  false
+[2026-04-13 11:30:25] Skip judge:     false
+[2026-04-13 11:30:25] Dry run:        true
+[2026-04-13 11:30:25] Master log:     ./logs/benchmark_20260413_113024.log
+[2026-04-13 11:30:25] 
+[2026-04-13 11:30:25] Python:         Python 3.10.18
+[2026-04-13 11:30:28] CUDA:           13.0
+[2026-04-13 11:30:28] GPU:            NVIDIA GB10 (120 GB)
+[2026-04-13 11:30:28] WARNING: HuggingFace not authenticated (run: huggingface-cli login)
+[2026-04-13 11:30:31] Dependencies:   OK
+[2026-04-13 11:30:31] Anthropic API:  not set (LLM judge will be skipped)
+[2026-04-13 11:30:31] 
+[2026-04-13 11:30:31] All checks passed.
+
+================================================================
+  PHASE 2: DATA PREPARATION
+================================================================
+
+[2026-04-13 11:30:31] Preparing dataset and evaluation questions...
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Train:       13,509
+  Validation:  750
+  Test:        752
+
+
+───────────────────────────────────────── Preset Questions ─────────────────────────────────────────
+
+  Saved to: ./data/eval/preset_questions.jsonl
+
+[2026-04-13 11:30:33] Data preparation complete. (0m 2s)
+
+================================================================
+  PHASE 3: TRAINING — LORA
+================================================================
+
+[2026-04-13 11:30:33] Starting lora training...
+[2026-04-13 11:30:33] Command: python3 -m benchmark_cuda run --mode lora --machine-label atom --output-dir ./results --max-steps 500 --dry-run
+
+╭─────────────────────────────────── CUDA Fine-Tuning Benchmark ───────────────────────────────────╮
+│                                                                                                  │
+│  Machine:      atom                                                                              │
+│  GPU:          NVIDIA GB10 (120 GB)                                                              │
+│  Mode:         LoRA                                                                              │
+│  Model:        meta-llama/Llama-3.1-8B-Instruct                                                  │
+│  Dataset:      databricks/databricks-dolly-15k                                                   │
+│  Steps:        5                                                                                 │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+DRY RUN: 5 steps, no evaluation
+
+                                   Run Configuration                                   
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                      ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ mode                           │ lora                                               │
+│ model_name                     │ meta-llama/Llama-3.1-8B-Instruct                   │
+│ max_steps                      │ 5                                                  │
+│ seq_len                        │ 1024                                               │
+│ micro_batch_size               │ 8                                                  │
+│ gradient_accumulation_steps    │ 4                                                  │
+│ learning_rate                  │ 0.0002                                             │
+│ dtype                          │ bfloat16                                           │
+│ attn_implementation            │ sdpa                                               │
+│ seed                           │ 42                                                 │
+│ gradient_checkpointing         │ False                                              │
+│ lora_r                         │ 16                                                 │
+│ lora_alpha                     │ 32                                                 │
+│ lora_dropout                   │ 0.05                                               │
+└────────────────────────────────┴────────────────────────────────────────────────────┘
+
+
+──────────────────────────────────────── System Information ────────────────────────────────────────
+
+  Hostname:  noc
+  OS:        Linux 6.17.0-1014-nvidia
+  CPU:       Cortex-X925 + Cortex-A725
+  RAM:       119.7 GB
+  PyTorch:   2.11.0+cu130
+  CUDA:      13.0
+  C2C Mode:  Enabled
+
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Dataset:     databricks/databricks-dolly-15k
+  Train:       13,509 samples
+  Validation:  750 samples
+  Test:        752 samples
+
+
+──────────────────── Loading Model LoRA mode - meta-llama/Llama-3.1-8B-Instruct ────────────────────
+
+
+╭──────────────────────────────────────────── FAILURE ─────────────────────────────────────────────╮
+│                                                                                                  │
+│  Benchmark FAILED                                                                                │
+│  Mode: lora                                                                                      │
+│  Reason: HuggingFace authentication required                                                     │
+│  Suggestion: Run: huggingface-cli login                                                          │
+│    You also need to accept the model license at:                                                 │
+│    https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct                                       │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[2026-04-13 11:30:37] ERROR: lora failed after 0m 4s
+
+
+================================================================
+  PHASE 3: TRAINING — QLORA
+================================================================
+
+[2026-04-13 11:30:37] Starting qlora training...
+[2026-04-13 11:30:37] Command: python3 -m benchmark_cuda run --mode qlora --machine-label atom --output-dir ./results --max-steps 500 --dry-run
+
+╭─────────────────────────────────── CUDA Fine-Tuning Benchmark ───────────────────────────────────╮
+│                                                                                                  │
+│  Machine:      atom                                                                              │
+│  GPU:          NVIDIA GB10 (120 GB)                                                              │
+│  Mode:         QLoRA                                                                             │
+│  Model:        meta-llama/Llama-3.1-8B-Instruct                                                  │
+│  Dataset:      databricks/databricks-dolly-15k                                                   │
+│  Steps:        5                                                                                 │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+DRY RUN: 5 steps, no evaluation
+
+                                   Run Configuration                                   
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                      ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ mode                           │ qlora                                              │
+│ model_name                     │ meta-llama/Llama-3.1-8B-Instruct                   │
+│ max_steps                      │ 5                                                  │
+│ seq_len                        │ 1024                                               │
+│ micro_batch_size               │ 2                                                  │
+│ gradient_accumulation_steps    │ 16                                                 │
+│ learning_rate                  │ 0.0002                                             │
+│ dtype                          │ bfloat16                                           │
+│ attn_implementation            │ sdpa                                               │
+│ seed                           │ 42                                                 │
+│ gradient_checkpointing         │ True                                               │
+│ lora_r                         │ 16                                                 │
+│ lora_alpha                     │ 32                                                 │
+│ lora_dropout                   │ 0.05                                               │
+│ qlora_bits                     │ 4                                                  │
+│ qlora_quant_type               │ nf4                                                │
+└────────────────────────────────┴────────────────────────────────────────────────────┘
+
+
+──────────────────────────────────────── System Information ────────────────────────────────────────
+
+  Hostname:  noc
+  OS:        Linux 6.17.0-1014-nvidia
+  CPU:       Cortex-X925 + Cortex-A725
+  RAM:       119.7 GB
+  PyTorch:   2.11.0+cu130
+  CUDA:      13.0
+  C2C Mode:  Enabled
+
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Dataset:     databricks/databricks-dolly-15k
+  Train:       13,509 samples
+  Validation:  750 samples
+  Test:        752 samples
+
+
+─────────────────── Loading Model QLoRA mode - meta-llama/Llama-3.1-8B-Instruct ────────────────────
+
+
+╭──────────────────────────────────────────── FAILURE ─────────────────────────────────────────────╮
+│                                                                                                  │
+│  Benchmark FAILED                                                                                │
+│  Mode: qlora                                                                                     │
+│  Reason: HuggingFace authentication required                                                     │
+│  Suggestion: Run: huggingface-cli login                                                          │
+│    You also need to accept the model license at:                                                 │
+│    https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct                                       │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[2026-04-13 11:30:42] ERROR: qlora failed after 0m 5s
+
+
+================================================================
+  PHASE 3: TRAINING — FULLFT
+================================================================
+
+[2026-04-13 11:30:42] Starting fullft training...
+[2026-04-13 11:30:42] Command: python3 -m benchmark_cuda run --mode fullft --machine-label atom --output-dir ./results --max-steps 500 --dry-run
+
+╭─────────────────────────────────── CUDA Fine-Tuning Benchmark ───────────────────────────────────╮
+│                                                                                                  │
+│  Machine:      atom                                                                              │
+│  GPU:          NVIDIA GB10 (120 GB)                                                              │
+│  Mode:         Full Fine-Tune                                                                    │
+│  Model:        meta-llama/Llama-3.1-8B-Instruct                                                  │
+│  Dataset:      databricks/databricks-dolly-15k                                                   │
+│  Steps:        5                                                                                 │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+DRY RUN: 5 steps, no evaluation
+
+                                   Run Configuration                                   
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                      ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ mode                           │ fullft                                             │
+│ model_name                     │ meta-llama/Llama-3.1-8B-Instruct                   │
+│ max_steps                      │ 5                                                  │
+│ seq_len                        │ 1024                                               │
+│ micro_batch_size               │ 4                                                  │
+│ gradient_accumulation_steps    │ 8                                                  │
+│ learning_rate                  │ 2e-05                                              │
+│ dtype                          │ bfloat16                                           │
+│ attn_implementation            │ sdpa                                               │
+│ seed                           │ 42                                                 │
+│ gradient_checkpointing         │ False                                              │
+└────────────────────────────────┴────────────────────────────────────────────────────┘
+
+
+──────────────────────────────────────── System Information ────────────────────────────────────────
+
+  Hostname:  noc
+  OS:        Linux 6.17.0-1014-nvidia
+  CPU:       Cortex-X925 + Cortex-A725
+  RAM:       119.7 GB
+  PyTorch:   2.11.0+cu130
+  CUDA:      13.0
+  C2C Mode:  Enabled
+
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Dataset:     databricks/databricks-dolly-15k
+  Train:       13,509 samples
+  Validation:  750 samples
+  Test:        752 samples
+
+
+─────────────── Loading Model Full Fine-Tune mode - meta-llama/Llama-3.1-8B-Instruct ───────────────
+
+
+╭──────────────────────────────────────────── FAILURE ─────────────────────────────────────────────╮
+│                                                                                                  │
+│  Benchmark FAILED                                                                                │
+│  Mode: fullft                                                                                    │
+│  Reason: HuggingFace authentication required                                                     │
+│  Suggestion: Run: huggingface-cli login                                                          │
+│    You also need to accept the model license at:                                                 │
+│    https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct                                       │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[2026-04-13 11:30:46] ERROR: fullft failed after 0m 4s
+
+[2026-04-13 11:30:46] 
+[2026-04-13 11:30:46] ERROR: No completed runs found. Cannot generate reports.

@@ -1,0 +1,30 @@
+{
+  "dataset": "databricks/databricks-dolly-15k",
+  "seed": 42,
+  "total_records": 15011,
+  "train_count": 13509,
+  "val_count": 750,
+  "test_count": 752,
+  "train_categories": {
+    "closed_qa": 1607,
+    "classification": 1925,
+    "open_qa": 3361,
+    "summarization": 1054,
+    "information_extraction": 1347,
+    "brainstorming": 1601,
+    "creative_writing": 644,
+    "general_qa": 1970
+  },
+  "test_categories": {
+    "general_qa": 108,
+    "summarization": 60,
+    "open_qa": 191,
+    "brainstorming": 84,
+    "information_extraction": 80,
+    "creative_writing": 32,
+    "closed_qa": 84,
+    "classification": 113
+  },
+  "content_hash": "444a48a91e7e91c7",
+  "data_dir": "./data/processed"
+}

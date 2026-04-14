@@ -50,10 +50,10 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 | 01 | **Model Scaling** | 183.6 tok/s (1.5B) to 4.3 tok/s (72B) — all 7 models run, 1–24% faster than GX10 | [Details](#01--inference-model-scaling) |
 | 02 | **Engine Comparison** | Ollama 47.1 tok/s vs llama.cpp 44.9 vs vLLM 12.8 — all 3 engines working | [Details](#02--inference-engine-comparison) |
 | 03 | **llama.cpp Multi-Quant** | 6,946 tok/s PP (3B Q4) · 12 configs · 5–20% faster than GX10 | [Details](#03--inference-llamacpp-multi-quantization) |
-| 04 | **Fine-Tuning** | Full FT of Qwen2.5 7B using 90.9 GB | [Details](#04--training-fine-tuning) |
+| 04 | **Fine-Tuning** | **Testing ongoing** — LoRA / QLoRA / Full FT to match GX10 | [Details](#04--training-fine-tuning) |
 | 05 | **Token per Watt** | 2.16 tok/W peak · RM 0.07 per 1M tokens · 4 models x 3 quants | [Details](#05--efficiency-token-per-watt) |
 | 06 | **Embedding Throughput** | 3,417 chunks/s GPU · 34.4x faster than CPU | [Details](#06--inference-embedding-throughput) |
-| 07 | **Image & Video Gen** | 5.9 images/min · video at 1.16 fps | [Details](#07--image--video-generation) |
+| 07 | **Image & Video Gen** | Image gen working · video gen timed out (WAN 2.2 too slow) | [Details](#07--image--video-generation) |
 | 08 | **Voice STT & TTS** | TTS: 2,012 chars/s · STT: 1.84x realtime | [Details](#08--voice-stt--tts) |
 | 09 | **Coding LLM Webpage** | Qwen3-Coder:30b 71.3 tok/s · full webpage in 56s | [Details](#09--coding-llm-webpage-generation) |
 
@@ -132,33 +132,17 @@ See [`03-inference-llama-cpp/results/benchmark_20260414_190923.csv`](03-inferenc
 
 ## 04 — Training: Fine-Tuning
 
-> Three fine-tuning methods compared on **Qwen2.5-7B-Instruct**, same dataset (Dolly 15k), same hyperparameters (dry-run, 5 steps). Full Fine-Tune uses **90.9 GB of 128 GB unified memory** — only possible because of the GB10's shared CPU+GPU memory pool.
+> **Testing ongoing.** Re-running with Llama 3.1 8B to match GX10 benchmark parameters (LoRA / QLoRA / Full Fine-Tune, full training run).
 
-| Mode | Time | Peak Memory | tok/s | Final Loss |
-|------|-----:|------------:|------:|-----------:|
-| **LoRA** | 2m 25s | 83.3 GB | **156** | 1.83 |
-| **Full FT** | 2m 44s | 90.9 GB | 137 | **1.57** |
-| **QLoRA** | 4m 59s | **12.8 GB** | 75 | 1.88 |
+### GX10 Reference (to be compared)
 
-### Training Loss Curves
+| Mode | Time | Peak GPU | tok/s |
+|------|------|----------|------:|
+| LoRA | 4h 47m | 87.4 GB | 164 |
+| Full FT | 5h 05m | 93.6 GB | 151 |
+| QLoRA | 9h 13m | 12.4 GB | 83 |
 
-<div align="center">
-<img src="04-training-finetuning/results/cross_comparison/loss_curves.png" width="700" alt="Training loss curves for LoRA, QLoRA, and Full Fine-Tune"/>
-<br><sub>Full Fine-Tune achieves the lowest loss. QLoRA converges slowest but uses 7x less memory.</sub>
-</div>
-
-### GPU Memory Usage
-
-<div align="center">
-<img src="04-training-finetuning/results/cross_comparison/gpu_memory.png" width="700" alt="GPU memory usage comparison — QLoRA at 12.8GB vs Full FT at 90.9GB"/>
-<br><sub>QLoRA: 12.8 GB · LoRA: 83.3 GB · Full FT: 90.9 GB — all fit in the GB10's 128 GB unified memory.</sub>
-</div>
-
-<details>
-<summary>Run details</summary>
-
-See [`04-training-finetuning/results/all_runs_summary.csv`](04-training-finetuning/results/all_runs_summary.csv) for full metrics.
-</details>
+<sub>Results will be updated once the ATOM training run completes.</sub>
 
 ---
 
@@ -209,7 +193,7 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 
 ## 07 — Image & Video Generation
 
-> ComfyUI with **Z-Image-Turbo** (text-to-image, bf16) and **Wan 2.2 T2V 14B** (text-to-video, fp8 + LightX2V LoRA).
+> ComfyUI with **Z-Image-Turbo** (text-to-image, bf16) and **Wan 2.2 T2V 14B** (text-to-video, fp8 + LightX2V LoRA). Image generation results from previous run. **Video generation timed out** after 3 hours — WAN 2.2 T2V VAE decoding is CPU-bound on ARM and too slow for automated benchmarking.
 
 ### Text-to-Image: Z-Image-Turbo
 
@@ -394,15 +378,15 @@ Download the HTML files from [`09-coding-llm-webpage/outputs/`](09-coding-llm-we
 
 ```
 aitopatom-benchmarks/
-├── 01-inference-model-scaling/        Ollama · 7 models · 8B to 72B
-├── 02-inference-engine-comparison/    Ollama vs llama.cpp vs vLLM (failed)
-├── 03-inference-llama-cpp/            Q4_K_M · 7B to 72B
-├── 04-training-finetuning/            LoRA · QLoRA · Full FT · with charts
-├── 05-efficiency-token-per-watt/      Power monitoring · cost analysis
-├── 06-inference-embedding/            CPU vs GPU · batch size sweep
-├── 07-image-video-generation/         Z-Image-Turbo · Wan 2.2 T2V · samples
-├── 08-voice-stt-tts/                  Whisper STT · MMS-TTS · audio samples
-└── 09-coding-llm-webpage/            3 coding LLMs · webpage generation · live outputs
+├── 01-inference-model-scaling/        Ollama · 7 models · 1.5B to 72B + GX10 comparison
+├── 02-inference-engine-comparison/    Ollama 47.1 vs llama.cpp 44.9 vs vLLM 12.8
+├── 03-inference-llama-cpp/            4 models x 3 quants · 48 measurements
+├── 04-training-finetuning/            LoRA · QLoRA · Full FT · TESTING ONGOING
+├── 05-efficiency-token-per-watt/      4 models x 3 quants · power monitoring · cost
+├── 06-inference-embedding/            GPU 3,417 chunks/s · 34.4x faster than CPU
+├── 07-image-video-generation/         Z-Image-Turbo · video gen timed out
+├── 08-voice-stt-tts/                  TTS 2,012 chars/s · STT 1.84x realtime
+└── 09-coding-llm-webpage/            3 coding LLMs · qwen3-coder:30b 71.3 tok/s
 ```
 
 Each benchmark includes:

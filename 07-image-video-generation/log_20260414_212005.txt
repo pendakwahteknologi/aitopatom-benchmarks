@@ -1,0 +1,25 @@
+============================================
+  ATOM Benchmark #07: Image & Video Gen
+  Tue 14 Apr 2026 09:20:05 PM +08
+  Reps per config: 3
+============================================
+
+[Setup] Checking ComfyUI...
+  ComfyUI is already running.
+
+[Setup] Activating conda environment...
+  Using: /home/atom/.conda/envs/comfyui/bin/python3
+
+[Setup] Checking websocket-client...
+  OK
+
+
+[Phase 3] Generating HTML report...
+  ERROR: Missing result files!
+
+============================================
+  Benchmark Complete!
+  Results: /home/atom/ai/benchmarks/07-image-video-generation/
+  Summary: /home/atom/ai/benchmarks/07-image-video-generation/
+  Report:  /home/atom/ai/benchmarks/07-image-video-generation/report_20260414_212005.html
+============================================

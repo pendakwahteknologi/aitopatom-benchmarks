@@ -1,6 +1,0 @@
-2026-04-13 11:49:08 | DEBUG    | Step 1/5 loss=2.2735 lr=1.81e-04 step_time=60.34s gpu_mem=13046MB
-2026-04-13 11:50:07 | DEBUG    | Step 2/5 loss=2.2595 lr=1.31e-04 step_time=59.80s gpu_mem=13123MB
-2026-04-13 11:51:07 | DEBUG    | Step 3/5 loss=2.0224 lr=6.91e-05 step_time=59.91s gpu_mem=13123MB
-2026-04-13 11:52:07 | DEBUG    | Step 4/5 loss=2.0729 lr=1.91e-05 step_time=59.89s gpu_mem=13123MB
-2026-04-13 11:53:07 | DEBUG    | Step 5/5 loss=1.8798 lr=0.00e+00 step_time=59.75s gpu_mem=13123MB
-2026-04-13 11:53:07 | INFO     | Benchmark complete: status=success run_dir=./results/atom_qlora_20260413_114628

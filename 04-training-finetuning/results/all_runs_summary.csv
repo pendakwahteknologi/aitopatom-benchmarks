@@ -1,4 +1,0 @@
-machine_label,mode,status,total_time_sec,avg_step_time,median_step_time,peak_gpu_memory_gb,final_loss,tokens_per_sec,samples_per_sec,steps_completed,run_dir
-atom,fullft,success,164.67,32.679,32.5788,90.86,1.5689,136.6,0.12,5,atom_fullft_20260413_115311
-atom,lora,success,145.94,28.5717,28.586,83.31,1.8309,156.3,0.28,5,atom_lora_20260413_113140
-atom,qlora,success,299.76,59.8358,59.8456,12.82,1.8798,74.6,0.03,5,atom_qlora_20260413_114628

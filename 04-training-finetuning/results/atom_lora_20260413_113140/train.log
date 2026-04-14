@@ -1,6 +1,0 @@
-2026-04-13 11:44:29 | DEBUG    | Step 1/5 loss=2.1872 lr=1.81e-04 step_time=31.51s gpu_mem=85235MB
-2026-04-13 11:44:57 | DEBUG    | Step 2/5 loss=2.1255 lr=1.31e-04 step_time=28.50s gpu_mem=85312MB
-2026-04-13 11:45:26 | DEBUG    | Step 3/5 loss=1.7724 lr=6.91e-05 step_time=28.59s gpu_mem=85312MB
-2026-04-13 11:45:54 | DEBUG    | Step 4/5 loss=2.0332 lr=1.91e-05 step_time=28.62s gpu_mem=85312MB
-2026-04-13 11:46:23 | DEBUG    | Step 5/5 loss=1.8309 lr=0.00e+00 step_time=28.58s gpu_mem=85312MB
-2026-04-13 11:46:23 | INFO     | Benchmark complete: status=success run_dir=./results/atom_lora_20260413_113140

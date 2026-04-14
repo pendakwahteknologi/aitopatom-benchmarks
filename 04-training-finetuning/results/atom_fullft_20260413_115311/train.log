@@ -1,6 +1,0 @@
-2026-04-13 11:55:25 | DEBUG    | Step 1/5 loss=2.2220 lr=1.81e-05 step_time=33.86s gpu_mem=74106MB
-2026-04-13 11:55:58 | DEBUG    | Step 2/5 loss=1.8572 lr=1.31e-05 step_time=33.09s gpu_mem=93042MB
-2026-04-13 11:56:31 | DEBUG    | Step 3/5 loss=1.6193 lr=6.91e-06 step_time=32.57s gpu_mem=93042MB
-2026-04-13 11:57:04 | DEBUG    | Step 4/5 loss=1.8763 lr=1.91e-06 step_time=32.59s gpu_mem=93043MB
-2026-04-13 11:57:36 | DEBUG    | Step 5/5 loss=1.5689 lr=0.00e+00 step_time=32.47s gpu_mem=93043MB
-2026-04-13 11:57:36 | INFO     | Benchmark complete: status=success run_dir=./results/atom_fullft_20260413_115311

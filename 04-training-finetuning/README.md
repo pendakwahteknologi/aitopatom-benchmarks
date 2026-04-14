@@ -2,51 +2,49 @@
 
 Compares LLM fine-tuning methods on real hardware. Trains **LoRA**, **QLoRA**, and **Full Fine-Tune** using the same model, dataset, and hyperparameters.
 
-Built and tested on the **Gigabyte Grace Blackwell Desktop AI (ATOM)** — an ARM-based desktop powered by the **NVIDIA GB10** (Blackwell architecture) with **128 GB unified memory**.
+Built and tested on the **Gigabyte Grace Blackwell Desktop AI (ATOM)** — an ARM-based desktop powered by the **NVIDIA GB10** (Blackwell architecture) with **120 GB unified memory**.
 
 ---
 
-## Results at a Glance
+## Status: Testing Ongoing
 
-All three fine-tuning methods trained **Qwen2.5-7B-Instruct** for 5 steps (dry run) on the Databricks Dolly 15k dataset.
+This benchmark is currently being re-run with parameters matching the [GX10 benchmark](https://github.com/pendakwahteknologi/gx10-benchmarks) for a fair comparison. Results will be updated once complete.
 
-### Training Performance
+### Planned Configuration
 
-| Metric | LoRA | QLoRA | Full Fine-Tune |
-|--------|-----:|------:|---------------:|
-| **Total Time** | 2m 25s | 4m 59s | 2m 44s |
-| **Avg Step Time** | 28.6s | 59.8s | 32.7s |
-| **Peak GPU Memory** | 83.3 GB | 12.8 GB | 90.9 GB |
-| **Final Loss** | 1.83 | 1.88 | 1.57 |
-| **Tokens/sec** | 156 | 75 | 137 |
+- **Model:** Llama 3.1 8B (matching GX10)
+- **Dataset:** Databricks Dolly 15k
+- **Methods:** LoRA, QLoRA, Full Fine-Tune
+- **Steps:** Full training run (not dry-run)
 
-## Key Findings
+### GX10 Reference Results
 
-### LoRA: Fastest Training
-- **2m 25s total** — fastest of all methods
-- 156 tok/s throughput, 28.6s per step
-- Uses 83.3 GB memory (fits comfortably in 128 GB unified pool)
-- Good balance of speed and quality
+| Mode | Time | Peak GPU | tok/s |
+|------|------|----------|------:|
+| LoRA | 4h 47m | 87.4 GB | 164 |
+| Full FT | 5h 05m | 93.6 GB | 151 |
+| QLoRA | 9h 13m | 12.4 GB | 83 |
 
-### QLoRA: Lowest Memory
-- Only **12.8 GB peak memory** — 7x less than Full FT
-- Trade-off: 2x slower (59.8s/step) and highest loss (1.88)
-- Essential for memory-constrained environments, but the GB10's 128 GB makes this less critical
+---
 
-### Full Fine-Tune: Best Quality
-- **Lowest loss at 1.57** — trains all parameters
-- Uses **90.9 GB** of the 128 GB unified memory pool
-- Only possible because of GB10's shared CPU+GPU memory architecture
-- Most consumer GPUs cannot run full fine-tuning of 7B models
+## Methodology
 
-## Output
+- Engine: PyTorch + HuggingFace Transformers + PEFT
+- Training modes: LoRA (rank 16), QLoRA (4-bit NF4), Full Fine-Tune
+- Same hyperparameters across all methods for fair comparison
+- GPU memory and power monitored throughout training
+- Results evaluated on 80 curated questions
 
-- `results/all_runs_summary.csv` — summary of all runs
-- `results/atom_*/` — individual run directories with metrics
+## Usage
+
+```bash
+./run_all.sh          # Run all three methods
+./run_benchmark.sh    # Run with custom options
+```
 
 ## Date
 
-13 April 2026
+15 April 2026
 
 ## Created by
 
