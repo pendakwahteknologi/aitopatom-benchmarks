@@ -1,0 +1,64 @@
+============================================
+  ATOM Benchmark: Can It Run X?
+  Mon 13 Apr 2026 11:02:20 PM +08
+============================================
+
+
+--- Testing qwen2.5:1.5b (1.5B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 183.6 tok/s | TTFT: 11.6ms | 256 tokens | 1.685298s total | GPU: 52C
+
+--- Testing qwen2.5:3b (3B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 101.47 tok/s | TTFT: 19.5ms | 256 tokens | 2.785906s total | GPU: 52C
+
+--- Testing qwen2.5:7b (7B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 45.99 tok/s | TTFT: 32.2ms | 256 tokens | 5.836463s total | GPU: 52C
+
+--- Testing qwen2.5:14b (14B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 23.39 tok/s | TTFT: 62.6ms | 256 tokens | 11.269012s total | GPU: 60C
+
+--- Testing gemma4:26b (27B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 0 tok/s | TTFT: 0ms | 0 tokens | 4.491807s total | GPU: 50C
+
+--- Testing qwen2.5:32b (32B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 10.19 tok/s | TTFT: 131.7ms | 256 tokens | 25.526690s total | GPU: 64C
+
+--- Testing qwen2.5:72b (72B) ---
+  Already installed
+  Warming up...
+  Running benchmark...
+  Results: 4.27 tok/s | TTFT: 313.1ms | 256 tokens | 61.785504s total | GPU: 66C
+
+============================================
+  Benchmark Complete!
+  Results: /home/atom/ai/benchmarks/01-inference-model-scaling/results_20260413_230220.csv
+============================================
+
+SUMMARY:
+
+MODEL                     SIZE     TOK/S      TTFT(ms)     GPU(C)    
+------------------------- -------- ---------- ------------ ----------
+qwen2.5:1.5b              1.5B     183.6      11.6         52        
+qwen2.5:3b                3B       101.47     19.5         52        
+qwen2.5:7b                7B       45.99      32.2         52        
+qwen2.5:14b               14B      23.39      62.6         60        
+gemma4:26b                27B      0          0            50        
+qwen2.5:32b               32B      10.19      131.7        64        
+qwen2.5:72b               72B      4.27       313.1        66        

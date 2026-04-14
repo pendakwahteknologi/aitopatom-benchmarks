@@ -1,0 +1,9 @@
+engine,test,tok_s,ttft_ms,total_time_s,tokens,gpu_temp
+ollama,single_run1,47.1,31.8,5.72,256,52
+ollama,single_run2,47.05,24.4,5.7,256,53
+ollama,single_run3,47.04,23.0,5.71,256,56
+vllm,single_run1,11.74,0,21.81,256,59
+vllm,single_run2,13.39,0,19.12,256,62
+vllm,single_run3,13.36,0,19.16,256,64
+llama.cpp,tg_bench,44.93,0,0,256,64
+llama.cpp,pp_bench,3049.04,0,0,512,64

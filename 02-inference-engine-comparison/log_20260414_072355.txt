@@ -1,0 +1,61 @@
+============================================
+  ATOM Benchmark: Serving Engine Comparison
+  Machine: Gigabyte GB10 (ATOM)
+  Model: Qwen2.5-7B on all engines
+  Tue 14 Apr 2026 07:23:55 AM +08
+============================================
+
+=== ENGINE 1: OLLAMA ===
+  Warming up...
+  Run 1/3...
+    tok/s: 47.1 | TTFT: 31.8ms | Total: 5.72s | GPU: 52C
+  Run 2/3...
+    tok/s: 47.05 | TTFT: 24.4ms | Total: 5.7s | GPU: 53C
+  Run 3/3...
+    tok/s: 47.04 | TTFT: 23.0ms | Total: 5.71s | GPU: 56C
+
+=== ENGINE 2: vLLM ===
+  Starting vLLM container with Qwen/Qwen2.5-7B-Instruct...
+1e714a00922288cb70634fc03398555cf2786712707f68d536d84968276f4b4b
+  Waiting for vLLM to be ready...
+  Still waiting... (30s)
+  Still waiting... (60s)
+  Still waiting... (90s)
+  Still waiting... (120s)
+  Still waiting... (150s)
+  Still waiting... (180s)
+  Still waiting... (210s)
+  Still waiting... (240s)
+  Still waiting... (270s)
+  vLLM ready (took 282s)
+  Run 1/3...
+    tok/s: 11.74 | Total: 21.81s | Tokens: 256 | GPU: 59C
+  Run 2/3...
+    tok/s: 13.39 | Total: 19.12s | Tokens: 256 | GPU: 62C
+  Run 3/3...
+    tok/s: 13.36 | Total: 19.16s | Tokens: 256 | GPU: 64C
+  Stopping vLLM container...
+
+=== ENGINE 3: llama.cpp ===
+  Running llama-bench with Qwen2.5-7B GGUF...
+  Model file: /usr/share/ollama/.ollama/models/blobs/sha256-2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/usr/share/ollama/.ollama/models/blobs/sha256-2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730","qwen2 7B Q4_K - Medium","4677120000","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","0","auto","0.00","none","1","0","0","0","0","0","0","0","256","0","2026-04-13T23:30:24Z","5698296246","3223096","44.925719","0.025400"
+    Token generation: "0.025400" tok/s | GPU: 64C
+    Prompt processing: "66.021192" tok/s
+
+============================================
+  Benchmark Complete!
+  Results: /home/atom/ai/benchmarks/02-inference-engine-comparison/results_20260414_072355.csv
+============================================
+
+SUMMARY:
+engine,test,tok_s,ttft_ms,total_time_s,tokens,gpu_temp
+ollama,single_run1,47.1,31.8,5.72,256,52
+ollama,single_run2,47.05,24.4,5.7,256,53
+ollama,single_run3,47.04,23.0,5.71,256,56
+vllm,single_run1,11.74,0,21.81,256,59
+vllm,single_run2,13.39,0,19.12,256,62
+vllm,single_run3,13.36,0,19.16,256,64
+llama.cpp,tg_bench,"0.025400",0,0,256,64
+llama.cpp,pp_bench,"66.021192",0,0,512,64

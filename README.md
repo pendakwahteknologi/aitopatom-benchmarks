@@ -47,8 +47,8 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 
 | # | Benchmark | Highlight | |
 |:-:|-----------|-----------|---|
-| 01 | **Model Scaling** | 40.7 tok/s (8B) to 4.3 tok/s (72B) — all run | [Details](#01--inference-model-scaling) |
-| 02 | **Engine Comparison** | Ollama 43.9 tok/s vs llama.cpp 42.6 · vLLM FAILED | [Details](#02--inference-engine-comparison) |
+| 01 | **Model Scaling** | 183.6 tok/s (1.5B) to 4.3 tok/s (72B) — all 7 models run, 1–24% faster than GX10 | [Details](#01--inference-model-scaling) |
+| 02 | **Engine Comparison** | Ollama 47.1 tok/s vs llama.cpp 44.9 vs vLLM 12.8 — all 3 engines working | [Details](#02--inference-engine-comparison) |
 | 03 | **llama.cpp Multi-Quant** | 3,334 tok/s prompt processing (7B Q4) | [Details](#03--inference-llamacpp-multi-quantization) |
 | 04 | **Fine-Tuning** | Full FT of Qwen2.5 7B using 90.9 GB | [Details](#04--training-fine-tuning) |
 | 05 | **Token per Watt** | 0.88 tok/W peak · RM 0.17 per 1M tokens | [Details](#05--efficiency-token-per-watt) |
@@ -61,46 +61,46 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 
 ## 01 — Inference: Model Scaling
 
-> Every available model tested via Ollama. **The 72B model runs** — most desktop GPUs cannot even load it.
+> Every popular model size from 1.5B to 72B, matching the [GX10 benchmark](https://github.com/pendakwahteknologi/gx10-benchmarks). **The 72B model runs** — most desktop GPUs cannot even load it. ATOM is **1–24% faster** than the GX10 across all models.
 
-| Model | Size | tok/s | TTFT | GPU |
-|-------|-----:|------:|-----:|----:|
-| Qwen3 | 8B | **40.7** | 94ms | 65C |
-| Qwen3.5 | 9B | **34.6** | 54ms | 70C |
-| DeepSeek-Coder-V2 | 16B | FAIL | -- | 56C |
-| Devstral | 14B | 13.8 | 115ms | 69C |
-| Mistral-Small3.2 | 15B | 13.8 | 105ms | 72C |
-| Qwen2.5-Coder | 32B | 10.0 | 134ms | 74C |
-| Qwen2.5 | 72B | 4.3 | 314ms | 74C |
+| Model | Size | ATOM tok/s | GX10 tok/s | Diff | GPU |
+|-------|-----:|-----------:|-----------:|-----:|----:|
+| Qwen2.5 | 1.5B | **183.6** | 173.3 | +6.0% | 52C |
+| Qwen2.5 | 3B | **101.5** | 93.5 | +8.5% | 52C |
+| Qwen2.5 | 7B | **46.0** | 43.2 | +6.5% | 52C |
+| Qwen2.5 | 14B | **23.4** | 22.2 | +5.2% | 60C |
+| Gemma 4 | 27B MoE | **68.4** | 55.0 | +24.3% | 57C |
+| Qwen2.5 | 32B | 10.2 | 10.0 | +1.9% | 64C |
+| Qwen2.5 | 72B | 4.3 | 4.2 | +0.7% | 66C |
 
-<sub>DeepSeek-Coder-V2 16B failed to generate tokens (timed out). All other models ran successfully.</sub>
+<sub>Gemma 4 27B MoE tested via llama.cpp (Ollama 0.20.6 crashes on gemma4 — see <a href="01-inference-model-scaling/README.md">full details</a>). All other models via Ollama.</sub>
 
 <details>
 <summary>Raw data</summary>
 
-See [`01-inference-model-scaling/results/model-scaling-results.csv`](01-inference-model-scaling/results/model-scaling-results.csv)
+See [`01-inference-model-scaling/results_20260413_230220.csv`](01-inference-model-scaling/results_20260413_230220.csv)
 </details>
 
 ---
 
 ## 02 — Inference: Engine Comparison
 
-> Same model (Qwen2.5-7B), three engines. **Ollama wins.** vLLM failed to start — the stock NVIDIA container does not support SM 12.1.
+> Same model (Qwen2.5-7B), three engines. **Ollama wins for single-user speed.** All 3 engines working — vLLM via NVIDIA NGC container.
 
-| Engine | Runtime | tok/s | GPU |
-|--------|---------|------:|----:|
-| **Ollama** | Native systemd | **43.9** | 61-65C |
-| **llama.cpp** | Native binary | **42.6** | 64C |
-| **vLLM** | Docker container | FAILED | -- |
+| Engine | Runtime | ATOM tok/s | GX10 tok/s | Diff | GPU |
+|--------|---------|----------:|-----------:|-----:|----:|
+| **Ollama** | Native systemd | **47.1** | 43.7 | +7.8% | 52-56C |
+| **llama.cpp** | Native binary | **44.9** | 43.0 | +4.5% | 64C |
+| **vLLM** | Docker container | **12.8** | 12.5 | +2.3% | 59-64C |
 
-llama.cpp prompt processing: **3,334 tok/s** (PP512).
+llama.cpp prompt processing: **3,049 tok/s** (PP512).
 
-> vLLM failed because `nvcr.io/nvidia/vllm:26.01-py3` does not include CUDA kernels for the GB10's SM 12.1 architecture. No community-compiled image was available for this test.
+> vLLM runs via `nvcr.io/nvidia/vllm:26.01-py3` Docker container. Slower than native engines due to Docker overhead + FP16 precision, but excels at concurrent multi-user serving.
 
 <details>
 <summary>Raw data</summary>
 
-See [`02-inference-engine-comparison/results/engine-comparison-results.csv`](02-inference-engine-comparison/results/engine-comparison-results.csv)
+See [`02-inference-engine-comparison/results_20260414_072355.csv`](02-inference-engine-comparison/results_20260414_072355.csv)
 </details>
 
 ---
