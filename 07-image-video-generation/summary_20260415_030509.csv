@@ -1,0 +1,6 @@
+test,model,type,width,height,steps,frames,megapixels,n_runs,mean_time_s,stddev_time_s,min_time_s,max_time_s,images_per_min,frames_per_sec,mean_gpu_temp,mean_gpu_power_w
+z_turbo_512x512_4steps,z-image-turbo,image,512,512,4,1,0.26,3,1.21,0.01,1.2,1.22,49.7,0,58.0,76.3
+z_turbo_768x768_4steps,z-image-turbo,image,768,768,4,1,0.59,3,2.46,0.07,2.42,2.54,24.4,0,56.0,74.5
+z_turbo_1024x1024_4steps,z-image-turbo,image,1024,1024,4,1,1.05,3,4.22,0.07,4.17,4.3,14.2,0,60.0,64.9
+z_turbo_1280x1280_4steps,z-image-turbo,image,1280,1280,4,1,1.64,3,6.66,0.1,6.58,6.77,9.0,0,63.0,53.7
+z_turbo_1024x1024_8steps,z-image-turbo,image,1024,1024,8,1,1.05,3,7.64,0.1,7.52,7.71,7.9,0,67.0,64.0

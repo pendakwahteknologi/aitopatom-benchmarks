@@ -53,7 +53,7 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 | 04 | **Fine-Tuning** | **Testing ongoing** — LoRA / QLoRA / Full FT to match GX10 | [Details](#04--training-fine-tuning) |
 | 05 | **Token per Watt** | 2.16 tok/W peak · RM 0.07 per 1M tokens · 4 models x 3 quants | [Details](#05--efficiency-token-per-watt) |
 | 06 | **Embedding Throughput** | 3,417 chunks/s GPU · 34.4x faster than CPU | [Details](#06--inference-embedding-throughput) |
-| 07 | **Image & Video Gen** | Image gen working · video gen timed out (WAN 2.2 too slow) | [Details](#07--image--video-generation) |
+| 07 | **Image & Video Gen** | 49.7 img/min (512x512) · 1024x1024 in 4.2s · video skipped (ARM CPU bottleneck) | [Details](#07--image--video-generation) |
 | 08 | **Voice STT & TTS** | TTS: 2,012 chars/s · STT: 1.84x realtime | [Details](#08--voice-stt--tts) |
 | 09 | **Coding LLM Webpage** | Qwen3-Coder:30b 71.3 tok/s · full webpage in 56s | [Details](#09--coding-llm-webpage-generation) |
 
@@ -193,7 +193,7 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 
 ## 07 — Image & Video Generation
 
-> ComfyUI with **Z-Image-Turbo** (text-to-image, bf16) and **Wan 2.2 T2V 14B** (text-to-video, fp8 + LightX2V LoRA). Image generation results from previous run. **Video generation timed out** after 3 hours — WAN 2.2 T2V VAE decoding is CPU-bound on ARM and too slow for automated benchmarking.
+> ComfyUI with **Z-Image-Turbo** (text-to-image, bf16). **2.4-4.1x faster** than previous run with clean GPU state. Video generation skipped — ARM CPU bottleneck in VAE decoding.
 
 ### Text-to-Image: Z-Image-Turbo
 
@@ -201,12 +201,12 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 
 | Resolution | Time | Images/min | Power |
 |------------|-----:|-----------:|------:|
-| 512x512 | 5.0s* | 3.2 | 31W |
-| 768x768 | 7.1s* | 5.9 | 50W |
-| 1024x1024 | 14.5s | 4.1 | 33W |
-| 1280x1280 | 16.0s | 3.7 | 44W |
+| 512x512 | **1.21s** | **49.7** | 76W |
+| 768x768 | 2.46s | 24.4 | 75W |
+| 1024x1024 | 4.22s | 14.2 | 65W |
+| 1280x1280 | 6.66s | 9.0 | 54W |
 
-<sub>*Excludes first-run model loading. 8-step at 1024x1024: 14.0s (4.3 img/min).</sub>
+<sub>8-step at 1024x1024: 7.64s (7.9 img/min). Video gen (WAN 2.2 T2V) skipped — times out after 3+ hours.</sub>
 
 #### Resolution Comparison
 
@@ -384,7 +384,7 @@ aitopatom-benchmarks/
 ├── 04-training-finetuning/            LoRA · QLoRA · Full FT · TESTING ONGOING
 ├── 05-efficiency-token-per-watt/      4 models x 3 quants · power monitoring · cost
 ├── 06-inference-embedding/            GPU 3,417 chunks/s · 34.4x faster than CPU
-├── 07-image-video-generation/         Z-Image-Turbo · video gen timed out
+├── 07-image-video-generation/         Z-Image-Turbo · 49.7 img/min · video skipped
 ├── 08-voice-stt-tts/                  TTS 2,012 chars/s · STT 1.84x realtime
 └── 09-coding-llm-webpage/            3 coding LLMs · qwen3-coder:30b 71.3 tok/s
 ```

@@ -74,7 +74,9 @@ echo "  OK" | tee -a "$LOG_FILE"
 # ---- Run benchmark ----
 echo "" | tee -a "$LOG_FILE"
 N_VIDEO_REPS=2
-python3 benchmark.py --reps "$N_REPS" --video-reps "$N_VIDEO_REPS" 2>&1 | tee -a "$LOG_FILE"
+# Skip video: WAN 2.2 T2V VAE decoding is CPU-bound on ARM and takes 3+ hours per video
+# Image-only benchmark completes in ~10 minutes
+python3 benchmark.py --reps "$N_REPS" --video-reps "$N_VIDEO_REPS" --skip-video 2>&1 | tee -a "$LOG_FILE"
 
 # ---- Generate report ----
 echo "" | tee -a "$LOG_FILE"

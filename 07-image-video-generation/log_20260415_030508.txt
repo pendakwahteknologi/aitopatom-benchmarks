@@ -1,0 +1,98 @@
+============================================
+  ATOM Benchmark #07: Image & Video Gen
+  Wed 15 Apr 2026 03:05:08 AM +08
+  Reps per config: 3
+============================================
+
+[Setup] Checking ComfyUI...
+  ComfyUI is already running.
+
+[Setup] Activating conda environment...
+  Using: /home/atom/.conda/envs/comfyui/bin/python3
+
+[Setup] Checking websocket-client...
+  OK
+
+
+======================================================================
+  GX10 Benchmark #07: Image & Video Generation Speed
+  2026-04-15 03:05:09
+  Reps per config: 3
+======================================================================
+
+[Phase 1] Checking ComfyUI server...
+  ComfyUI v0.18.1 is running
+  WebSocket support: yes
+
+[Phase 2] Collecting metadata...
+  Saved to /home/atom/ai/benchmarks/07-image-video-generation/metadata_20260415_030509.json
+
+======================================================================
+  MODEL: Z-Image-Turbo (text-to-image)
+======================================================================
+
+  Warmup (512x512, 1 image)...
+  Warmup complete.
+
+  Test: z_turbo_512x512_4steps (512x512, 4 steps)
+    Run 1/3: 1.22s | GPU: 59C, 75.8W
+    Run 2/3: 1.20s | GPU: 55C, 75.9W
+    Run 3/3: 1.20s | GPU: 61C, 77.2W
+    => Mean: 1.21s (stddev: 0.01s)
+
+  Test: z_turbo_768x768_4steps (768x768, 4 steps)
+    Run 1/3: 2.43s | GPU: 56C, 76.3W
+    Run 2/3: 2.42s | GPU: 57C, 77.9W
+    Run 3/3: 2.54s | GPU: 56C, 69.3W
+    => Mean: 2.46s (stddev: 0.07s)
+
+  Test: z_turbo_1024x1024_4steps (1024x1024, 4 steps)
+    Run 1/3: 4.18s | GPU: 58C, 65.0W
+    Run 2/3: 4.17s | GPU: 61C, 70.1W
+    Run 3/3: 4.30s | GPU: 60C, 59.7W
+    => Mean: 4.22s (stddev: 0.07s)
+
+  Test: z_turbo_1280x1280_4steps (1280x1280, 4 steps)
+    Run 1/3: 6.58s | GPU: 62C, 55.6W
+    Run 2/3: 6.77s | GPU: 63C, 48.0W
+    Run 3/3: 6.62s | GPU: 65C, 57.5W
+    => Mean: 6.66s (stddev: 0.10s)
+
+  Test: z_turbo_1024x1024_8steps (1024x1024, 8 steps)
+    Run 1/3: 7.71s | GPU: 66C, 60.3W
+    Run 2/3: 7.52s | GPU: 69C, 70.4W
+    Run 3/3: 7.69s | GPU: 67C, 61.2W
+    => Mean: 7.64s (stddev: 0.10s)
+
+  Freeing GPU memory...
+
+======================================================================
+  Writing results...
+======================================================================
+  Raw results: /home/atom/ai/benchmarks/07-image-video-generation/results_20260415_030509.csv (15 rows)
+  Summary: /home/atom/ai/benchmarks/07-image-video-generation/summary_20260415_030509.csv (5 configs)
+
+====================================================================================================
+Test                           Type   Res          Mean(s)    StdDev     Rate               GPU C   Watts
+----------------------------------------------------------------------------------------------------
+z_turbo_512x512_4steps         image  512x512      1.21       0.01       49.7 img/min       58      76.3
+z_turbo_768x768_4steps         image  768x768      2.46       0.07       24.4 img/min       56      74.5
+z_turbo_1024x1024_4steps       image  1024x1024    4.22       0.07       14.2 img/min       60      64.9
+z_turbo_1280x1280_4steps       image  1280x1280    6.66       0.10       9.0 img/min        63      53.7
+z_turbo_1024x1024_8steps       image  1024x1024    7.64       0.10       7.9 img/min        67      64.0
+
+======================================================================
+  Benchmark Complete!
+======================================================================
+
+[Phase 3] Generating HTML report...
+Report generated: report_20260415_030508.html
+  Raw rows: 15
+  Summary configs: 5
+
+============================================
+  Benchmark Complete!
+  Results: /home/atom/ai/benchmarks/07-image-video-generation/results_20260415_030509.csv
+  Summary: /home/atom/ai/benchmarks/07-image-video-generation/summary_20260415_030509.csv
+  Report:  /home/atom/ai/benchmarks/07-image-video-generation/report_20260415_030508.html
+============================================
