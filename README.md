@@ -49,9 +49,9 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 |:-:|-----------|-----------|---|
 | 01 | **Model Scaling** | 183.6 tok/s (1.5B) to 4.3 tok/s (72B) — all 7 models run, 1–24% faster than GX10 | [Details](#01--inference-model-scaling) |
 | 02 | **Engine Comparison** | Ollama 47.1 tok/s vs llama.cpp 44.9 vs vLLM 12.8 — all 3 engines working | [Details](#02--inference-engine-comparison) |
-| 03 | **llama.cpp Multi-Quant** | 3,334 tok/s prompt processing (7B Q4) | [Details](#03--inference-llamacpp-multi-quantization) |
+| 03 | **llama.cpp Multi-Quant** | 6,946 tok/s PP (3B Q4) · 12 configs · 5–20% faster than GX10 | [Details](#03--inference-llamacpp-multi-quantization) |
 | 04 | **Fine-Tuning** | Full FT of Qwen2.5 7B using 90.9 GB | [Details](#04--training-fine-tuning) |
-| 05 | **Token per Watt** | 0.88 tok/W peak · RM 0.17 per 1M tokens | [Details](#05--efficiency-token-per-watt) |
+| 05 | **Token per Watt** | 2.16 tok/W peak · RM 0.07 per 1M tokens · 4 models x 3 quants | [Details](#05--efficiency-token-per-watt) |
 | 06 | **Embedding Throughput** | 3,365 chunks/s GPU · 33x faster than CPU | [Details](#06--inference-embedding-throughput) |
 | 07 | **Image & Video Gen** | 5.9 images/min · video at 1.16 fps | [Details](#07--image--video-generation) |
 | 08 | **Voice STT & TTS** | TTS: 1,924 chars/s · STT: 1.8x realtime | [Details](#08--voice-stt--tts) |
@@ -107,21 +107,25 @@ See [`02-inference-engine-comparison/results_20260414_072355.csv`](02-inference-
 
 ## 03 — Inference: llama.cpp Multi-Quantization
 
-> Q4_K_M quantization across 4 model sizes (extracted from Ollama blobs). All models fit in memory.
+> Qwen2.5 Instruct (3B/7B/14B/32B) across Q4_K_M, Q5_K_M, Q8_0 — **12 configurations**, matching GX10. ATOM is **5–20% faster** on prompt processing.
 
-| Model | Quant | PP 128 | PP 256 | PP 512 | TG 128 |
-|-------|-------|-------:|-------:|-------:|-------:|
-| **Qwen2.5-7B** | Q4_K_M | 2,557 | 3,224 | **3,334** | **42.6** |
-| **Qwen3-8B** | Q4_K_M | 2,577 | 2,954 | 3,018 | 38.3 |
-| **Qwen2.5-32B** | Q4_K_M | 683 | **723** | 716 | 9.6 |
-| **Qwen2.5-72B** | Q4_K_M | 306 | **314** | 305 | 4.0 |
+**Text Generation (tok/s):**
 
-<sub>All benchmarks run with Flash Attention enabled, all layers on GPU (ngl=99), 3 repetitions averaged.</sub>
+| Model | Q4_K_M | Q5_K_M | Q8_0 |
+|-------|-------:|-------:|-----:|
+| **Qwen2.5-3B** | **97.5** | 83.9 | 66.0 |
+| **Qwen2.5-7B** | **46.2** | 38.8 | 29.9 |
+| **Qwen2.5-14B** | **23.7** | 19.4 | 14.7 |
+| **Qwen2.5-32B** | **10.4** | 8.1 | 6.5 |
+
+**Peak Prompt Processing:** 6,946 tok/s (3B Q4_K_M PP512) — 20% faster than GX10.
+
+<sub>All benchmarks run with Flash Attention enabled, all layers on GPU (ngl=99), 3 repetitions averaged. Standalone GGUF files from HuggingFace.</sub>
 
 <details>
 <summary>Raw data</summary>
 
-See [`03-inference-llama-cpp/results/benchmark_20260413_120412.csv`](03-inference-llama-cpp/results/benchmark_20260413_120412.csv) for all PP128/PP256/PP512/TG128 measurements.
+See [`03-inference-llama-cpp/results/benchmark_20260414_190923.csv`](03-inference-llama-cpp/results/benchmark_20260414_190923.csv) for all 48 measurements.
 </details>
 
 ---
@@ -160,16 +164,18 @@ See [`04-training-finetuning/results/all_runs_summary.csv`](04-training-finetuni
 
 ## 05 — Efficiency: Token per Watt
 
-> How much does it cost to run inference? Measured with real-time GPU power monitoring during generation.
+> How much does it cost to run inference? Measured with real-time GPU power monitoring during generation. **4 models x 3 quants = 12 configurations**, matching the GX10 benchmark.
 
-| Model | tok/s | Avg Power | tok/W | Cost per 1M tokens |
-|-------|------:|----------:|------:|--------------------:|
-| **Qwen2.5-7B** | 39.1 | 44.6W | **0.879** | RM 0.17 |
-| **Qwen3-8B** | 36.3 | 48.5W | 0.748 | RM 0.21 |
-| **Qwen2.5-Coder-32B** | 9.1 | 47.7W | 0.191 | RM 0.80 |
-| **Qwen2.5-72B** | 3.9 | 36.8W | 0.105 | RM 1.46 |
+| Model | Quant | tok/s | Avg Power | tok/W | Cost/1M tokens |
+|-------|-------|------:|----------:|------:|---------------:|
+| **3B** | Q4_K_M | 98.5 | 45.6W | **2.16** | RM 0.07 |
+| **7B** | Q4_K_M | 45.4 | 50.9W | 0.89 | RM 0.17 |
+| **14B** | Q4_K_M | 23.5 | 51.8W | 0.45 | RM 0.34 |
+| **32B** | Q4_K_M | 10.3 | 51.9W | 0.20 | RM 0.77 |
 
-<sub>Electricity cost based on Malaysian tariff (RM 0.55/kWh). Running 1 million tokens on the most efficient config costs about RM 0.17.</sub>
+> ATOM is **faster** but draws **25-35% more power** than GX10, resulting in ~15-20% lower tok/W efficiency. The Gigabyte firmware is less aggressive with power gating than NVIDIA's.
+
+<sub>Electricity cost based on Malaysian tariff (RM 0.55/kWh). Full results across Q4_K_M/Q5_K_M/Q8_0 in the <a href="05-efficiency-token-per-watt/README.md">detailed README</a>.</sub>
 
 ---
 
