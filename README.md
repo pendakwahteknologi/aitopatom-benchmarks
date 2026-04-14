@@ -52,7 +52,7 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 | 03 | **llama.cpp Multi-Quant** | 6,946 tok/s PP (3B Q4) · 12 configs · 5–20% faster than GX10 | [Details](#03--inference-llamacpp-multi-quantization) |
 | 04 | **Fine-Tuning** | Full FT of Qwen2.5 7B using 90.9 GB | [Details](#04--training-fine-tuning) |
 | 05 | **Token per Watt** | 2.16 tok/W peak · RM 0.07 per 1M tokens · 4 models x 3 quants | [Details](#05--efficiency-token-per-watt) |
-| 06 | **Embedding Throughput** | 3,365 chunks/s GPU · 33x faster than CPU | [Details](#06--inference-embedding-throughput) |
+| 06 | **Embedding Throughput** | 3,417 chunks/s GPU · 34.4x faster than CPU | [Details](#06--inference-embedding-throughput) |
 | 07 | **Image & Video Gen** | 5.9 images/min · video at 1.16 fps | [Details](#07--image--video-generation) |
 | 08 | **Voice STT & TTS** | TTS: 1,924 chars/s · STT: 1.8x realtime | [Details](#08--voice-stt--tts) |
 | 09 | **Coding LLM Webpage** | Qwen3-Coder-Next 46 tok/s · full webpage in 123s | [Details](#09--coding-llm-webpage-generation) |
@@ -181,14 +181,14 @@ See [`04-training-finetuning/results/all_runs_summary.csv`](04-training-finetuni
 
 ## 06 — Inference: Embedding Throughput
 
-> Mesolitica Mistral 191M embedding model — **GPU is 33x faster than CPU**.
+> Mesolitica Mistral 191M embedding model — **GPU is 34.4x faster than CPU**. 1M chunks in under 5 minutes.
 
 | Device | Batch Size | Chunks/s | Power |
 |--------|----------:|---------:|------:|
-| CPU | 64 | 103 | 14W |
-| **GPU** | 32 | 2,620 | 49W |
-| **GPU** | 128 | **3,365** | 58W |
-| **GPU** | 256 | 3,252 | 59W |
+| CPU | 64 | 99.4 | 13W |
+| **GPU** | 64 | 3,293 | 54W |
+| **GPU** | 128 | **3,417** | 50W |
+| **GPU** | 256 | 3,409 | 58W |
 
 > Batch 128 is the sweet spot — beyond that, throughput plateaus while power increases.
 
