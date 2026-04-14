@@ -1,0 +1,207 @@
+[INFO] Benchmark started at Tue 14 Apr 2026 07:09:25 PM +08
+[INFO] GPU: NVIDIA GB10
+[INFO] CUDA: 13.0 | Driver: 580.142
+[INFO] CPU: Cortex-X925
+[INFO] Memory: 119Gi Unified
+
+================================================================================
+ MODEL 1/4: Qwen2.5-3B-Instruct-GGUF
+================================================================================
+
+
+   [BENCH] Qwen2.5-3B-Instruct-GGUF Q4_K_M (2.0GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q4_k_m.gguf","qwen2 3B Q4_K - Medium","2098976768","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:09:27Z","27458854","2960604","4695.800125","476.927719"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q4_k_m.gguf","qwen2 3B Q4_K - Medium","2098976768","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:09:27Z","42099938","1817451","6088.185678","257.733734"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q4_k_m.gguf","qwen2 3B Q4_K - Medium","2098976768","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:09:28Z","73761588","2326257","6945.882177","218.823658"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q4_k_m.gguf","qwen2 3B Q4_K - Medium","2098976768","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:09:28Z","1313249306","692621","97.468183","0.051279"
+
+   [DONE] Qwen2.5-3B-Instruct-GGUF Q4_K_M (5s)
+
+   [BENCH] Qwen2.5-3B-Instruct-GGUF Q5_K_M (2.3GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q5_k_m.gguf","qwen2 3B Q5_K - Medium","2432784384","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:09:35Z","29492532","2874833","4366.308409","403.624839"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q5_k_m.gguf","qwen2 3B Q5_K - Medium","2432784384","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:09:35Z","44045909","2273133","5822.203773","293.199043"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q5_k_m.gguf","qwen2 3B Q5_K - Medium","2432784384","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:09:35Z","77048121","1402372","6646.679255","122.105040"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q5_k_m.gguf","qwen2 3B Q5_K - Medium","2432784384","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:09:36Z","1526313815","1249621","83.862215","0.068567"
+
+   [DONE] Qwen2.5-3B-Instruct-GGUF Q5_K_M (8s)
+
+   [BENCH] Qwen2.5-3B-Instruct-GGUF Q8_0 (3.4GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q8_0.gguf","qwen2 3B Q8_0","3610132480","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:09:42Z","32984336","2404258","3893.930417","273.766224"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q8_0.gguf","qwen2 3B Q8_0","3610132480","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:09:43Z","51240577","1102139","4997.563021","106.174633"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q8_0.gguf","qwen2 3B Q8_0","3610132480","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:09:43Z","86530929","1801217","5918.649022","121.749709"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-3b-instruct-q8_0.gguf","qwen2 3B Q8_0","3610132480","3397103616","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:09:43Z","1940632350","1232431","65.957900","0.041846"
+
+   [DONE] Qwen2.5-3B-Instruct-GGUF Q8_0 (9s)
+================================================================================
+ MODEL 2/4: Qwen2.5-7B-Instruct-GGUF
+================================================================================
+
+
+   [BENCH] Qwen2.5-7B-Instruct-GGUF Q4_K_M (3.7GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf","qwen2 7B Q4_K - Medium","4677120000","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:09:52Z","46550507","1992415","2752.989184","115.224221"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf","qwen2 7B Q4_K - Medium","4677120000","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:09:52Z","75438647","1209780","3394.063133","53.973722"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf","qwen2 7B Q4_K - Medium","4677120000","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:09:53Z","146183954","1255700","3502.608679","30.092042"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf","qwen2 7B Q4_K - Medium","4677120000","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:09:53Z","2767975245","1532339","46.243198","0.025583"
+
+   [DONE] Qwen2.5-7B-Instruct-GGUF Q4_K_M (13s)
+
+   [BENCH] Qwen2.5-7B-Instruct-GGUF Q5_K_M (3.7GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf","qwen2 7B Q5_K - Medium","5438877696","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:10:05Z","50125835","2031932","2556.313665","101.402148"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf","qwen2 7B Q5_K - Medium","5438877696","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:10:05Z","79112039","1976462","3237.281221","81.907839"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf","qwen2 7B Q5_K - Medium","5438877696","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:10:05Z","155996410","1092747","3282.234114","22.983105"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf","qwen2 7B Q5_K - Medium","5438877696","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:10:06Z","3301925863","3103149","38.765278","0.036408"
+
+   [DONE] Qwen2.5-7B-Instruct-GGUF Q5_K_M (14s)
+
+   [BENCH] Qwen2.5-7B-Instruct-GGUF Q8_0 (3.7GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf","qwen2 7B Q8_0","8092571648","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:10:20Z","59726467","2604275","2145.768582","91.691565"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf","qwen2 7B Q8_0","8092571648","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:10:21Z","98939639","2526509","2588.549174","65.384427"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf","qwen2 7B Q8_0","8092571648","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:10:21Z","193454624","758128","2646.642624","10.394576"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf","qwen2 7B Q8_0","8092571648","7615616512","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:10:22Z","4283990548","1704512","29.878687","0.011877"
+
+   [DONE] Qwen2.5-7B-Instruct-GGUF Q8_0 (19s)
+================================================================================
+ MODEL 3/4: Qwen2.5-14B-Instruct-GGUF
+================================================================================
+
+
+   [BENCH] Qwen2.5-14B-Instruct-GGUF Q4_K_M (3.7GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf","qwen2 14B Q4_K - Medium","8982142976","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:10:43Z","86458745","3916253","1482.450952","65.438764"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf","qwen2 14B Q4_K - Medium","8982142976","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:10:44Z","150557746","2745909","1700.717493","30.696004"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf","qwen2 14B Q4_K - Medium","8982142976","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:10:44Z","299957678","3220036","1707.038056","18.247617"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf","qwen2 14B Q4_K - Medium","8982142976","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:10:46Z","5395727097","6562570","23.722498","0.028843"
+
+   [DONE] Qwen2.5-14B-Instruct-GGUF Q4_K_M (27s)
+
+   [BENCH] Qwen2.5-14B-Instruct-GGUF Q5_K_M (3.7GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q5_k_m-00001-of-00003.gguf","qwen2 14B Q5_K - Medium","10502905856","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:11:09Z","93710170","4130133","1367.643547","58.877937"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q5_k_m-00001-of-00003.gguf","qwen2 14B Q5_K - Medium","10502905856","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:11:09Z","165566961","2456483","1546.427211","22.749514"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q5_k_m-00001-of-00003.gguf","qwen2 14B Q5_K - Medium","10502905856","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:11:10Z","337086996","2926084","1518.971723","13.131667"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q5_k_m-00001-of-00003.gguf","qwen2 14B Q5_K - Medium","10502905856","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:11:11Z","6601131262","605738","19.390616","0.001747"
+
+   [DONE] Qwen2.5-14B-Instruct-GGUF Q5_K_M (29s)
+
+   [BENCH] Qwen2.5-14B-Instruct-GGUF Q8_0 (3.7GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q8_0-00001-of-00004.gguf","qwen2 14B Q8_0","15695630336","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:11:40Z","112770949","3669231","1135.831654","36.308029"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q8_0-00001-of-00004.gguf","qwen2 14B Q8_0","15695630336","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:11:41Z","208489555","2244857","1227.973767","13.166955"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q8_0-00001-of-00004.gguf","qwen2 14B Q8_0","15695630336","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:11:42Z","427452382","2765645","1197.827547","7.723125"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-14b-instruct-q8_0-00001-of-00004.gguf","qwen2 14B Q8_0","15695630336","14770033664","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:11:44Z","8701213774","2437980","14.710592","0.004118"
+
+   [DONE] Qwen2.5-14B-Instruct-GGUF Q8_0 (39s)
+================================================================================
+ MODEL 4/4: Qwen2.5-32B-Instruct-GGUF
+================================================================================
+
+
+   [BENCH] Qwen2.5-32B-Instruct-GGUF Q4_K_M (3.7GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf","qwen2 32B Q4_K - Medium","19845357568","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:12:19Z","182336977","5133635","702.362327","19.467027"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf","qwen2 32B Q4_K - Medium","19845357568","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:12:20Z","347044629","4791292","737.750473","10.124833"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf","qwen2 32B Q4_K - Medium","19845357568","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:12:22Z","732652057","2681354","698.837268","2.552440"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf","qwen2 32B Q4_K - Medium","19845357568","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:12:25Z","12310037769","4995442","10.398020","0.004219"
+
+   [DONE] Qwen2.5-32B-Instruct-GGUF Q4_K_M (52s)
+
+   [BENCH] Qwen2.5-32B-Instruct-GGUF Q5_K_M (3.7GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q5_k_m-00001-of-00006.gguf","qwen2 32B Q5_K - Medium","23256178688","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:13:24Z","213887651","5521952","598.715007","15.686466"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q5_k_m-00001-of-00006.gguf","qwen2 32B Q5_K - Medium","23256178688","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:13:25Z","395755379","2588616","646.882621","4.217148"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q5_k_m-00001-of-00006.gguf","qwen2 32B Q5_K - Medium","23256178688","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:13:27Z","815271176","6813031","628.041007","5.224725"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q5_k_m-00001-of-00006.gguf","qwen2 32B Q5_K - Medium","23256178688","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:13:30Z","15813337724","682804","8.094433","0.000350"
+
+   [DONE] Qwen2.5-32B-Instruct-GGUF Q5_K_M (79s)
+
+   [BENCH] Qwen2.5-32B-Instruct-GGUF Q8_0 (3.7GB)
+           PP lengths: 128,256,512 | TG: 128 | Reps: 3
+
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 122566 MiB):
+  Device 0: NVIDIA GB10, compute capability 12.1, VMM: yes, VRAM: 122566 MiB
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,use_mmap,use_direct_io,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q8_0-00001-of-00009.gguf","qwen2 32B Q8_0","34814906368","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","128","0","0","2026-04-14T11:16:07Z","294090617","7680127","435.436970","11.314918"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q8_0-00001-of-00009.gguf","qwen2 32B Q8_0","34814906368","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","256","0","0","2026-04-14T11:16:09Z","575662662","16532941","444.945751","12.580153"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q8_0-00001-of-00009.gguf","qwen2 32B Q8_0","34814906368","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","512","0","0","2026-04-14T11:16:11Z","1125401814","11439469","454.980056","4.639414"
+"e97492369","8782","CPU","NVIDIA GB10","CUDA","/home/atom/ai/benchmarks/03-inference-llama-cpp/models/qwen2.5-32b-instruct-q8_0-00001-of-00009.gguf","qwen2 32B Q8_0","34814906368","32763876352","2048","512","20","0x0","0","50","f16","f16","99","0","layer","0","0","1","auto","0.00","none","1","0","0","0","0","0","0","0","128","0","2026-04-14T11:16:16Z","19852810566","82677934","6.447524","0.026853"
+
+   [DONE] Qwen2.5-32B-Instruct-GGUF Q8_0 (176s)
+
+================================================================================
+ BENCHMARK COMPLETE - Total time: 00:07:54
+================================================================================
+
+ NVIDIA GB10 (Blackwell GB10) | 119Gi Unified | CUDA 13.0
+ llama.cpp (CUDA) | Flash Attention ON | All layers on GPU
+
+  PROMPT PROCESSING (tok/s)
+  -----------------------------------------------------------------------------------------------------------
+  Model                               Quant            PP 128       PP 256       PP 512
+  -----------------------------------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------------------------------
+
+  TEXT GENERATION (tok/s)
+  -----------------------------------------------------------------------------------------------------------
+  Model                               Quant            TG 128
+  -----------------------------------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------------------------------
+
+  PEAK PROMPT PROCESSING:  0.0 tok/s  (Qwen2.5--Instruct-GGUF )
+  PEAK TEXT GENERATION:    0.0 tok/s  (Qwen2.5--Instruct-GGUF )
+
+================================================================================
+ Results saved to:
+   CSV:  /home/atom/ai/benchmarks/03-inference-llama-cpp/results/benchmark_20260414_190923.csv
+   JSON: /home/atom/ai/benchmarks/03-inference-llama-cpp/results/benchmark_20260414_190923.json
+   Log:  /home/atom/ai/benchmarks/03-inference-llama-cpp/results/benchmark_20260414_190923.log
+================================================================================

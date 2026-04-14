@@ -1,0 +1,340 @@
+{
+  "results": [
+    {
+      "model_size": "3B",
+      "quant": "Q4_K_M",
+      "test": "PP128",
+      "tok_s": 4695.8,
+      "model_file": "qwen2.5-3b-instruct-q4_k_m.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q4_K_M",
+      "test": "PP256",
+      "tok_s": 6088.19,
+      "model_file": "qwen2.5-3b-instruct-q4_k_m.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q4_K_M",
+      "test": "PP512",
+      "tok_s": 6945.88,
+      "model_file": "qwen2.5-3b-instruct-q4_k_m.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q4_K_M",
+      "test": "TG128",
+      "tok_s": 97.47,
+      "model_file": "qwen2.5-3b-instruct-q4_k_m.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q5_K_M",
+      "test": "PP128",
+      "tok_s": 4366.31,
+      "model_file": "qwen2.5-3b-instruct-q5_k_m.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q5_K_M",
+      "test": "PP256",
+      "tok_s": 5822.2,
+      "model_file": "qwen2.5-3b-instruct-q5_k_m.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q5_K_M",
+      "test": "PP512",
+      "tok_s": 6646.68,
+      "model_file": "qwen2.5-3b-instruct-q5_k_m.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q5_K_M",
+      "test": "TG128",
+      "tok_s": 83.86,
+      "model_file": "qwen2.5-3b-instruct-q5_k_m.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q8_0",
+      "test": "PP128",
+      "tok_s": 3893.93,
+      "model_file": "qwen2.5-3b-instruct-q8_0.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q8_0",
+      "test": "PP256",
+      "tok_s": 4997.56,
+      "model_file": "qwen2.5-3b-instruct-q8_0.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q8_0",
+      "test": "PP512",
+      "tok_s": 5918.65,
+      "model_file": "qwen2.5-3b-instruct-q8_0.gguf"
+    },
+    {
+      "model_size": "3B",
+      "quant": "Q8_0",
+      "test": "TG128",
+      "tok_s": 65.96,
+      "model_file": "qwen2.5-3b-instruct-q8_0.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q4_K_M",
+      "test": "PP128",
+      "tok_s": 2752.99,
+      "model_file": "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q4_K_M",
+      "test": "PP256",
+      "tok_s": 3394.06,
+      "model_file": "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q4_K_M",
+      "test": "PP512",
+      "tok_s": 3502.61,
+      "model_file": "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q4_K_M",
+      "test": "TG128",
+      "tok_s": 46.24,
+      "model_file": "qwen2.5-7b-instruct-q4_k_m-00001-of-00002.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q5_K_M",
+      "test": "PP128",
+      "tok_s": 2556.31,
+      "model_file": "qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q5_K_M",
+      "test": "PP256",
+      "tok_s": 3237.28,
+      "model_file": "qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q5_K_M",
+      "test": "PP512",
+      "tok_s": 3282.23,
+      "model_file": "qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q5_K_M",
+      "test": "TG128",
+      "tok_s": 38.77,
+      "model_file": "qwen2.5-7b-instruct-q5_k_m-00001-of-00002.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q8_0",
+      "test": "PP128",
+      "tok_s": 2145.77,
+      "model_file": "qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q8_0",
+      "test": "PP256",
+      "tok_s": 2588.55,
+      "model_file": "qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q8_0",
+      "test": "PP512",
+      "tok_s": 2646.64,
+      "model_file": "qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "7B",
+      "quant": "Q8_0",
+      "test": "TG128",
+      "tok_s": 29.88,
+      "model_file": "qwen2.5-7b-instruct-q8_0-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q4_K_M",
+      "test": "PP128",
+      "tok_s": 1482.45,
+      "model_file": "qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q4_K_M",
+      "test": "PP256",
+      "tok_s": 1700.72,
+      "model_file": "qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q4_K_M",
+      "test": "PP512",
+      "tok_s": 1707.04,
+      "model_file": "qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q4_K_M",
+      "test": "TG128",
+      "tok_s": 23.72,
+      "model_file": "qwen2.5-14b-instruct-q4_k_m-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q5_K_M",
+      "test": "PP128",
+      "tok_s": 1367.64,
+      "model_file": "qwen2.5-14b-instruct-q5_k_m-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q5_K_M",
+      "test": "PP256",
+      "tok_s": 1546.43,
+      "model_file": "qwen2.5-14b-instruct-q5_k_m-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q5_K_M",
+      "test": "PP512",
+      "tok_s": 1518.97,
+      "model_file": "qwen2.5-14b-instruct-q5_k_m-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q5_K_M",
+      "test": "TG128",
+      "tok_s": 19.39,
+      "model_file": "qwen2.5-14b-instruct-q5_k_m-00001-of-00003.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q8_0",
+      "test": "PP128",
+      "tok_s": 1135.83,
+      "model_file": "qwen2.5-14b-instruct-q8_0-00001-of-00004.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q8_0",
+      "test": "PP256",
+      "tok_s": 1227.97,
+      "model_file": "qwen2.5-14b-instruct-q8_0-00001-of-00004.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q8_0",
+      "test": "PP512",
+      "tok_s": 1197.83,
+      "model_file": "qwen2.5-14b-instruct-q8_0-00001-of-00004.gguf"
+    },
+    {
+      "model_size": "14B",
+      "quant": "Q8_0",
+      "test": "TG128",
+      "tok_s": 14.71,
+      "model_file": "qwen2.5-14b-instruct-q8_0-00001-of-00004.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q4_K_M",
+      "test": "PP128",
+      "tok_s": 702.36,
+      "model_file": "qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q4_K_M",
+      "test": "PP256",
+      "tok_s": 737.75,
+      "model_file": "qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q4_K_M",
+      "test": "PP512",
+      "tok_s": 698.84,
+      "model_file": "qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q4_K_M",
+      "test": "TG128",
+      "tok_s": 10.4,
+      "model_file": "qwen2.5-32b-instruct-q4_k_m-00001-of-00005.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q5_K_M",
+      "test": "PP128",
+      "tok_s": 598.72,
+      "model_file": "qwen2.5-32b-instruct-q5_k_m-00001-of-00006.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q5_K_M",
+      "test": "PP256",
+      "tok_s": 646.88,
+      "model_file": "qwen2.5-32b-instruct-q5_k_m-00001-of-00006.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q5_K_M",
+      "test": "PP512",
+      "tok_s": 628.04,
+      "model_file": "qwen2.5-32b-instruct-q5_k_m-00001-of-00006.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q5_K_M",
+      "test": "TG128",
+      "tok_s": 8.09,
+      "model_file": "qwen2.5-32b-instruct-q5_k_m-00001-of-00006.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q8_0",
+      "test": "PP128",
+      "tok_s": 435.44,
+      "model_file": "qwen2.5-32b-instruct-q8_0-00001-of-00009.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q8_0",
+      "test": "PP256",
+      "tok_s": 444.95,
+      "model_file": "qwen2.5-32b-instruct-q8_0-00001-of-00009.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q8_0",
+      "test": "PP512",
+      "tok_s": 454.98,
+      "model_file": "qwen2.5-32b-instruct-q8_0-00001-of-00009.gguf"
+    },
+    {
+      "model_size": "32B",
+      "quant": "Q8_0",
+      "test": "TG128",
+      "tok_s": 6.45,
+      "model_file": "qwen2.5-32b-instruct-q8_0-00001-of-00009.gguf"
+    }
+  ]
+}
