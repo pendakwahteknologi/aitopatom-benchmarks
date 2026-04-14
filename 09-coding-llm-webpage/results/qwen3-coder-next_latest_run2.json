@@ -4,10 +4,10 @@
     "timestamp": "2026-04-13T18:31:50+08:00",
     "metrics": {
         "total_duration_sec": 123.85,
-        "model_load_sec": .13,
-        "prompt_eval_sec": .443,
+        "model_load_sec": 0.13,
+        "prompt_eval_sec": 0.443,
         "generation_sec": 122.15,
-        "ttft_sec": .578,
+        "ttft_sec": 0.578,
         "tokens_generated": 5629,
         "tokens_per_sec": 46.07,
         "prompt_tokens": 372

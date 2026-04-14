@@ -86,19 +86,19 @@ for model in "${MODELS[@]}"; do
         eval_count=$(echo "$response" | jq -r '.eval_count // 0')
         eval_duration=$(echo "$response" | jq -r '.eval_duration // 0')
 
-        # Calculate metrics
-        total_sec=$(echo "scale=2; $total_duration / 1000000000" | bc)
-        load_sec=$(echo "scale=2; $load_duration / 1000000000" | bc)
-        prompt_eval_sec=$(echo "scale=3; $prompt_eval_duration / 1000000000" | bc)
-        eval_sec=$(echo "scale=2; $eval_duration / 1000000000" | bc)
+        # Calculate metrics (sed adds leading zero for bare decimals like .184 → 0.184)
+        total_sec=$(echo "scale=2; $total_duration / 1000000000" | bc | sed 's/^\./0./')
+        load_sec=$(echo "scale=2; $load_duration / 1000000000" | bc | sed 's/^\./0./')
+        prompt_eval_sec=$(echo "scale=3; $prompt_eval_duration / 1000000000" | bc | sed 's/^\./0./')
+        eval_sec=$(echo "scale=2; $eval_duration / 1000000000" | bc | sed 's/^\./0./')
 
         if [ "$eval_duration" -gt 0 ]; then
-            tokens_per_sec=$(echo "scale=2; $eval_count * 1000000000 / $eval_duration" | bc)
+            tokens_per_sec=$(echo "scale=2; $eval_count * 1000000000 / $eval_duration" | bc | sed 's/^\./0./')
         else
             tokens_per_sec=0
         fi
 
-        ttft_sec=$(echo "scale=3; ($load_duration + $prompt_eval_duration) / 1000000000" | bc)
+        ttft_sec=$(echo "scale=3; ($load_duration + $prompt_eval_duration) / 1000000000" | bc | sed 's/^\./0./')
 
         # Extract HTML from response (find <!DOCTYPE html> to </html>)
         echo "$raw_response" | sed -n '/<!DOCTYPE html>/I,/<\/html>/Ip' > "$output_file"

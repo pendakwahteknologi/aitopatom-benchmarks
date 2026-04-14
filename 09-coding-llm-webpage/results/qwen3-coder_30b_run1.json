@@ -5,7 +5,7 @@
     "metrics": {
         "total_duration_sec": 56.00,
         "model_load_sec": 4.41,
-        "prompt_eval_sec": .184,
+        "prompt_eval_sec": 0.184,
         "generation_sec": 50.73,
         "ttft_sec": 4.598,
         "tokens_generated": 3658,
