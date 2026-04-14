@@ -1,0 +1,23 @@
+{
+    "model": "qwen3-coder:30b",
+    "run": 2,
+    "timestamp": "2026-04-15T00:22:55+08:00",
+    "metrics": {
+        "total_duration_sec": 66.44,
+        "model_load_sec": .08,
+        "prompt_eval_sec": .020,
+        "generation_sec": 65.51,
+        "ttft_sec": .104,
+        "tokens_generated": 4619,
+        "tokens_per_sec": 70.50,
+        "prompt_tokens": 372
+    },
+    "output": {
+        "html_size_bytes": 18933,
+        "html_lines": 560,
+        "has_doctype": 1,
+        "has_closing_html": 1,
+        "has_canvas": 0,
+        "has_script": 1
+    }
+}

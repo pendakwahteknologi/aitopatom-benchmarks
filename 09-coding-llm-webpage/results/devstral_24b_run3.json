@@ -1,23 +1,23 @@
 {
     "model": "devstral:24b",
     "run": 3,
-    "timestamp": "2026-04-13T18:43:55+08:00",
+    "timestamp": "2026-04-15T00:34:53+08:00",
     "metrics": {
-        "total_duration_sec": 214.08,
-        "model_load_sec": .13,
-        "prompt_eval_sec": .076,
-        "generation_sec": 212.77,
-        "ttft_sec": .216,
-        "tokens_generated": 2895,
-        "tokens_per_sec": 13.60,
+        "total_duration_sec": 268.84,
+        "model_load_sec": .12,
+        "prompt_eval_sec": .074,
+        "generation_sec": 267.17,
+        "ttft_sec": .195,
+        "tokens_generated": 3759,
+        "tokens_per_sec": 14.06,
         "prompt_tokens": 1606
     },
     "output": {
-        "html_size_bytes": 9788,
-        "html_lines": 301,
+        "html_size_bytes": 12278,
+        "html_lines": 334,
         "has_doctype": 1,
         "has_closing_html": 1,
-        "has_canvas": 1,
+        "has_canvas": 0,
         "has_script": 1
     }
 }

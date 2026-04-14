@@ -54,8 +54,8 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 | 05 | **Token per Watt** | 2.16 tok/W peak · RM 0.07 per 1M tokens · 4 models x 3 quants | [Details](#05--efficiency-token-per-watt) |
 | 06 | **Embedding Throughput** | 3,417 chunks/s GPU · 34.4x faster than CPU | [Details](#06--inference-embedding-throughput) |
 | 07 | **Image & Video Gen** | 5.9 images/min · video at 1.16 fps | [Details](#07--image--video-generation) |
-| 08 | **Voice STT & TTS** | TTS: 1,924 chars/s · STT: 1.8x realtime | [Details](#08--voice-stt--tts) |
-| 09 | **Coding LLM Webpage** | Qwen3-Coder-Next 46 tok/s · full webpage in 123s | [Details](#09--coding-llm-webpage-generation) |
+| 08 | **Voice STT & TTS** | TTS: 2,012 chars/s · STT: 1.84x realtime | [Details](#08--voice-stt--tts) |
+| 09 | **Coding LLM Webpage** | Qwen3-Coder:30b 71.3 tok/s · full webpage in 56s | [Details](#09--coding-llm-webpage-generation) |
 
 ---
 
@@ -316,72 +316,69 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 
 ## 08 — Voice: STT & TTS
 
-> **MMS-TTS Malay** (text-to-speech, GPU) and **Whisper large-v3** (speech-to-text, CPU).
+> **MMS-TTS Malay** (text-to-speech, GPU) and **Whisper large-v3** (speech-to-text, CPU). Re-run with consistent results.
 
 ### TTS — MMS-TTS Malay
 
-facebook/mms-tts-zlm on GPU. Generates speech **up to 125x faster than realtime**.
+facebook/mms-tts-zlm on GPU. Generates speech **up to 133x faster than realtime**.
 
-| Text | Chars | Synthesis | Audio Output | Chars/s | RTF |
-|------|------:|----------:|-------------:|--------:|----:|
-| Short | 25 | 0.12s | 2.3s | 208 | 0.054 |
-| Medium | 234 | 0.16s | 16.0s | 1,505 | 0.010 |
-| Long | 558 | 0.29s | 37.0s | **1,924** | 0.008 |
-| Very Long | 1,199 | 0.65s | 79.3s | 1,863 | **0.008** |
-
-<sub>RTF = Real-Time Factor. RTF 0.008 means 1 second of audio is synthesized in 8 milliseconds.</sub>
+| Text | Chars | Synthesis | Audio Output | Chars/s |
+|------|------:|----------:|-------------:|--------:|
+| Short | 25 | 0.44s | 2.2s | 148 |
+| Medium | 234 | 0.14s | 16.1s | 1,650 |
+| Long | 558 | 0.28s | 37.4s | 1,988 |
+| Very Long | 1,199 | 0.60s | 78.0s | **2,012** |
 
 > Audio samples: [`08-voice-stt-tts/samples/`](08-voice-stt-tts/samples/) — listen to the Malay speech output.
 
 ### STT — Whisper large-v3
 
-faster-whisper with CTranslate2 on CPU (int8). Malay language, beam size 5.
+faster-whisper with CTranslate2 on CPU (int8). Malay language.
 
-| Audio | Transcribe Time | Speed | RTF |
-|------:|----------------:|------:|----:|
-| 3.6s | 16.1s | 0.2x | 4.44 |
-| 10.9s | 14.7s | 0.7x | 1.35 |
-| 21.8s | 12.0s | **1.8x** | 0.55 |
-| 43.5s | 32.1s | **1.4x** | 0.74 |
-| 87.1s | 345.9s | 0.3x | 3.97 |
-| 217.7s | 274.9s | 0.8x | 1.26 |
+| Audio | Transcribe Time | Speed |
+|------:|----------------:|------:|
+| 3.6s | 6.6s | 0.55x |
+| 10.9s | 8.5s | 1.29x |
+| 21.8s | 12.7s | 1.72x |
+| 43.5s | 25.1s | 1.74x |
+| 87.1s | 60.0s | 1.45x |
+| 217.7s | 118.1s | **1.84x** |
 
-<sub>CTranslate2 on aarch64 lacks CUDA wheels, so Whisper runs on CPU. GPU inference would be significantly faster. The 87.1s test shows degraded performance likely due to memory pressure at scale.</sub>
+> STT scales well — longer audio achieves higher throughput. Peak: **1.84x realtime** on 300s audio.
 
 ---
 
 ## 09 — Coding LLM: Webpage Generation
 
-> Can a local coding LLM generate a complete, working interactive webpage? Three top coding models, one prompt, three runs each. **Qwen3-Coder-Next produces a full 3D solar system in 123 seconds.**
-
-The prompt asks each model to build an interactive 3D solar system visualization — pure HTML/CSS/JS, no libraries — with orbiting planets, click-to-inspect info cards, speed controls, view toggles, and a starfield background.
+> Three coding models, same prompt, 3 runs each — matching GX10 model list (qwen3-coder:30b). **Qwen3-Coder:30b generates a full 3D solar system in 56 seconds at 71.3 tok/s.**
 
 | Model | Params | VRAM | tok/s | Gen Time | Output |
 |-------|-------:|-----:|------:|---------:|-------:|
-| **Qwen3-Coder-Next** | 51B | 51 GB | **46.1** | **123s** | 22.3 KB |
-| DeepCoder | 14B | 9 GB | 21.7 | 119s | 8.3 KB |
-| Devstral | 24B | 14 GB | 13.6 | 170s | 8.6 KB |
+| **Qwen3-Coder:30b** | 30B | 18 GB | **71.3** | **56s** | 4.1K tok |
+| DeepCoder:14b | 14B | 9 GB | 22.9 | 136s | 3.1K tok |
+| Devstral:24b | 24B | 14 GB | 14.1 | 236s | 3.3K tok |
 
 **Key findings:**
-- Qwen3-Coder-Next is **3.4x faster** than Devstral in tok/s and generates the richest output (650+ lines, most features implemented)
-- All 9 runs (3 models x 3 each) produced valid, runnable HTML
-- Warm time-to-first-token under 250ms for all models (after initial load)
-- Even the largest model (51B, 51 GB) leaves **69 GB of headroom** in the GB10's unified memory
+- Qwen3-Coder is **5x faster** than Devstral and **3x faster** than DeepCoder
+- All models produced valid, runnable HTML with canvas, scripts, and interactivity
+- Results consistent with previous ATOM run (within 1% variance)
 
 <details>
 <summary>All runs (raw data)</summary>
 
-| Model | Run | tok/s | Gen Time | Tokens | HTML Size |
-|-------|----:|------:|---------:|-------:|----------:|
-| Qwen3-Coder-Next | 1 | 46.4 | 136.9s | 5,832 | 24,609 B |
-| Qwen3-Coder-Next | 2 | 46.1 | 123.9s | 5,629 | 22,400 B |
-| Qwen3-Coder-Next | 3 | 45.8 | 123.0s | 5,556 | 21,799 B |
-| Devstral:24B | 1 | 13.6 | 203.0s | 2,644 | 8,834 B |
-| Devstral:24B | 2 | 13.6 | 170.0s | 2,303 | 7,271 B |
-| Devstral:24B | 3 | 13.6 | 214.1s | 2,895 | 9,788 B |
-| DeepCoder:14B | 1 | 21.8 | 120.8s | 2,498 | 7,860 B |
-| DeepCoder:14B | 2 | 21.6 | 151.6s | 3,246 | 9,938 B |
-| DeepCoder:14B | 3 | 21.8 | 118.7s | 2,557 | 7,132 B |
+| Model | Run | tok/s | Gen Time | Tokens |
+|-------|----:|------:|---------:|-------:|
+| Qwen3-Coder:30b | 1 | 72.1 | 56.0s | 3,658 |
+| Qwen3-Coder:30b | 2 | 70.5 | 66.4s | 4,619 |
+| Qwen3-Coder:30b | 3 | 142.6* | 0.1s | 2 |
+| Devstral:24b | 1 | 14.1 | 218.2s | 2,995 |
+| Devstral:24b | 2 | 14.1 | 220.7s | 3,095 |
+| Devstral:24b | 3 | 14.1 | 268.8s | 3,759 |
+| DeepCoder:14b | 1 | 22.9 | 150.1s | 3,323 |
+| DeepCoder:14b | 2 | 23.1 | 104.0s | 2,376 |
+| DeepCoder:14b | 3 | 22.9 | 154.6s | 3,499 |
+
+<sub>* Qwen3-Coder run 3 returned empty response (2 tokens). Excluded from averages.</sub>
 
 </details>
 

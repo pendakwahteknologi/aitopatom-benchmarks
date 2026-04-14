@@ -10,9 +10,8 @@ RESULTS_DIR="$BENCHMARK_DIR/results"
 
 PROMPT=$(cat "$PROMPT_FILE")
 
-# Models to test
-# qwen3-coder:30b crashes on GB10 (SIGABRT in CUDA). Using qwen3-coder-next (51B) instead.
-MODELS=("qwen3-coder-next:latest" "devstral:24b" "deepcoder:14b")
+# Models to test (matching GX10)
+MODELS=("qwen3-coder:30b" "devstral:24b" "deepcoder:14b")
 RUNS=3  # 3 runs per model, take median
 
 echo "=============================================="

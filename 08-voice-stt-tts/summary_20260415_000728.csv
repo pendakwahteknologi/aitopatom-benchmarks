@@ -1,0 +1,11 @@
+test,model,type,n_runs,input_chars,input_duration_s,mean_time_s,stddev_time_s,min_time_s,max_time_s,mean_audio_duration_s,mean_chars_per_sec,mean_rtf,mean_speed_x,mean_gpu_power_w
+tts_short,mms-tts-zlm,tts,3,25,,0.4443,0.4581,0.107,1.092,2.24,147.8,0.1994,,11.6
+tts_medium,mms-tts-zlm,tts,3,234,,0.142,0.005,0.1361,0.1484,16.053,1650.4,0.0088,,18.5
+tts_long,mms-tts-zlm,tts,3,558,,0.281,0.0093,0.272,0.2937,37.403,1988.0,0.0075,,31.7
+tts_very_long,mms-tts-zlm,tts,3,1199,,0.5965,0.0154,0.585,0.6183,77.957,2011.6,0.0076,,39.1
+stt_5s,whisper-large-v3,stt,3,,3.63,6.6111,0.191,6.3429,6.7729,,,1.8222,0.55,15.5
+stt_15s,whisper-large-v3,stt,3,,10.88,8.4893,0.2103,8.1943,8.6695,,,0.78,1.29,11.9
+stt_30s,whisper-large-v3,stt,3,,21.77,12.736,1.1397,11.6789,14.3183,,,0.585,1.72,12.9
+stt_60s,whisper-large-v3,stt,3,,43.54,25.0511,0.7571,24.0209,25.8186,,,0.5754,1.74,14.7
+stt_120s,whisper-large-v3,stt,3,,87.07,60.0366,2.7557,56.8432,63.5678,,,0.6895,1.45,17.2
+stt_300s,whisper-large-v3,stt,3,,217.69,118.1042,1.1232,116.8877,119.597,,,0.5426,1.84,17.5
