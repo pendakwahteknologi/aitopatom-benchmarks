@@ -1,6 +1,6 @@
 <div align="center">
 
-# Gigabyte Grace Blackwell Desktop AI Benchmark Suite
+# Gigabyte AI Top ATOM Benchmark Suite
 
 ### 8 AI Benchmarks on the NVIDIA Grace Blackwell Superchip
 
