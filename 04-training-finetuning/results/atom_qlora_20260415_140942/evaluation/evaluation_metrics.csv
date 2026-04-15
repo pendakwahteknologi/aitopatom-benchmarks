@@ -1,0 +1,7 @@
+metric,baseline,finetuned,delta
+rouge_l,0.2597,0.1496,-0.1100
+bleu,0.0674,0.0403,-0.0271
+exact_match,0.0125,0.0000,-0.0125
+normalized_match,0.4059,0.5041,+0.0982
+prediction_length,118.0000,196.4125,+78.4125
+latency_sec,11.4768,11.1577,-0.3191

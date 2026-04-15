@@ -1,0 +1,1700 @@
+
+================================================================
+  PHASE 1: PRE-FLIGHT CHECKS
+================================================================
+
+[2026-04-15 08:31:38] Machine label:  atom
+[2026-04-15 08:31:38] Max steps:      500
+[2026-04-15 08:31:38] Modes:          lora qlora fullft
+[2026-04-15 08:31:38] Results dir:    ./results
+[2026-04-15 08:31:38] Skip training:  false
+[2026-04-15 08:31:38] Skip judge:     false
+[2026-04-15 08:31:38] Dry run:        false
+[2026-04-15 08:31:38] Master log:     ./logs/benchmark_20260415_083137.log
+[2026-04-15 08:31:38] 
+[2026-04-15 08:31:38] Python:         Python 3.10.18
+[2026-04-15 08:31:41] CUDA:           13.0
+[2026-04-15 08:31:41] GPU:            NVIDIA GB10 (120 GB)
+[2026-04-15 08:31:42] HuggingFace:    pendakwahteknologi
+[2026-04-15 08:31:45] Dependencies:   OK
+[2026-04-15 08:31:45] Anthropic API:  not set (LLM judge will be skipped)
+[2026-04-15 08:31:45] 
+[2026-04-15 08:31:45] All checks passed.
+
+================================================================
+  PHASE 2: DATA PREPARATION
+================================================================
+
+[2026-04-15 08:31:45] Preparing dataset and evaluation questions...
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Train:       13,509
+  Validation:  750
+  Test:        752
+
+
+───────────────────────────────────────── Preset Questions ─────────────────────────────────────────
+
+  Saved to: ./data/eval/preset_questions.jsonl
+
+[2026-04-15 08:31:48] Data preparation complete. (0m 3s)
+
+================================================================
+  PHASE 3: TRAINING — LORA
+================================================================
+
+[2026-04-15 08:31:48] Starting lora training...
+[2026-04-15 08:31:48] Command: python3 -m benchmark_cuda run --mode lora --machine-label atom --output-dir ./results --max-steps 500  --model meta-llama/Llama-3.1-8B
+
+╭─────────────────────────────────── CUDA Fine-Tuning Benchmark ───────────────────────────────────╮
+│                                                                                                  │
+│  Machine:      atom                                                                              │
+│  GPU:          NVIDIA GB10 (120 GB)                                                              │
+│  Mode:         LoRA                                                                              │
+│  Model:        meta-llama/Llama-3.1-8B                                                           │
+│  Dataset:      databricks/databricks-dolly-15k                                                   │
+│  Steps:        500                                                                               │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+                                   Run Configuration                                   
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                      ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ mode                           │ lora                                               │
+│ model_name                     │ meta-llama/Llama-3.1-8B                            │
+│ max_steps                      │ 500                                                │
+│ seq_len                        │ 1024                                               │
+│ micro_batch_size               │ 8                                                  │
+│ gradient_accumulation_steps    │ 4                                                  │
+│ learning_rate                  │ 0.0002                                             │
+│ dtype                          │ bfloat16                                           │
+│ attn_implementation            │ sdpa                                               │
+│ seed                           │ 42                                                 │
+│ gradient_checkpointing         │ False                                              │
+│ lora_r                         │ 16                                                 │
+│ lora_alpha                     │ 32                                                 │
+│ lora_dropout                   │ 0.05                                               │
+└────────────────────────────────┴────────────────────────────────────────────────────┘
+
+
+──────────────────────────────────────── System Information ────────────────────────────────────────
+
+  Hostname:  atom
+  OS:        Linux 6.17.0-1014-nvidia
+  CPU:       Cortex-X925 + Cortex-A725
+  RAM:       119.7 GB
+  PyTorch:   2.11.0+cu130
+  CUDA:      13.0
+  C2C Mode:  Enabled
+
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Dataset:     databricks/databricks-dolly-15k
+  Train:       13,509 samples
+  Validation:  750 samples
+  Test:        752 samples
+
+
+──────────────────────── Loading Model LoRA mode - meta-llama/Llama-3.1-8B ─────────────────────────
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [02:16<06:50, 136.82s/it]Fetching 4 files: 100%|██████████| 4/4 [02:16<00:00, 34.20s/it] 
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:08<40:44,  8.43s/it]Loading weights:   1%|          | 2/291 [00:16<39:43,  8.25s/it]Loading weights:   1%|▏         | 4/291 [00:17<16:05,  3.36s/it]Loading weights:   2%|▏         | 5/291 [00:18<12:25,  2.61s/it]Loading weights:   2%|▏         | 6/291 [00:19<09:54,  2.09s/it]Loading weights:   3%|▎         | 8/291 [00:26<12:44,  2.70s/it]Loading weights:  11%|█         | 31/291 [00:27<01:30,  2.88it/s]Loading weights:  11%|█         | 32/291 [00:27<01:37,  2.66it/s]Loading weights:  11%|█▏        | 33/291 [00:38<04:42,  1.10s/it]Loading weights:  12%|█▏        | 35/291 [00:39<04:00,  1.06it/s]Loading weights:  23%|██▎       | 67/291 [00:39<00:49,  4.54it/s]Loading weights:  23%|██▎       | 67/291 [00:50<00:49,  4.54it/s]Loading weights:  24%|██▎       | 69/291 [00:51<02:11,  1.69it/s]Loading weights:  24%|██▍       | 71/291 [00:51<02:01,  1.81it/s]Loading weights:  34%|███▍      | 100/291 [00:52<00:39,  4.88it/s]Loading weights:  36%|███▌      | 105/291 [00:58<01:04,  2.90it/s]Loading weights:  36%|███▌      | 105/291 [01:10<01:04,  2.90it/s]Loading weights:  42%|████▏     | 121/291 [01:10<01:24,  2.01it/s]Loading weights:  42%|████▏     | 122/291 [01:43<04:25,  1.57s/it]Loading weights:  85%|████████▍ | 247/291 [01:59<00:14,  2.97it/s]Loading weights:  85%|████████▌ | 248/291 [02:00<00:14,  2.92it/s]Loading weights: 100%|██████████| 291/291 [02:00<00:00,  2.42it/s]
+  Total parameters:     8,043,892,736
+  Trainable parameters: 13,631,488 (0.17%)
+  LoRA rank:            16
+  LoRA alpha:           32
+
+
+────────────────────────────────────────── Preparing Data ──────────────────────────────────────────
+
+  Train samples: 13,509
+  Val samples:   750
+
+─────────────────────────────────────── Setting Up Optimizer ───────────────────────────────────────
+
+  Optimizer:        AdamW
+  LR schedule:      cosine
+  Warmup steps:     25
+  Max steps:        500
+  Timing warmup:    3 steps (excluded from metrics)
+
+
+─────────────────────────────────────── Training Steps 1-500 ───────────────────────────────────────
+
+  Step     1/500 (  0.2%) (warmup)  Loss: 2.0672  LR: 8.00e-06  Step: 39.40s  Elapsed: 39s  ETA: 5h 
+27m 42s  GPU: 87.3/120GB
+  Step    10/500 (  2.0%)  Loss: 1.7088  LR: 8.00e-05  Step: 33.86s  Elapsed: 5m 44s  ETA: 4h 36m 
+51s  GPU: 87.4/120GB  Tok/s: 169  Samp/s: 0.2
+  Step    20/500 (  4.0%)  Loss: 1.6683  LR: 1.60e-04  Step: 33.76s  Elapsed: 11m 23s  ETA: 4h 30m 
+59s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step    30/500 (  6.0%)  Loss: 1.6062  LR: 2.00e-04  Step: 33.85s  Elapsed: 17m 01s  ETA: 4h 25m 
+18s  GPU: 87.4/120GB  Tok/s: 159  Samp/s: 0.2
+  Step    40/500 (  8.0%)  Loss: 1.5465  LR: 2.00e-04  Step: 33.74s  Elapsed: 22m 40s  ETA: 4h 19m 
+37s  GPU: 87.4/120GB  Tok/s: 160  Samp/s: 0.2
+  Step    50/500 ( 10.0%)  Loss: 1.8957  LR: 1.99e-04  Step: 33.89s  Elapsed: 28m 18s  ETA: 4h 13m 
+59s  GPU: 87.4/120GB  Tok/s: 159  Samp/s: 0.2
+  Step    60/500 ( 12.0%)  Loss: 1.6952  LR: 1.97e-04  Step: 33.92s  Elapsed: 33m 57s  ETA: 4h 08m 
+21s  GPU: 87.4/120GB  Tok/s: 160  Samp/s: 0.2
+  Step    70/500 ( 14.0%)  Loss: 1.6125  LR: 1.96e-04  Step: 33.86s  Elapsed: 39m 36s  ETA: 4h 02m 
+41s  GPU: 87.4/120GB  Tok/s: 160  Samp/s: 0.2
+  Step    80/500 ( 16.0%)  Loss: 1.5314  LR: 1.93e-04  Step: 33.86s  Elapsed: 45m 14s  ETA: 3h 57m 
+03s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step    90/500 ( 18.0%)  Loss: 1.6425  LR: 1.91e-04  Step: 33.84s  Elapsed: 50m 53s  ETA: 3h 51m 
+22s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   100/500 ( 20.0%)  Loss: 1.5804  LR: 1.88e-04  Step: 33.77s  Elapsed: 56m 31s  ETA: 3h 45m 
+42s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Eval @ step 100  Val Loss: 1.5704
+[04/15/26 09:33:49] INFO     Validation @ step 100: val_loss=1.5704                                 
+  Step   110/500 ( 22.0%)  Loss: 1.6057  LR: 1.85e-04  Step: 33.86s  Elapsed: 1h 03m 10s  ETA: 3h 
+40m 04s  GPU: 87.4/120GB  Tok/s: 161  Samp/s: 0.2
+  Step   120/500 ( 24.0%)  Loss: 1.6065  LR: 1.81e-04  Step: 33.79s  Elapsed: 1h 08m 48s  ETA: 3h 
+34m 25s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   130/500 ( 26.0%)  Loss: 1.6357  LR: 1.77e-04  Step: 33.91s  Elapsed: 1h 14m 27s  ETA: 3h 
+28m 46s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   140/500 ( 28.0%)  Loss: 1.4985  LR: 1.72e-04  Step: 33.88s  Elapsed: 1h 20m 05s  ETA: 3h 
+23m 08s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   150/500 ( 30.0%)  Loss: 1.5535  LR: 1.68e-04  Step: 33.85s  Elapsed: 1h 25m 44s  ETA: 3h 
+17m 29s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   160/500 ( 32.0%)  Loss: 1.4313  LR: 1.63e-04  Step: 33.85s  Elapsed: 1h 31m 22s  ETA: 3h 
+11m 50s  GPU: 87.4/120GB  Tok/s: 164  Samp/s: 0.2
+  Step   170/500 ( 34.0%)  Loss: 1.7124  LR: 1.57e-04  Step: 33.83s  Elapsed: 1h 37m 01s  ETA: 3h 
+06m 12s  GPU: 87.4/120GB  Tok/s: 165  Samp/s: 0.2
+  Step   180/500 ( 36.0%)  Loss: 1.4949  LR: 1.52e-04  Step: 33.82s  Elapsed: 1h 42m 40s  ETA: 3h 
+00m 34s  GPU: 87.4/120GB  Tok/s: 165  Samp/s: 0.2
+  Step   190/500 ( 38.0%)  Loss: 1.3958  LR: 1.46e-04  Step: 33.91s  Elapsed: 1h 48m 19s  ETA: 2h 
+54m 55s  GPU: 87.4/120GB  Tok/s: 164  Samp/s: 0.2
+  Step   200/500 ( 40.0%)  Loss: 1.5737  LR: 1.40e-04  Step: 33.81s  Elapsed: 1h 53m 57s  ETA: 2h 
+49m 16s  GPU: 87.4/120GB  Tok/s: 164  Samp/s: 0.2
+  Eval @ step 200  Val Loss: 1.5558
+[04/15/26 10:31:15] INFO     Validation @ step 200: val_loss=1.5558                                 
+  Step   210/500 ( 42.0%)  Loss: 1.4237  LR: 1.34e-04  Step: 33.82s  Elapsed: 2h 00m 36s  ETA: 2h 
+43m 38s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   220/500 ( 44.0%)  Loss: 1.3803  LR: 1.28e-04  Step: 33.83s  Elapsed: 2h 06m 14s  ETA: 2h 
+37m 59s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   230/500 ( 46.0%)  Loss: 1.5898  LR: 1.21e-04  Step: 33.83s  Elapsed: 2h 11m 53s  ETA: 2h 
+32m 21s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   240/500 ( 48.0%)  Loss: 1.5066  LR: 1.15e-04  Step: 33.95s  Elapsed: 2h 17m 32s  ETA: 2h 
+26m 43s  GPU: 87.4/120GB  Tok/s: 164  Samp/s: 0.2
+  Step   250/500 ( 50.0%)  Loss: 1.5492  LR: 1.08e-04  Step: 33.91s  Elapsed: 2h 23m 10s  ETA: 2h 
+21m 04s  GPU: 87.4/120GB  Tok/s: 164  Samp/s: 0.2
+  Step   260/500 ( 52.0%)  Loss: 1.3717  LR: 1.02e-04  Step: 33.80s  Elapsed: 2h 28m 49s  ETA: 2h 
+15m 25s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   270/500 ( 54.0%)  Loss: 1.5369  LR: 9.50e-05  Step: 33.88s  Elapsed: 2h 34m 27s  ETA: 2h 
+09m 46s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   280/500 ( 56.0%)  Loss: 1.6669  LR: 8.85e-05  Step: 33.80s  Elapsed: 2h 40m 06s  ETA: 2h 
+04m 08s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   290/500 ( 58.0%)  Loss: 1.4362  LR: 8.19e-05  Step: 33.84s  Elapsed: 2h 45m 44s  ETA: 1h 
+58m 29s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   300/500 ( 60.0%)  Loss: 1.5778  LR: 7.55e-05  Step: 33.93s  Elapsed: 2h 51m 23s  ETA: 1h 
+52m 51s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Eval @ step 300  Val Loss: 1.5483
+[04/15/26 11:28:41] INFO     Validation @ step 300: val_loss=1.5483                                 
+  Step   310/500 ( 62.0%)  Loss: 1.4480  LR: 6.91e-05  Step: 33.86s  Elapsed: 2h 58m 02s  ETA: 1h 
+47m 12s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   320/500 ( 64.0%)  Loss: 1.7515  LR: 6.29e-05  Step: 33.82s  Elapsed: 3h 03m 40s  ETA: 1h 
+41m 34s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   330/500 ( 66.0%)  Loss: 1.5715  LR: 5.68e-05  Step: 33.75s  Elapsed: 3h 09m 19s  ETA: 1h 
+35m 55s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   340/500 ( 68.0%)  Loss: 1.2979  LR: 5.10e-05  Step: 33.90s  Elapsed: 3h 14m 57s  ETA: 1h 
+30m 16s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   350/500 ( 70.0%)  Loss: 1.5546  LR: 4.53e-05  Step: 33.86s  Elapsed: 3h 20m 36s  ETA: 1h 
+24m 38s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   360/500 ( 72.0%)  Loss: 1.5408  LR: 3.99e-05  Step: 33.85s  Elapsed: 3h 26m 14s  ETA: 1h 
+18m 59s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   370/500 ( 74.0%)  Loss: 1.5359  LR: 3.47e-05  Step: 33.83s  Elapsed: 3h 31m 53s  ETA: 1h 
+13m 21s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   380/500 ( 76.0%)  Loss: 1.4735  LR: 2.99e-05  Step: 33.96s  Elapsed: 3h 37m 31s  ETA: 1h 
+07m 42s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   390/500 ( 78.0%)  Loss: 1.6557  LR: 2.53e-05  Step: 33.85s  Elapsed: 3h 43m 10s  ETA: 1h 
+02m 03s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   400/500 ( 80.0%)  Loss: 1.4813  LR: 2.11e-05  Step: 33.74s  Elapsed: 3h 48m 48s  ETA: 56m 
+25s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Eval @ step 400  Val Loss: 1.5446
+[04/15/26 12:26:06] INFO     Validation @ step 400: val_loss=1.5446                                 
+  Step   410/500 ( 82.0%)  Loss: 1.4445  LR: 1.72e-05  Step: 33.72s  Elapsed: 3h 55m 26s  ETA: 50m 
+46s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   420/500 ( 84.0%)  Loss: 1.4516  LR: 1.37e-05  Step: 33.74s  Elapsed: 4h 01m 03s  ETA: 45m 
+07s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   430/500 ( 86.0%)  Loss: 1.6843  LR: 1.05e-05  Step: 33.79s  Elapsed: 4h 06m 41s  ETA: 39m 
+29s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   440/500 ( 88.0%)  Loss: 1.4766  LR: 7.77e-06  Step: 33.78s  Elapsed: 4h 12m 19s  ETA: 33m 
+50s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   450/500 ( 90.0%)  Loss: 1.4244  LR: 5.42e-06  Step: 33.75s  Elapsed: 4h 17m 56s  ETA: 28m 
+12s  GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Step   460/500 ( 92.0%)  Loss: 1.6705  LR: 3.48e-06  Step: 33.76s  Elapsed: 4h 23m 33s  ETA: 22m 
+33s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   470/500 ( 94.0%)  Loss: 1.5439  LR: 1.96e-06  Step: 33.69s  Elapsed: 4h 29m 11s  ETA: 16m 
+55s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   480/500 ( 96.0%)  Loss: 1.4790  LR: 8.74e-07  Step: 33.81s  Elapsed: 4h 34m 48s  ETA: 11m 
+16s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   490/500 ( 98.0%)  Loss: 1.3514  LR: 2.19e-07  Step: 33.70s  Elapsed: 4h 40m 26s  ETA: 5m 
+38s  GPU: 87.4/120GB  Tok/s: 163  Samp/s: 0.2
+  Step   500/500 (100.0%)  Loss: 1.3767  LR: 0.00e+00  Step: 33.68s  Elapsed: 4h 46m 03s  ETA: --:--
+GPU: 87.4/120GB  Tok/s: 162  Samp/s: 0.2
+  Eval @ step 500  Val Loss: 1.5446
+[04/15/26 13:23:22] INFO     Validation @ step 500: val_loss=1.5446                                 
+
+                             Final Benchmark Results                             
+┌─────────────────────────────┬─────────────────────────────────────────────────┐
+│  Machine                    │  atom                                           │
+│  Mode                       │  lora                                           │
+│  Status                     │  success                                        │
+│  Steps Completed            │  500 / 500                                      │
+│  Total Time                 │  4h 47m 04s                                     │
+│  Avg Step Time              │  33.8326s                                       │
+│  Median Step Time           │  33.8323s                                       │
+│  P95 Step Time              │  33.9628s                                       │
+│  Peak GPU Memory            │  87.38 GB                                       │
+│  Final Loss                 │  1.3767                                         │
+│  Tokens/sec                 │  162.4                                          │
+│  Samples/sec                │  0.24                                           │
+└─────────────────────────────┴─────────────────────────────────────────────────┘
+
+
+──────────────────────────── Evaluation Pipeline Baseline vs Fine-Tuned ────────────────────────────
+
+Loading baseline model for comparison...
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:07<35:53,  7.43s/it]Loading weights:   1%|          | 2/291 [00:14<36:10,  7.51s/it]Loading weights:   1%|          | 3/291 [00:47<1:31:37, 19.09s/it]Loading weights:   1%|▏         | 4/291 [00:48<57:08, 11.95s/it]  Loading weights:  34%|███▍      | 100/291 [00:55<00:54,  3.49it/s]Loading weights:  41%|████      | 118/291 [01:06<01:00,  2.84it/s]Loading weights:  54%|█████▎    | 156/291 [01:13<00:38,  3.54it/s]Loading weights:  60%|██████    | 176/291 [01:13<00:26,  4.36it/s]Loading weights:  62%|██████▏   | 180/291 [01:14<00:24,  4.54it/s]Loading weights:  63%|██████▎   | 182/291 [01:14<00:23,  4.61it/s]Loading weights:  63%|██████▎   | 184/291 [01:16<00:27,  3.92it/s]Loading weights:  64%|██████▍   | 186/291 [01:17<00:28,  3.67it/s]Loading weights:  65%|██████▍   | 188/291 [01:17<00:26,  3.83it/s]Loading weights:  65%|██████▌   | 190/291 [01:17<00:24,  4.09it/s]Loading weights:  66%|██████▋   | 193/291 [01:18<00:25,  3.79it/s]Loading weights:  67%|██████▋   | 194/291 [01:19<00:32,  2.99it/s]Loading weights:  67%|██████▋   | 195/291 [01:21<00:40,  2.40it/s]Loading weights:  68%|██████▊   | 198/291 [01:21<00:29,  3.20it/s]Loading weights:  68%|██████▊   | 199/291 [01:21<00:28,  3.27it/s]Loading weights:  69%|██████▉   | 202/291 [01:22<00:28,  3.07it/s]Loading weights:  70%|██████▉   | 203/291 [01:23<00:36,  2.42it/s]Loading weights:  70%|███████   | 204/291 [01:24<00:44,  1.95it/s]Loading weights:  71%|███████▏  | 208/291 [01:24<00:22,  3.63it/s]Loading weights:  73%|███████▎  | 211/291 [01:24<00:16,  4.76it/s]Loading weights:  73%|███████▎  | 213/291 [01:26<00:30,  2.57it/s]Loading weights:  74%|███████▍  | 216/291 [01:27<00:21,  3.45it/s]Loading weights:  75%|███████▍  | 217/291 [01:27<00:21,  3.50it/s]Loading weights:  76%|███████▌  | 220/291 [01:28<00:21,  3.33it/s]Loading weights:  76%|███████▌  | 221/291 [01:29<00:26,  2.62it/s]Loading weights:  76%|███████▋  | 222/291 [01:30<00:32,  2.10it/s]Loading weights:  77%|███████▋  | 225/291 [01:30<00:20,  3.19it/s]Loading weights:  78%|███████▊  | 226/291 [01:30<00:19,  3.34it/s]Loading weights:  79%|███████▊  | 229/291 [01:31<00:18,  3.31it/s]Loading weights:  79%|███████▉  | 230/291 [01:32<00:23,  2.55it/s]Loading weights:  79%|███████▉  | 231/291 [01:33<00:29,  2.05it/s]Loading weights:  80%|████████  | 234/291 [01:33<00:19,  2.87it/s]Loading weights:  82%|████████▏ | 238/291 [01:34<00:15,  3.35it/s]Loading weights:  82%|████████▏ | 239/291 [01:35<00:19,  2.66it/s]Loading weights:  82%|████████▏ | 240/291 [01:36<00:23,  2.13it/s]Loading weights:  84%|████████▍ | 245/291 [01:36<00:10,  4.46it/s]Loading weights:  85%|████████▍ | 247/291 [01:37<00:12,  3.53it/s]Loading weights:  86%|████████▌ | 249/291 [01:39<00:18,  2.28it/s]Loading weights:  87%|████████▋ | 252/291 [01:39<00:12,  3.09it/s]Loading weights:  87%|████████▋ | 253/291 [01:40<00:11,  3.19it/s]Loading weights:  88%|████████▊ | 256/291 [01:41<00:11,  3.11it/s]Loading weights:  88%|████████▊ | 257/291 [01:41<00:13,  2.43it/s]Loading weights:  89%|████████▊ | 258/291 [01:42<00:16,  1.99it/s]Loading weights:  90%|████████▉ | 261/291 [01:43<00:09,  3.05it/s]Loading weights:  90%|█████████ | 262/291 [01:43<00:09,  3.16it/s]Loading weights:  91%|█████████ | 265/291 [01:44<00:08,  3.24it/s]Loading weights:  91%|█████████▏| 266/291 [01:45<00:09,  2.52it/s]Loading weights:  92%|█████████▏| 267/291 [01:46<00:11,  2.01it/s]Loading weights:  93%|█████████▎| 270/291 [01:46<00:06,  3.16it/s]Loading weights:  93%|█████████▎| 271/291 [01:46<00:06,  3.28it/s]Loading weights:  94%|█████████▍| 274/291 [01:47<00:05,  3.22it/s]Loading weights:  95%|█████████▍| 275/291 [01:48<00:06,  2.41it/s]Loading weights:  95%|█████████▍| 276/291 [01:49<00:07,  1.96it/s]Loading weights:  96%|█████████▌| 279/291 [01:49<00:03,  3.07it/s]Loading weights:  96%|█████████▌| 280/291 [01:49<00:03,  3.25it/s]Loading weights:  97%|█████████▋| 283/291 [01:50<00:02,  3.26it/s]Loading weights:  98%|█████████▊| 284/291 [01:51<00:02,  2.44it/s]Loading weights:  98%|█████████▊| 285/291 [01:52<00:03,  2.00it/s]Loading weights:  99%|█████████▉| 288/291 [01:52<00:00,  3.10it/s]Loading weights:  99%|█████████▉| 289/291 [01:53<00:00,  3.22it/s]Loading weights: 100%|██████████| 291/291 [01:53<00:00,  2.57it/s]
+  Loaded 80 preset questions
+
+───────────────────────────────── Inference: baseline 80 questions ─────────────────────────────────
+
+   1/80 (1%) latency: 8.18s
+   10/80 (12%) latency: 9.60s
+   20/80 (25%) latency: 1.87s
+   30/80 (38%) latency: 0.39s
+   40/80 (50%) latency: 18.37s
+   50/80 (62%) latency: 18.37s
+   60/80 (75%) latency: 18.49s
+   70/80 (88%) latency: 8.31s
+   80/80 (100%) latency: 18.60s
+  Loaded 80 preset questions
+
+──────────────────────────────── Inference: finetuned 80 questions ─────────────────────────────────
+
+   1/80 (1%) latency: 19.75s
+   10/80 (12%) latency: 19.66s
+   20/80 (25%) latency: 19.69s
+   30/80 (38%) latency: 19.74s
+   40/80 (50%) latency: 19.66s
+   50/80 (62%) latency: 19.66s
+   60/80 (75%) latency: 19.78s
+   70/80 (88%) latency: 19.66s
+   80/80 (100%) latency: 19.90s
+
+                 Evaluation: Baseline vs Fine-Tuned                  
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Metric               ┃     Baseline ┃   Fine-tuned ┃        Delta ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ rouge_l              │       0.2597 │       0.1466 │      -0.1131 │
+│ bleu                 │       0.0674 │       0.0372 │      -0.0302 │
+│ exact_match          │       0.0125 │       0.0000 │      -0.0125 │
+│ normalized_match     │       0.4059 │       0.5387 │      +0.1328 │
+│ prediction_length    │     118.0000 │     198.1000 │     +80.1000 │
+│ latency_sec          │      11.2289 │      19.7312 │      +8.5023 │
+└──────────────────────┴──────────────┴──────────────┴──────────────┘
+
+Sample Comparisons:
+
+╭─────────────────────────────────────────── Sample 00 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: Give me three recipes from different cuisines that I can make with potatoes and        │
+│ chicken                                                                                          │
+│ Reference: You could make potato dumplings in a chicken broth, which comes from German cuisine.  │
+│ Another recipe is mashed potatoes and fried chicken from the Amer                                │
+│ Baseline: * **Recipe 1:** [Chicken and Potato                                                    │
+│ Curry](https://www.bbcgoodfood.com/recipes/chicken-potato-curry)                                 │
+│ * **Recipe 2:** [Chicken and Potato Casserole](ht                                                │
+│ Fine-tuned: 1. Chicken Tikka Masala - Indian                                                     │
+│ 2. Chicken and Potatoes - American                                                               │
+│ 3. Chicken and Potatoes - French                                                                 │
+│ 4. Chicken and Potatoes - Italian                                                                │
+│ 5. Chicken and                                                                                   │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 01 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: Give me multiple modes of transport to get to Australia                                │
+│ Reference: Fly by plane, take a boat or cruise ship, swim, paddle board, kayak, sail             │
+│ Baseline: ```bash                                                                                │
+│ $ python3 main.py                                                                                │
+│ Enter a mode of transport: car                                                                   │
+│ Enter a mode of transport: plane                                                                 │
+│ Enter a mode of transport: boat                                                                  │
+│ Enter a mode of transport: t                                                                     │
+│ Fine-tuned: You can get to Australia by plane, boat, or car. You can also get there by train,    │
+│ but it is a very long journey. You can also get there by bike, but i                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 02 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What are the primary ingredients and spices that go into Greek cooking?                │
+│ Reference: 1) Salt                                                                               │
+│ 2) Pepper                                                                                        │
+│ 3) Extra virgin olive oil                                                                        │
+│ 4) Fresh oregano                                                                                 │
+│ 5) Lemon juice                                                                                   │
+│ 6) Garlic                                                                                        │
+│                                                                                                  │
+│ Technique matters; however, the addition of these six ingredien                                  │
+│ Baseline: The primary ingredients in Greek cooking are olive oil, lemon juice, garlic, oregano,  │
+│ and feta cheese. The spices that are commonly used in Greek cook                                 │
+│ Fine-tuned: The primary ingredients in Greek cooking are olive oil, lemon, garlic, oregano, and  │
+│ feta cheese.  These ingredients are used in a variety of dishes, i                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 03 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What medicinal plants should I grow in my Mid-Atlantic garden?                         │
+│ Reference: Echinacea                                                                             │
+│ Elder                                                                                            │
+│ Bee balm                                                                                         │
+│ Lemon balm                                                                                       │
+│ Mullein                                                                                          │
+│ Burdock                                                                                          │
+│ Yarrow                                                                                           │
+│ Wood Betony                                                                                      │
+│ Baseline: The Mid-Atlantic region is a diverse area with a wide range of climates and growing    │
+│ conditions. However, there are some medicinal plants that are well                               │
+│ Fine-tuned: The Mid-Atlantic region of the United States is a temperate climate with four        │
+│ distinct seasons.  The growing season is long enough to grow many medici                         │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 04 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What are some ways I could cheer up my friend that just got dumped?                    │
+│ Reference: Im sorry your friend recently got dumped.  I would ask them if they want to talk      │
+│ about it, or be distracted from it.  If they want to talk about it, I                            │
+│ Baseline: - I could send them a funny meme                                                       │
+│ - I could send them a funny gif                                                                  │
+│ - I could send them a funny video                                                                │
+│ - I could send them a funny picture                                                              │
+│ - I could send                                                                                   │
+│ Fine-tuned: 1. Listen to them and let them vent                                                  │
+│ 2. Offer to go out for a drink                                                                   │
+│ 3. Offer to go for a walk                                                                        │
+│ 4. Offer to go to the movies                                                                     │
+│ 5. Offer to go to a comedy s                                                                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Perplexity Measurement
+Computing fine-tuned model perplexity...
+Computing perplexity on 200 samples (batch_size=4, seq_len=1024)...
+  [4/200] running avg loss = 1.3501
+  [44/200] running avg loss = 1.5406
+  [84/200] running avg loss = 1.4388
+  [124/200] running avg loss = 1.4428
+  [164/200] running avg loss = 1.4031
+Perplexity: 4.1704  (avg CE loss: 1.4280, tokens: 32072)
+Loading baseline model (meta-llama/Llama-3.1-8B) for comparison...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:07<37:13,  7.70s/it]Loading weights:   1%|          | 2/291 [00:15<38:10,  7.92s/it]Loading weights:   1%|▏         | 4/291 [00:16<15:24,  3.22s/it]Loading weights:   2%|▏         | 5/291 [00:17<11:52,  2.49s/it]Loading weights:   2%|▏         | 6/291 [00:18<09:32,  2.01s/it]Loading weights:   3%|▎         | 9/291 [00:18<04:19,  1.09it/s]Loading weights:   3%|▎         | 10/291 [00:18<03:37,  1.29it/s]Loading weights:   4%|▍         | 13/291 [00:19<02:34,  1.80it/s]Loading weights:   5%|▍         | 14/291 [00:20<02:55,  1.58it/s]Loading weights:   5%|▌         | 15/291 [00:21<03:12,  1.44it/s]Loading weights:   6%|▌         | 18/291 [00:22<02:06,  2.17it/s]Loading weights:   8%|▊         | 22/291 [00:23<01:35,  2.81it/s]Loading weights:   8%|▊         | 23/291 [00:24<01:59,  2.24it/s]Loading weights:   8%|▊         | 24/291 [00:25<02:21,  1.89it/s]Loading weights:  10%|▉         | 28/291 [00:38<08:30,  1.94s/it]Loading weights:  23%|██▎       | 67/291 [00:39<01:00,  3.73it/s]Loading weights:  24%|██▎       | 69/291 [00:41<01:07,  3.27it/s]Loading weights:  25%|██▍       | 72/291 [00:41<01:01,  3.57it/s]Loading weights:  25%|██▌       | 74/291 [00:42<00:58,  3.74it/s]Loading weights:  26%|██▌       | 76/291 [00:42<01:01,  3.49it/s]Loading weights:  26%|██▋       | 77/291 [00:43<01:10,  3.02it/s]Loading weights:  27%|██▋       | 78/291 [00:44<01:23,  2.55it/s]Loading weights:  28%|██▊       | 81/291 [00:45<01:03,  3.30it/s]Loading weights:  28%|██▊       | 82/291 [00:45<01:01,  3.37it/s]Loading weights:  29%|██▉       | 85/291 [00:46<01:01,  3.33it/s]Loading weights:  30%|██▉       | 86/291 [00:47<01:19,  2.57it/s]Loading weights:  30%|██▉       | 87/291 [00:48<01:39,  2.06it/s]Loading weights:  31%|███       | 90/291 [00:48<01:05,  3.06it/s]Loading weights:  31%|███▏      | 91/291 [00:51<02:37,  1.27it/s]Loading weights:  34%|███▍      | 100/291 [01:11<05:34,  1.75s/it]Loading weights:  54%|█████▍    | 157/291 [01:12<00:34,  3.88it/s]Loading weights:  55%|█████▍    | 160/291 [01:13<00:36,  3.60it/s]Loading weights:  56%|█████▌    | 162/291 [01:14<00:34,  3.70it/s]Loading weights:  56%|█████▋    | 164/291 [01:14<00:33,  3.81it/s]Loading weights:  57%|█████▋    | 166/291 [01:15<00:35,  3.56it/s]Loading weights:  57%|█████▋    | 167/291 [01:16<00:39,  3.12it/s]Loading weights:  58%|█████▊    | 168/291 [01:17<00:45,  2.68it/s]Loading weights:  59%|█████▉    | 171/291 [01:17<00:36,  3.31it/s]Loading weights:  59%|█████▉    | 172/291 [01:17<00:35,  3.36it/s]Loading weights:  60%|██████    | 175/291 [01:18<00:35,  3.25it/s]Loading weights:  60%|██████    | 176/291 [01:19<00:45,  2.53it/s]Loading weights:  61%|██████    | 177/291 [01:20<00:52,  2.17it/s]Loading weights:  62%|██████▏   | 180/291 [01:20<00:35,  3.14it/s]Loading weights:  62%|██████▏   | 181/291 [01:21<00:33,  3.26it/s]Loading weights:  63%|██████▎   | 184/291 [01:22<00:33,  3.18it/s]Loading weights:  64%|██████▎   | 185/291 [01:23<00:43,  2.46it/s]Loading weights:  64%|██████▍   | 186/291 [01:23<00:52,  2.02it/s]Loading weights:  65%|██████▍   | 189/291 [01:24<00:31,  3.19it/s]Loading weights:  65%|██████▌   | 190/291 [01:24<00:29,  3.38it/s]Loading weights:  66%|██████▌   | 191/291 [01:53<10:10,  6.10s/it]Loading weights: 100%|██████████| 291/291 [01:53<00:00,  2.56it/s]
+Computing perplexity on 200 samples (batch_size=4, seq_len=1024)...
+  [4/200] running avg loss = 1.7179
+  [44/200] running avg loss = 1.8699
+  [84/200] running avg loss = 1.7943
+  [124/200] running avg loss = 1.8261
+  [164/200] running avg loss = 1.7845
+Perplexity: 6.1447  (avg CE loss: 1.8156, tokens: 32072)
+Perplexity results saved to ./results/atom_lora_20260415_083150/evaluation/perplexity.json
+             Perplexity Comparison              
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━┓
+┃ Model      ┃ Perplexity ┃   Delta ┃ Change % ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━┩
+│ Baseline   │     6.1447 │      -- │       -- │
+│ Fine-tuned │     4.1704 │ -1.9743 │  -32.13% │
+└────────────┴────────────┴─────────┴──────────┘
+
+╭──────────────────────────────────────────── SUCCESS ─────────────────────────────────────────────╮
+│                                                                                                  │
+│  Benchmark completed successfully!                                                               │
+│                                                                                                  │
+│  Results saved to: ./results/atom_lora_20260415_083150                                           │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04/15/26 14:09:24] INFO     Benchmark complete: status=success                                     
+                             run_dir=./results/atom_lora_20260415_083150                            
+INFO:benchmark:Benchmark complete: status=success run_dir=./results/atom_lora_20260415_083150
+[2026-04-15 14:09:35] lora completed successfully. (337m 47s)
+
+
+================================================================
+  PHASE 3: TRAINING — QLORA
+================================================================
+
+[2026-04-15 14:09:35] Starting qlora training...
+[2026-04-15 14:09:35] Command: python3 -m benchmark_cuda run --mode qlora --machine-label atom --output-dir ./results --max-steps 500  --model meta-llama/Llama-3.1-8B
+
+╭─────────────────────────────────── CUDA Fine-Tuning Benchmark ───────────────────────────────────╮
+│                                                                                                  │
+│  Machine:      atom                                                                              │
+│  GPU:          NVIDIA GB10 (120 GB)                                                              │
+│  Mode:         QLoRA                                                                             │
+│  Model:        meta-llama/Llama-3.1-8B                                                           │
+│  Dataset:      databricks/databricks-dolly-15k                                                   │
+│  Steps:        500                                                                               │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+                                   Run Configuration                                   
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                      ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ mode                           │ qlora                                              │
+│ model_name                     │ meta-llama/Llama-3.1-8B                            │
+│ max_steps                      │ 500                                                │
+│ seq_len                        │ 1024                                               │
+│ micro_batch_size               │ 2                                                  │
+│ gradient_accumulation_steps    │ 16                                                 │
+│ learning_rate                  │ 0.0002                                             │
+│ dtype                          │ bfloat16                                           │
+│ attn_implementation            │ sdpa                                               │
+│ seed                           │ 42                                                 │
+│ gradient_checkpointing         │ True                                               │
+│ lora_r                         │ 16                                                 │
+│ lora_alpha                     │ 32                                                 │
+│ lora_dropout                   │ 0.05                                               │
+│ qlora_bits                     │ 4                                                  │
+│ qlora_quant_type               │ nf4                                                │
+└────────────────────────────────┴────────────────────────────────────────────────────┘
+
+
+──────────────────────────────────────── System Information ────────────────────────────────────────
+
+  Hostname:  atom
+  OS:        Linux 6.17.0-1014-nvidia
+  CPU:       Cortex-X925 + Cortex-A725
+  RAM:       119.7 GB
+  PyTorch:   2.11.0+cu130
+  CUDA:      13.0
+  C2C Mode:  Enabled
+
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Dataset:     databricks/databricks-dolly-15k
+  Train:       13,509 samples
+  Validation:  750 samples
+  Test:        752 samples
+
+
+──────────────────────── Loading Model QLoRA mode - meta-llama/Llama-3.1-8B ────────────────────────
+
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:08<42:13,  8.74s/it]Loading weights:   1%|          | 2/291 [00:17<41:51,  8.69s/it]Loading weights:   1%|▏         | 4/291 [00:18<16:56,  3.54s/it]Loading weights:   2%|▏         | 5/291 [00:19<13:05,  2.75s/it]Loading weights:   2%|▏         | 6/291 [00:20<10:28,  2.21s/it]Loading weights:   4%|▍         | 13/291 [00:21<03:01,  1.53it/s]Loading weights:   5%|▍         | 14/291 [00:22<03:12,  1.44it/s]Loading weights:   5%|▌         | 15/291 [00:23<03:24,  1.35it/s]Loading weights:   6%|▌         | 18/291 [00:23<02:12,  2.06it/s]Loading weights:   7%|▋         | 19/291 [00:23<02:02,  2.22it/s]Loading weights:   8%|▊         | 22/291 [00:24<01:50,  2.44it/s]Loading weights:   8%|▊         | 23/291 [00:25<02:14,  1.99it/s]Loading weights:   8%|▊         | 24/291 [00:26<02:38,  1.68it/s]Loading weights:  11%|█         | 31/291 [00:27<01:17,  3.34it/s]Loading weights:  11%|█         | 32/291 [00:28<01:38,  2.63it/s]Loading weights:  11%|█▏        | 33/291 [00:29<01:59,  2.15it/s]Loading weights:  12%|█▏        | 36/291 [00:30<01:24,  3.01it/s]Loading weights:  13%|█▎        | 37/291 [00:30<01:22,  3.10it/s]Loading weights:  14%|█▎        | 40/291 [00:31<01:23,  3.00it/s]Loading weights:  14%|█▍        | 41/291 [00:32<01:48,  2.31it/s]Loading weights:  14%|█▍        | 42/291 [00:33<02:12,  1.88it/s]Loading weights:  15%|█▌        | 45/291 [00:33<01:25,  2.88it/s]Loading weights:  16%|█▌        | 46/291 [00:34<01:22,  2.98it/s]Loading weights:  17%|█▋        | 49/291 [00:35<01:22,  2.93it/s]Loading weights:  17%|█▋        | 50/291 [00:36<01:47,  2.25it/s]Loading weights:  18%|█▊        | 51/291 [00:37<02:11,  1.82it/s]Loading weights:  19%|█▊        | 54/291 [00:37<01:23,  2.83it/s]Loading weights:  19%|█▉        | 55/291 [00:37<01:20,  2.95it/s]Loading weights:  20%|█▉        | 58/291 [00:38<01:19,  2.94it/s]Loading weights:  20%|██        | 59/291 [00:39<01:43,  2.25it/s]Loading weights:  21%|██        | 60/291 [00:40<02:04,  1.85it/s]Loading weights:  23%|██▎       | 67/291 [00:41<01:01,  3.62it/s]Loading weights:  23%|██▎       | 68/291 [00:42<01:19,  2.80it/s]Loading weights:  24%|██▎       | 69/291 [00:43<01:38,  2.25it/s]Loading weights:  25%|██▍       | 72/291 [00:43<01:09,  3.16it/s]Loading weights:  25%|██▌       | 73/291 [00:44<01:07,  3.23it/s]Loading weights:  26%|██▌       | 76/291 [00:45<01:09,  3.11it/s]Loading weights:  26%|██▋       | 77/291 [00:46<01:30,  2.35it/s]Loading weights:  27%|██▋       | 78/291 [00:47<01:52,  1.89it/s]Loading weights:  28%|██▊       | 81/291 [00:47<01:12,  2.89it/s]Loading weights:  28%|██▊       | 82/291 [00:47<01:09,  2.99it/s]Loading weights:  29%|██▉       | 85/291 [00:48<01:10,  2.94it/s]Loading weights:  30%|██▉       | 86/291 [00:49<01:31,  2.24it/s]Loading weights:  30%|██▉       | 87/291 [00:50<01:51,  1.82it/s]Loading weights:  31%|███       | 90/291 [00:51<01:10,  2.84it/s]Loading weights:  31%|███▏      | 91/291 [00:51<01:07,  2.95it/s]Loading weights:  32%|███▏      | 94/291 [00:52<01:07,  2.92it/s]Loading weights:  33%|███▎      | 95/291 [00:53<01:28,  2.23it/s]Loading weights:  33%|███▎      | 96/291 [00:54<01:47,  1.81it/s]Loading weights:  35%|███▌      | 103/291 [00:55<00:52,  3.55it/s]Loading weights:  36%|███▌      | 104/291 [00:56<01:08,  2.75it/s]Loading weights:  36%|███▌      | 105/291 [00:57<01:23,  2.22it/s]Loading weights:  37%|███▋      | 108/291 [00:57<00:58,  3.11it/s]Loading weights:  37%|███▋      | 109/291 [00:57<00:57,  3.18it/s]Loading weights:  38%|███▊      | 112/291 [00:58<00:58,  3.07it/s]Loading weights:  39%|███▉      | 113/291 [00:59<01:15,  2.35it/s]Loading weights:  39%|███▉      | 114/291 [01:00<01:31,  1.93it/s]Loading weights:  42%|████▏     | 121/291 [01:01<00:46,  3.65it/s]Loading weights:  42%|████▏     | 122/291 [01:02<01:00,  2.80it/s]Loading weights:  42%|████▏     | 123/291 [01:03<01:14,  2.24it/s]Loading weights:  43%|████▎     | 126/291 [01:04<00:52,  3.14it/s]Loading weights:  44%|████▎     | 127/291 [01:04<00:51,  3.20it/s]Loading weights:  45%|████▍     | 130/291 [01:05<00:52,  3.09it/s]Loading weights:  45%|████▌     | 131/291 [01:06<01:07,  2.36it/s]Loading weights:  45%|████▌     | 132/291 [01:07<01:23,  1.91it/s]Loading weights:  46%|████▋     | 135/291 [01:07<00:53,  2.94it/s]Loading weights:  47%|████▋     | 136/291 [01:07<00:50,  3.05it/s]Loading weights:  48%|████▊     | 139/291 [01:08<00:50,  2.99it/s]Loading weights:  48%|████▊     | 140/291 [01:09<01:06,  2.28it/s]Loading weights:  48%|████▊     | 141/291 [01:10<01:20,  1.85it/s]Loading weights:  49%|████▉     | 144/291 [01:11<00:50,  2.89it/s]Loading weights:  50%|████▉     | 145/291 [01:11<00:48,  3.01it/s]Loading weights:  51%|█████     | 148/291 [01:12<00:48,  2.98it/s]Loading weights:  51%|█████     | 149/291 [01:13<01:02,  2.27it/s]Loading weights:  52%|█████▏    | 150/291 [01:14<01:16,  1.84it/s]Loading weights:  54%|█████▍    | 157/291 [01:15<00:37,  3.61it/s]Loading weights:  54%|█████▍    | 158/291 [01:16<00:47,  2.80it/s]Loading weights:  55%|█████▍    | 159/291 [01:17<00:58,  2.26it/s]Loading weights:  56%|█████▌    | 162/291 [01:17<00:40,  3.15it/s]Loading weights:  56%|█████▌    | 163/291 [01:17<00:39,  3.23it/s]Loading weights:  57%|█████▋    | 166/291 [01:18<00:40,  3.12it/s]Loading weights:  57%|█████▋    | 167/291 [01:19<00:51,  2.40it/s]Loading weights:  58%|█████▊    | 168/291 [01:20<01:03,  1.94it/s]Loading weights:  59%|█████▉    | 171/291 [01:21<00:40,  2.97it/s]Loading weights:  59%|█████▉    | 172/291 [01:21<00:38,  3.09it/s]Loading weights:  60%|██████    | 175/291 [01:22<00:38,  3.01it/s]Loading weights:  60%|██████    | 176/291 [01:23<00:50,  2.29it/s]Loading weights:  61%|██████    | 177/291 [01:24<01:01,  1.87it/s]Loading weights:  62%|██████▏   | 180/291 [01:24<00:38,  2.90it/s]Loading weights:  62%|██████▏   | 181/291 [01:24<00:36,  3.02it/s]Loading weights:  63%|██████▎   | 184/291 [01:25<00:35,  2.99it/s]Loading weights:  64%|██████▎   | 185/291 [01:26<00:46,  2.27it/s]Loading weights:  64%|██████▍   | 186/291 [01:27<00:56,  1.85it/s]Loading weights:  65%|██████▍   | 189/291 [01:28<00:35,  2.91it/s]Loading weights:  65%|██████▌   | 190/291 [01:28<00:33,  3.02it/s]Loading weights:  66%|██████▋   | 193/291 [01:29<00:32,  3.01it/s]Loading weights:  67%|██████▋   | 194/291 [01:30<00:42,  2.28it/s]Loading weights:  67%|██████▋   | 195/291 [01:31<00:51,  1.85it/s]Loading weights:  68%|██████▊   | 198/291 [01:31<00:32,  2.90it/s]Loading weights:  68%|██████▊   | 199/291 [01:31<00:30,  3.02it/s]Loading weights:  69%|██████▉   | 202/291 [01:32<00:29,  2.99it/s]Loading weights:  70%|██████▉   | 203/291 [01:33<00:38,  2.27it/s]Loading weights:  70%|███████   | 204/291 [01:34<00:47,  1.84it/s]Loading weights:  73%|███████▎  | 211/291 [01:35<00:22,  3.62it/s]Loading weights:  73%|███████▎  | 212/291 [01:36<00:28,  2.79it/s]Loading weights:  73%|███████▎  | 213/291 [01:37<00:34,  2.25it/s]Loading weights:  74%|███████▍  | 216/291 [01:38<00:23,  3.16it/s]Loading weights:  75%|███████▍  | 217/291 [01:38<00:22,  3.22it/s]Loading weights:  76%|███████▌  | 220/291 [01:39<00:22,  3.11it/s]Loading weights:  76%|███████▌  | 221/291 [01:40<00:29,  2.38it/s]Loading weights:  76%|███████▋  | 222/291 [01:41<00:35,  1.93it/s]Loading weights:  77%|███████▋  | 225/291 [01:41<00:22,  2.94it/s]Loading weights:  78%|███████▊  | 226/291 [01:41<00:21,  3.05it/s]Loading weights:  79%|███████▊  | 229/291 [01:42<00:20,  3.00it/s]Loading weights:  79%|███████▉  | 230/291 [01:43<00:26,  2.28it/s]Loading weights:  79%|███████▉  | 231/291 [01:44<00:32,  1.86it/s]Loading weights:  80%|████████  | 234/291 [01:45<00:19,  2.90it/s]Loading weights:  81%|████████  | 235/291 [01:45<00:18,  3.02it/s]Loading weights:  82%|████████▏ | 238/291 [01:46<00:17,  2.97it/s]Loading weights:  82%|████████▏ | 239/291 [01:47<00:22,  2.27it/s]Loading weights:  82%|████████▏ | 240/291 [01:48<00:27,  1.84it/s]Loading weights:  85%|████████▍ | 247/291 [01:49<00:12,  3.63it/s]Loading weights:  85%|████████▌ | 248/291 [01:50<00:15,  2.80it/s]Loading weights:  86%|████████▌ | 249/291 [01:51<00:18,  2.23it/s]Loading weights:  87%|████████▋ | 252/291 [01:51<00:12,  3.11it/s]Loading weights:  87%|████████▋ | 253/291 [01:51<00:11,  3.18it/s]Loading weights:  88%|████████▊ | 256/291 [01:52<00:11,  3.05it/s]Loading weights:  88%|████████▊ | 257/291 [01:53<00:14,  2.31it/s]Loading weights:  89%|████████▊ | 258/291 [01:54<00:17,  1.87it/s]Loading weights:  90%|████████▉ | 261/291 [01:55<00:10,  2.87it/s]Loading weights:  90%|█████████ | 262/291 [01:55<00:09,  2.97it/s]Loading weights:  91%|█████████ | 265/291 [01:56<00:08,  2.95it/s]Loading weights:  91%|█████████▏| 266/291 [01:57<00:11,  2.24it/s]Loading weights:  92%|█████████▏| 267/291 [01:58<00:13,  1.82it/s]Loading weights:  93%|█████████▎| 270/291 [01:58<00:07,  2.83it/s]Loading weights:  93%|█████████▎| 271/291 [01:59<00:06,  2.93it/s]Loading weights:  94%|█████████▍| 274/291 [02:00<00:05,  2.92it/s]Loading weights:  95%|█████████▍| 275/291 [02:01<00:07,  2.21it/s]Loading weights:  95%|█████████▍| 276/291 [02:02<00:08,  1.81it/s]Loading weights:  96%|█████████▌| 279/291 [02:02<00:04,  2.83it/s]Loading weights:  96%|█████████▌| 280/291 [02:02<00:03,  2.96it/s]Loading weights:  97%|█████████▋| 283/291 [02:03<00:02,  2.91it/s]Loading weights:  98%|█████████▊| 284/291 [02:04<00:03,  2.21it/s]Loading weights:  98%|█████████▊| 285/291 [02:05<00:03,  1.80it/s]Loading weights:  99%|█████████▉| 288/291 [02:06<00:01,  2.83it/s]Loading weights:  99%|█████████▉| 289/291 [02:06<00:00,  2.93it/s]Loading weights: 100%|██████████| 291/291 [02:06<00:00,  2.30it/s]
+  Quantization:         4-bit nf4
+  Double quantization:  True
+  Total parameters:     8,043,892,736
+  Trainable parameters: 13,631,488 (0.17%)
+  LoRA rank:            16
+  LoRA alpha:           32
+
+
+────────────────────────────────────────── Preparing Data ──────────────────────────────────────────
+
+  Train samples: 13,509
+  Val samples:   750
+
+─────────────────────────────────────── Setting Up Optimizer ───────────────────────────────────────
+
+  Optimizer:        AdamW
+  LR schedule:      cosine
+  Warmup steps:     25
+  Max steps:        500
+  Timing warmup:    3 steps (excluded from metrics)
+
+
+─────────────────────────────────────── Training Steps 1-500 ───────────────────────────────────────
+
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+  Step     1/500 (  0.2%) (warmup)  Loss: 2.2061  LR: 8.00e-06  Step: 68.45s  Elapsed: 1m 08s  ETA: 
+9h 29m 17s  GPU: 12.3/120GB
+  Step    10/500 (  2.0%)  Loss: 1.9998  LR: 8.00e-05  Step: 67.28s  Elapsed: 11m 13s  ETA: 9h 08m 
+59s  GPU: 12.4/120GB  Tok/s: 85  Samp/s: 0.0
+  Step    20/500 (  4.0%)  Loss: 1.7767  LR: 1.60e-04  Step: 67.21s  Elapsed: 22m 25s  ETA: 8h 57m 
+50s  GPU: 12.4/120GB  Tok/s: 82  Samp/s: 0.0
+  Step    30/500 (  6.0%)  Loss: 1.8254  LR: 2.00e-04  Step: 68.22s  Elapsed: 33m 39s  ETA: 8h 47m 
+00s  GPU: 12.4/120GB  Tok/s: 80  Samp/s: 0.0
+  Step    40/500 (  8.0%)  Loss: 1.7807  LR: 2.00e-04  Step: 67.22s  Elapsed: 44m 52s  ETA: 8h 35m 
+45s  GPU: 12.4/120GB  Tok/s: 80  Samp/s: 0.0
+  Step    50/500 ( 10.0%)  Loss: 1.7903  LR: 1.99e-04  Step: 67.24s  Elapsed: 56m 04s  ETA: 8h 24m 
+26s  GPU: 12.4/120GB  Tok/s: 80  Samp/s: 0.0
+  Step    60/500 ( 12.0%)  Loss: 1.6918  LR: 1.97e-04  Step: 67.19s  Elapsed: 1h 07m 17s  ETA: 8h 
+13m 16s  GPU: 12.4/120GB  Tok/s: 80  Samp/s: 0.0
+  Step    70/500 ( 14.0%)  Loss: 1.6851  LR: 1.96e-04  Step: 67.18s  Elapsed: 1h 18m 29s  ETA: 8h 
+02m 03s  GPU: 12.4/120GB  Tok/s: 80  Samp/s: 0.0
+  Step    80/500 ( 16.0%)  Loss: 1.5910  LR: 1.93e-04  Step: 67.20s  Elapsed: 1h 29m 42s  ETA: 7h 
+50m 49s  GPU: 12.4/120GB  Tok/s: 81  Samp/s: 0.0
+  Step    90/500 ( 18.0%)  Loss: 1.6421  LR: 1.91e-04  Step: 67.35s  Elapsed: 1h 40m 54s  ETA: 7h 
+39m 36s  GPU: 12.4/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   100/500 ( 20.0%)  Loss: 1.7272  LR: 1.88e-04  Step: 67.32s  Elapsed: 1h 52m 07s  ETA: 7h 
+28m 24s  GPU: 12.4/120GB  Tok/s: 82  Samp/s: 0.0
+  Eval @ step 100  Val Loss: 1.7426
+[04/15/26 16:04:26] INFO     Validation @ step 100: val_loss=1.7426                                 
+  Step   110/500 ( 22.0%)  Loss: 1.6355  LR: 1.85e-04  Step: 67.31s  Elapsed: 2h 03m 45s  ETA: 7h 
+17m 13s  GPU: 12.5/120GB  Tok/s: 81  Samp/s: 0.0
+  Step   120/500 ( 24.0%)  Loss: 1.7539  LR: 1.81e-04  Step: 67.24s  Elapsed: 2h 14m 58s  ETA: 7h 
+06m 01s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   130/500 ( 26.0%)  Loss: 1.6524  LR: 1.77e-04  Step: 67.36s  Elapsed: 2h 26m 11s  ETA: 6h 
+54m 49s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   140/500 ( 28.0%)  Loss: 1.6154  LR: 1.72e-04  Step: 67.41s  Elapsed: 2h 37m 24s  ETA: 6h 
+43m 38s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   150/500 ( 30.0%)  Loss: 1.5027  LR: 1.68e-04  Step: 67.38s  Elapsed: 2h 48m 37s  ETA: 6h 
+32m 27s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   160/500 ( 32.0%)  Loss: 1.5681  LR: 1.63e-04  Step: 67.45s  Elapsed: 2h 59m 52s  ETA: 6h 
+21m 18s  GPU: 12.5/120GB  Tok/s: 83  Samp/s: 0.0
+  Step   170/500 ( 34.0%)  Loss: 1.6581  LR: 1.57e-04  Step: 67.59s  Elapsed: 3h 11m 07s  ETA: 6h 
+10m 09s  GPU: 12.5/120GB  Tok/s: 83  Samp/s: 0.0
+  Step   180/500 ( 36.0%)  Loss: 1.6041  LR: 1.52e-04  Step: 67.38s  Elapsed: 3h 22m 21s  ETA: 5h 
+58m 58s  GPU: 12.5/120GB  Tok/s: 83  Samp/s: 0.0
+  Step   190/500 ( 38.0%)  Loss: 1.4916  LR: 1.46e-04  Step: 67.35s  Elapsed: 3h 33m 35s  ETA: 5h 
+47m 47s  GPU: 12.5/120GB  Tok/s: 83  Samp/s: 0.0
+  Step   200/500 ( 40.0%)  Loss: 1.7377  LR: 1.40e-04  Step: 67.51s  Elapsed: 3h 44m 49s  ETA: 5h 
+36m 35s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Eval @ step 200  Val Loss: 1.7295
+[04/15/26 17:57:09] INFO     Validation @ step 200: val_loss=1.7295                                 
+  Step   210/500 ( 42.0%)  Loss: 1.4285  LR: 1.34e-04  Step: 67.43s  Elapsed: 3h 56m 29s  ETA: 5h 
+25m 24s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   220/500 ( 44.0%)  Loss: 1.4843  LR: 1.28e-04  Step: 67.43s  Elapsed: 4h 07m 43s  ETA: 5h 
+14m 12s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   230/500 ( 46.0%)  Loss: 1.6430  LR: 1.21e-04  Step: 67.36s  Elapsed: 4h 18m 58s  ETA: 5h 
+03m 00s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   240/500 ( 48.0%)  Loss: 1.5969  LR: 1.15e-04  Step: 67.52s  Elapsed: 4h 30m 12s  ETA: 4h 
+51m 48s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   250/500 ( 50.0%)  Loss: 1.6127  LR: 1.08e-04  Step: 67.48s  Elapsed: 4h 41m 26s  ETA: 4h 
+40m 35s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   260/500 ( 52.0%)  Loss: 1.5308  LR: 1.02e-04  Step: 67.50s  Elapsed: 4h 52m 40s  ETA: 4h 
+29m 23s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   270/500 ( 54.0%)  Loss: 1.5385  LR: 9.50e-05  Step: 67.41s  Elapsed: 5h 03m 54s  ETA: 4h 
+18m 09s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   280/500 ( 56.0%)  Loss: 1.7223  LR: 8.85e-05  Step: 67.37s  Elapsed: 5h 15m 08s  ETA: 4h 
+06m 56s  GPU: 12.5/120GB  Tok/s: 81  Samp/s: 0.0
+  Step   290/500 ( 58.0%)  Loss: 1.4868  LR: 8.19e-05  Step: 67.31s  Elapsed: 5h 26m 21s  ETA: 3h 
+55m 43s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   300/500 ( 60.0%)  Loss: 1.5051  LR: 7.55e-05  Step: 67.47s  Elapsed: 5h 37m 35s  ETA: 3h 
+44m 29s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Eval @ step 300  Val Loss: 1.7189
+[04/15/26 19:49:55] INFO     Validation @ step 300: val_loss=1.7189                                 
+  Step   310/500 ( 62.0%)  Loss: 1.5387  LR: 6.91e-05  Step: 67.46s  Elapsed: 5h 49m 14s  ETA: 3h 
+33m 16s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   320/500 ( 64.0%)  Loss: 1.7255  LR: 6.29e-05  Step: 67.36s  Elapsed: 6h 00m 28s  ETA: 3h 
+22m 03s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   330/500 ( 66.0%)  Loss: 1.6559  LR: 5.68e-05  Step: 67.38s  Elapsed: 6h 11m 41s  ETA: 3h 
+10m 49s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   340/500 ( 68.0%)  Loss: 1.4202  LR: 5.10e-05  Step: 67.33s  Elapsed: 6h 22m 55s  ETA: 2h 
+59m 36s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   350/500 ( 70.0%)  Loss: 1.6286  LR: 4.53e-05  Step: 67.33s  Elapsed: 6h 34m 09s  ETA: 2h 
+48m 22s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   360/500 ( 72.0%)  Loss: 1.5985  LR: 3.99e-05  Step: 67.32s  Elapsed: 6h 45m 22s  ETA: 2h 
+37m 09s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   370/500 ( 74.0%)  Loss: 1.5714  LR: 3.47e-05  Step: 67.23s  Elapsed: 6h 56m 36s  ETA: 2h 
+25m 55s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   380/500 ( 76.0%)  Loss: 1.5119  LR: 2.99e-05  Step: 67.35s  Elapsed: 7h 07m 49s  ETA: 2h 
+14m 42s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   390/500 ( 78.0%)  Loss: 1.7629  LR: 2.53e-05  Step: 67.29s  Elapsed: 7h 19m 02s  ETA: 2h 
+03m 28s  GPU: 12.5/120GB  Tok/s: 81  Samp/s: 0.0
+  Step   400/500 ( 80.0%)  Loss: 1.5606  LR: 2.11e-05  Step: 67.37s  Elapsed: 7h 30m 16s  ETA: 1h 
+52m 15s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Eval @ step 400  Val Loss: 1.7167
+[04/15/26 21:42:35] INFO     Validation @ step 400: val_loss=1.7167                                 
+  Step   410/500 ( 82.0%)  Loss: 1.4854  LR: 1.72e-05  Step: 67.28s  Elapsed: 7h 41m 53s  ETA: 1h 
+41m 01s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   420/500 ( 84.0%)  Loss: 1.5104  LR: 1.37e-05  Step: 67.37s  Elapsed: 7h 53m 07s  ETA: 1h 
+29m 47s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   430/500 ( 86.0%)  Loss: 1.6701  LR: 1.05e-05  Step: 67.35s  Elapsed: 8h 04m 20s  ETA: 1h 
+18m 34s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   440/500 ( 88.0%)  Loss: 1.4701  LR: 7.77e-06  Step: 67.30s  Elapsed: 8h 15m 33s  ETA: 1h 
+07m 20s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   450/500 ( 90.0%)  Loss: 1.4939  LR: 5.42e-06  Step: 67.25s  Elapsed: 8h 26m 46s  ETA: 56m 
+07s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   460/500 ( 92.0%)  Loss: 1.7258  LR: 3.48e-06  Step: 67.24s  Elapsed: 8h 38m 00s  ETA: 44m 
+53s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   470/500 ( 94.0%)  Loss: 1.5443  LR: 1.96e-06  Step: 67.23s  Elapsed: 8h 49m 13s  ETA: 33m 
+40s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   480/500 ( 96.0%)  Loss: 1.5218  LR: 8.74e-07  Step: 67.26s  Elapsed: 9h 00m 25s  ETA: 22m 
+26s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   490/500 ( 98.0%)  Loss: 1.4176  LR: 2.19e-07  Step: 67.24s  Elapsed: 9h 11m 39s  ETA: 11m 
+13s  GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Step   500/500 (100.0%)  Loss: 1.5156  LR: 0.00e+00  Step: 67.30s  Elapsed: 9h 22m 51s  ETA: --:--
+GPU: 12.5/120GB  Tok/s: 82  Samp/s: 0.0
+  Eval @ step 500  Val Loss: 1.7157
+[04/15/26 23:35:11] INFO     Validation @ step 500: val_loss=1.7157                                 
+
+                             Final Benchmark Results                             
+┌─────────────────────────────┬─────────────────────────────────────────────────┐
+│  Machine                    │  atom                                           │
+│  Mode                       │  qlora                                          │
+│  Status                     │  success                                        │
+│  Steps Completed            │  500 / 500                                      │
+│  Total Time                 │  9h 23m 16s                                     │
+│  Avg Step Time              │  67.3424s                                       │
+│  Median Step Time           │  67.3370s                                       │
+│  P95 Step Time              │  67.4913s                                       │
+│  Peak GPU Memory            │  12.45 GB                                       │
+│  Final Loss                 │  1.5156                                         │
+│  Tokens/sec                 │  81.6                                           │
+│  Samples/sec                │  0.03                                           │
+└─────────────────────────────┴─────────────────────────────────────────────────┘
+
+
+──────────────────────────── Evaluation Pipeline Baseline vs Fine-Tuned ────────────────────────────
+
+Loading baseline model for comparison...
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:08<42:16,  8.75s/it]Loading weights:   1%|          | 2/291 [00:17<40:50,  8.48s/it]Loading weights:   1%|          | 3/291 [00:17<24:04,  5.02s/it]Loading weights:   2%|▏         | 5/291 [00:18<11:36,  2.43s/it]Loading weights:   2%|▏         | 6/291 [00:19<09:27,  1.99s/it]Loading weights:   3%|▎         | 9/291 [00:20<04:27,  1.05it/s]Loading weights:   3%|▎         | 10/291 [00:20<03:46,  1.24it/s]Loading weights:   4%|▍         | 11/291 [00:26<09:29,  2.03s/it]Loading weights:  11%|█         | 31/291 [00:33<02:25,  1.79it/s]Loading weights:  17%|█▋        | 49/291 [00:34<01:10,  3.42it/s]Loading weights:  17%|█▋        | 50/291 [01:31<10:19,  2.57s/it]Loading weights:  72%|███████▏  | 210/291 [01:33<00:21,  3.73it/s]Loading weights:  72%|███████▏  | 210/291 [01:46<00:21,  3.73it/s]Loading weights:  74%|███████▍  | 215/291 [01:50<00:29,  2.57it/s]Loading weights:  74%|███████▍  | 216/291 [01:52<00:30,  2.50it/s]Loading weights:  91%|█████████▏| 266/291 [01:53<00:05,  4.30it/s]Loading weights:  92%|█████████▏| 269/291 [01:54<00:05,  4.13it/s]Loading weights:  93%|█████████▎| 272/291 [01:57<00:05,  3.62it/s]Loading weights:  96%|█████████▌| 279/291 [01:57<00:02,  4.10it/s]Loading weights:  97%|█████████▋| 281/291 [01:59<00:02,  3.79it/s]Loading weights:  98%|█████████▊| 285/291 [01:59<00:01,  3.86it/s]Loading weights: 100%|██████████| 291/291 [02:00<00:00,  2.42it/s]
+  Loaded 80 preset questions
+
+───────────────────────────────── Inference: baseline 80 questions ─────────────────────────────────
+
+   1/80 (1%) latency: 6.94s
+   10/80 (12%) latency: 9.83s
+   20/80 (25%) latency: 1.92s
+   30/80 (38%) latency: 0.39s
+   40/80 (50%) latency: 18.81s
+   50/80 (62%) latency: 18.81s
+   60/80 (75%) latency: 18.93s
+   70/80 (88%) latency: 8.51s
+   80/80 (100%) latency: 19.05s
+  Loaded 80 preset questions
+
+──────────────────────────────── Inference: finetuned 80 questions ─────────────────────────────────
+
+   1/80 (1%) latency: 10.93s
+   10/80 (12%) latency: 10.83s
+   20/80 (25%) latency: 10.89s
+   30/80 (38%) latency: 11.05s
+   40/80 (50%) latency: 10.84s
+   50/80 (62%) latency: 10.84s
+   60/80 (75%) latency: 11.31s
+   70/80 (88%) latency: 10.86s
+   80/80 (100%) latency: 12.18s
+
+                 Evaluation: Baseline vs Fine-Tuned                  
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Metric               ┃     Baseline ┃   Fine-tuned ┃        Delta ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ rouge_l              │       0.2597 │       0.1496 │      -0.1100 │
+│ bleu                 │       0.0674 │       0.0403 │      -0.0271 │
+│ exact_match          │       0.0125 │       0.0000 │      -0.0125 │
+│ normalized_match     │       0.4059 │       0.5041 │      +0.0982 │
+│ prediction_length    │     118.0000 │     196.4125 │     +78.4125 │
+│ latency_sec          │      11.4768 │      11.1577 │      -0.3191 │
+└──────────────────────┴──────────────┴──────────────┴──────────────┘
+
+Sample Comparisons:
+
+╭─────────────────────────────────────────── Sample 00 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: Give me three recipes from different cuisines that I can make with potatoes and        │
+│ chicken                                                                                          │
+│ Reference: You could make potato dumplings in a chicken broth, which comes from German cuisine.  │
+│ Another recipe is mashed potatoes and fried chicken from the Amer                                │
+│ Baseline: * **Recipe 1:** [Chicken and Potato                                                    │
+│ Curry](https://www.bbcgoodfood.com/recipes/chicken-potato-curry)                                 │
+│ * **Recipe 2:** [Chicken and Potato Casserole](ht                                                │
+│ Fine-tuned: 1. Chicken and potatoes curry                                                        │
+│ 2. Chicken and potatoes stew                                                                     │
+│ 3. Chicken and potatoes soup                                                                     │
+│ 4. Chicken and potatoes salad                                                                    │
+│ 5. Chicken and potatoes casserol                                                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 01 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: Give me multiple modes of transport to get to Australia                                │
+│ Reference: Fly by plane, take a boat or cruise ship, swim, paddle board, kayak, sail             │
+│ Baseline: ```bash                                                                                │
+│ $ python3 main.py                                                                                │
+│ Enter a mode of transport: car                                                                   │
+│ Enter a mode of transport: plane                                                                 │
+│ Enter a mode of transport: boat                                                                  │
+│ Enter a mode of transport: t                                                                     │
+│ Fine-tuned: You can get to Australia by plane, boat, or car. You can also get there by train,    │
+│ but that is not a very popular option. You can also get there by bik                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 02 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What are the primary ingredients and spices that go into Greek cooking?                │
+│ Reference: 1) Salt                                                                               │
+│ 2) Pepper                                                                                        │
+│ 3) Extra virgin olive oil                                                                        │
+│ 4) Fresh oregano                                                                                 │
+│ 5) Lemon juice                                                                                   │
+│ 6) Garlic                                                                                        │
+│                                                                                                  │
+│ Technique matters; however, the addition of these six ingredien                                  │
+│ Baseline: The primary ingredients in Greek cooking are olive oil, lemon juice, garlic, oregano,  │
+│ and feta cheese. The spices that are commonly used in Greek cook                                 │
+│ Fine-tuned: The primary ingredients in Greek cooking are olive oil, lemon, garlic, oregano, and  │
+│ feta cheese.  These ingredients are used in a variety of dishes in                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 03 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What medicinal plants should I grow in my Mid-Atlantic garden?                         │
+│ Reference: Echinacea                                                                             │
+│ Elder                                                                                            │
+│ Bee balm                                                                                         │
+│ Lemon balm                                                                                       │
+│ Mullein                                                                                          │
+│ Burdock                                                                                          │
+│ Yarrow                                                                                           │
+│ Wood Betony                                                                                      │
+│ Baseline: The Mid-Atlantic region is a diverse area with a wide range of climates and growing    │
+│ conditions. However, there are some medicinal plants that are well                               │
+│ Fine-tuned: The Mid-Atlantic region of the United States is a great place to grow medicinal      │
+│ plants. Some of the most common medicinal plants that grow well in thi                           │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 04 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What are some ways I could cheer up my friend that just got dumped?                    │
+│ Reference: Im sorry your friend recently got dumped.  I would ask them if they want to talk      │
+│ about it, or be distracted from it.  If they want to talk about it, I                            │
+│ Baseline: - I could send them a funny meme                                                       │
+│ - I could send them a funny gif                                                                  │
+│ - I could send them a funny video                                                                │
+│ - I could send them a funny picture                                                              │
+│ - I could send                                                                                   │
+│ Fine-tuned: 1. Listen to them and be a good friend                                               │
+│ 2. Offer to go out for a drink                                                                   │
+│ 3. Offer to help them move out of their apartment                                                │
+│ 4. Offer to help them clean ou                                                                   │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Perplexity Measurement
+Computing fine-tuned model perplexity...
+Computing perplexity on 200 samples (batch_size=4, seq_len=1024)...
+  [4/200] running avg loss = 1.3991
+  [44/200] running avg loss = 1.5893
+  [84/200] running avg loss = 1.4910
+  [124/200] running avg loss = 1.5056
+  [164/200] running avg loss = 1.4708
+Perplexity: 4.4409  (avg CE loss: 1.4909, tokens: 32072)
+Loading baseline model (meta-llama/Llama-3.1-8B) for comparison...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:07<36:16,  7.51s/it]Loading weights:   1%|          | 2/291 [00:15<38:55,  8.08s/it]Loading weights:   2%|▏         | 5/291 [00:16<11:54,  2.50s/it]Loading weights:   2%|▏         | 6/291 [00:17<09:56,  2.09s/it]Loading weights:   3%|▎         | 9/291 [00:18<04:57,  1.06s/it]Loading weights:   3%|▎         | 10/291 [00:18<04:10,  1.12it/s]Loading weights:   4%|▍         | 12/291 [01:58<1:26:49, 18.67s/it]Loading weights:   4%|▍         | 13/291 [01:58<1:09:24, 14.98s/it]Loading weights: 100%|██████████| 291/291 [01:58<00:00,  2.45it/s] 
+Computing perplexity on 200 samples (batch_size=4, seq_len=1024)...
+  [4/200] running avg loss = 1.7179
+  [44/200] running avg loss = 1.8699
+  [84/200] running avg loss = 1.7943
+  [124/200] running avg loss = 1.8261
+  [164/200] running avg loss = 1.7845
+Perplexity: 6.1447  (avg CE loss: 1.8156, tokens: 32072)
+Perplexity results saved to ./results/atom_qlora_20260415_140942/evaluation/perplexity.json
+             Perplexity Comparison              
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━┓
+┃ Model      ┃ Perplexity ┃   Delta ┃ Change % ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━┩
+│ Baseline   │     6.1447 │      -- │       -- │
+│ Fine-tuned │     4.4409 │ -1.7037 │  -27.73% │
+└────────────┴────────────┴─────────┴──────────┘
+
+╭──────────────────────────────────────────── SUCCESS ─────────────────────────────────────────────╮
+│                                                                                                  │
+│  Benchmark completed successfully!                                                               │
+│                                                                                                  │
+│  Results saved to: ./results/atom_qlora_20260415_140942                                          │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04/16/26 00:10:30] INFO     Benchmark complete: status=success                                     
+                             run_dir=./results/atom_qlora_20260415_140942                           
+INFO:benchmark:Benchmark complete: status=success run_dir=./results/atom_qlora_20260415_140942
+[2026-04-16 00:10:31] qlora completed successfully. (600m 56s)
+
+
+================================================================
+  PHASE 3: TRAINING — FULLFT
+================================================================
+
+[2026-04-16 00:10:31] Starting fullft training...
+[2026-04-16 00:10:31] Command: python3 -m benchmark_cuda run --mode fullft --machine-label atom --output-dir ./results --max-steps 500  --model meta-llama/Llama-3.1-8B
+
+╭─────────────────────────────────── CUDA Fine-Tuning Benchmark ───────────────────────────────────╮
+│                                                                                                  │
+│  Machine:      atom                                                                              │
+│  GPU:          NVIDIA GB10 (120 GB)                                                              │
+│  Mode:         Full Fine-Tune                                                                    │
+│  Model:        meta-llama/Llama-3.1-8B                                                           │
+│  Dataset:      databricks/databricks-dolly-15k                                                   │
+│  Steps:        500                                                                               │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+                                   Run Configuration                                   
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                      ┃ Value                                              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ mode                           │ fullft                                             │
+│ model_name                     │ meta-llama/Llama-3.1-8B                            │
+│ max_steps                      │ 500                                                │
+│ seq_len                        │ 1024                                               │
+│ micro_batch_size               │ 4                                                  │
+│ gradient_accumulation_steps    │ 8                                                  │
+│ learning_rate                  │ 2e-05                                              │
+│ dtype                          │ bfloat16                                           │
+│ attn_implementation            │ sdpa                                               │
+│ seed                           │ 42                                                 │
+│ gradient_checkpointing         │ False                                              │
+└────────────────────────────────┴────────────────────────────────────────────────────┘
+
+
+──────────────────────────────────────── System Information ────────────────────────────────────────
+
+  Hostname:  atom
+  OS:        Linux 6.17.0-1014-nvidia
+  CPU:       Cortex-X925 + Cortex-A725
+  RAM:       119.7 GB
+  PyTorch:   2.11.0+cu130
+  CUDA:      13.0
+  C2C Mode:  Enabled
+
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+
+  Dataset:     databricks/databricks-dolly-15k
+  Train:       13,509 samples
+  Validation:  750 samples
+  Test:        752 samples
+
+
+─────────────────── Loading Model Full Fine-Tune mode - meta-llama/Llama-3.1-8B ────────────────────
+
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:17<1:24:17, 17.44s/it]Loading weights:   2%|▏         | 5/291 [00:18<13:17,  2.79s/it]  Loading weights:   2%|▏         | 6/291 [00:19<11:11,  2.36s/it]Loading weights:   3%|▎         | 9/291 [00:19<05:47,  1.23s/it]Loading weights:   3%|▎         | 10/291 [00:19<04:53,  1.05s/it]Loading weights:   4%|▍         | 13/291 [00:21<04:02,  1.15it/s]Loading weights:   5%|▍         | 14/291 [00:25<06:32,  1.42s/it]Loading weights:   6%|▌         | 18/291 [00:39<10:50,  2.38s/it]Loading weights:  23%|██▎       | 67/291 [00:51<01:44,  2.15it/s]Loading weights:  23%|██▎       | 68/291 [00:58<02:23,  1.56it/s]Loading weights:  42%|████▏     | 121/291 [01:10<01:02,  2.71it/s]Loading weights:  42%|████▏     | 122/291 [01:11<01:04,  2.64it/s]Loading weights:  54%|█████▍    | 157/291 [01:28<00:57,  2.33it/s]Loading weights:  69%|██████▉   | 202/291 [01:30<00:22,  3.99it/s]Loading weights:  70%|██████▉   | 203/291 [01:31<00:22,  3.84it/s]Loading weights:  72%|███████▏  | 209/291 [01:37<00:28,  2.89it/s]Loading weights:  77%|███████▋  | 225/291 [01:38<00:16,  4.02it/s]Loading weights:  78%|███████▊  | 228/291 [01:38<00:15,  4.19it/s]Loading weights:  79%|███████▉  | 230/291 [01:40<00:17,  3.54it/s]Loading weights:  80%|███████▉  | 232/291 [01:41<00:17,  3.38it/s]Loading weights:  80%|████████  | 234/291 [01:44<00:25,  2.23it/s]Loading weights:  85%|████████▍ | 247/291 [02:01<00:38,  1.13it/s]Loading weights: 100%|██████████| 291/291 [02:01<00:00,  2.39it/s]
+  Total parameters:     8,030,261,248
+  Trainable parameters: 8,030,261,248 (100.00%)
+  Dtype:                torch.bfloat16
+  Grad checkpointing:   disabled
+
+
+────────────────────────────────────────── Preparing Data ──────────────────────────────────────────
+
+  Train samples: 13,509
+  Val samples:   750
+
+─────────────────────────────────────── Setting Up Optimizer ───────────────────────────────────────
+
+  Optimizer:        AdamW
+  LR schedule:      cosine
+  Warmup steps:     25
+  Max steps:        500
+  Timing warmup:    3 steps (excluded from metrics)
+
+
+─────────────────────────────────────── Training Steps 1-500 ───────────────────────────────────────
+
+  Step     1/500 (  0.2%) (warmup)  Loss: 2.1021  LR: 8.00e-07  Step: 38.16s  Elapsed: 38s  ETA: 5h 
+17m 23s  GPU: 76.3/120GB
+  Step    10/500 (  2.0%)  Loss: 1.6629  LR: 8.00e-06  Step: 36.57s  Elapsed: 6m 08s  ETA: 4h 58m 
+40s  GPU: 93.6/120GB  Tok/s: 156  Samp/s: 0.1
+  Step    20/500 (  4.0%)  Loss: 1.5643  LR: 1.60e-05  Step: 36.63s  Elapsed: 12m 14s  ETA: 4h 52m 
+45s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step    30/500 (  6.0%)  Loss: 1.5188  LR: 2.00e-05  Step: 36.61s  Elapsed: 18m 21s  ETA: 4h 46m 
+45s  GPU: 93.6/120GB  Tok/s: 148  Samp/s: 0.1
+  Step    40/500 (  8.0%)  Loss: 1.6081  LR: 2.00e-05  Step: 36.58s  Elapsed: 24m 27s  ETA: 4h 40m 
+37s  GPU: 93.6/120GB  Tok/s: 148  Samp/s: 0.1
+  Step    50/500 ( 10.0%)  Loss: 1.7866  LR: 1.99e-05  Step: 36.61s  Elapsed: 30m 33s  ETA: 4h 34m 
+35s  GPU: 93.6/120GB  Tok/s: 147  Samp/s: 0.1
+  Step    60/500 ( 12.0%)  Loss: 1.6622  LR: 1.97e-05  Step: 36.67s  Elapsed: 36m 39s  ETA: 4h 28m 
+29s  GPU: 93.6/120GB  Tok/s: 148  Samp/s: 0.1
+  Step    70/500 ( 14.0%)  Loss: 1.5616  LR: 1.96e-05  Step: 36.54s  Elapsed: 42m 45s  ETA: 4h 22m 
+23s  GPU: 93.6/120GB  Tok/s: 148  Samp/s: 0.1
+  Step    80/500 ( 16.0%)  Loss: 1.5165  LR: 1.93e-05  Step: 36.64s  Elapsed: 48m 52s  ETA: 4h 16m 
+17s  GPU: 93.6/120GB  Tok/s: 149  Samp/s: 0.1
+  Step    90/500 ( 18.0%)  Loss: 1.6638  LR: 1.91e-05  Step: 36.59s  Elapsed: 54m 58s  ETA: 4h 10m 
+10s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   100/500 ( 20.0%)  Loss: 1.6048  LR: 1.88e-05  Step: 36.60s  Elapsed: 1h 01m 04s  ETA: 4h 
+04m 03s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Eval @ step 100  Val Loss: 1.5930
+[04/16/26 01:14:09] INFO     Validation @ step 100: val_loss=1.5930                                 
+  Step   110/500 ( 22.0%)  Loss: 1.5654  LR: 1.85e-05  Step: 36.56s  Elapsed: 1h 07m 34s  ETA: 3h 
+57m 55s  GPU: 93.6/120GB  Tok/s: 149  Samp/s: 0.1
+  Step   120/500 ( 24.0%)  Loss: 1.6632  LR: 1.81e-05  Step: 36.58s  Elapsed: 1h 13m 40s  ETA: 3h 
+51m 48s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   130/500 ( 26.0%)  Loss: 1.6772  LR: 1.77e-05  Step: 36.53s  Elapsed: 1h 19m 46s  ETA: 3h 
+45m 41s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   140/500 ( 28.0%)  Loss: 1.5627  LR: 1.72e-05  Step: 36.58s  Elapsed: 1h 25m 51s  ETA: 3h 
+39m 34s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   150/500 ( 30.0%)  Loss: 1.5658  LR: 1.68e-05  Step: 36.51s  Elapsed: 1h 31m 57s  ETA: 3h 
+33m 28s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   160/500 ( 32.0%)  Loss: 1.4561  LR: 1.63e-05  Step: 36.60s  Elapsed: 1h 38m 03s  ETA: 3h 
+27m 21s  GPU: 93.6/120GB  Tok/s: 152  Samp/s: 0.1
+  Step   170/500 ( 34.0%)  Loss: 1.7056  LR: 1.57e-05  Step: 36.68s  Elapsed: 1h 44m 09s  ETA: 3h 
+21m 16s  GPU: 93.6/120GB  Tok/s: 152  Samp/s: 0.1
+  Step   180/500 ( 36.0%)  Loss: 1.4990  LR: 1.52e-05  Step: 36.59s  Elapsed: 1h 50m 15s  ETA: 3h 
+15m 09s  GPU: 93.6/120GB  Tok/s: 152  Samp/s: 0.1
+  Step   190/500 ( 38.0%)  Loss: 1.4178  LR: 1.46e-05  Step: 36.48s  Elapsed: 1h 56m 20s  ETA: 3h 
+09m 03s  GPU: 93.6/120GB  Tok/s: 152  Samp/s: 0.1
+  Step   200/500 ( 40.0%)  Loss: 1.6127  LR: 1.40e-05  Step: 36.48s  Elapsed: 2h 02m 26s  ETA: 3h 
+02m 56s  GPU: 93.6/120GB  Tok/s: 151  Samp/s: 0.1
+  Eval @ step 200  Val Loss: 1.5483
+[04/16/26 02:15:31] INFO     Validation @ step 200: val_loss=1.5483                                 
+  Step   210/500 ( 42.0%)  Loss: 1.4421  LR: 1.34e-05  Step: 36.58s  Elapsed: 2h 08m 56s  ETA: 2h 
+56m 49s  GPU: 93.6/120GB  Tok/s: 151  Samp/s: 0.1
+  Step   220/500 ( 44.0%)  Loss: 1.4037  LR: 1.28e-05  Step: 36.56s  Elapsed: 2h 15m 01s  ETA: 2h 
+50m 43s  GPU: 93.6/120GB  Tok/s: 151  Samp/s: 0.1
+  Step   230/500 ( 46.0%)  Loss: 1.5322  LR: 1.21e-05  Step: 36.61s  Elapsed: 2h 21m 07s  ETA: 2h 
+44m 37s  GPU: 93.6/120GB  Tok/s: 151  Samp/s: 0.1
+  Step   240/500 ( 48.0%)  Loss: 1.5019  LR: 1.15e-05  Step: 36.61s  Elapsed: 2h 27m 13s  ETA: 2h 
+38m 31s  GPU: 93.6/120GB  Tok/s: 151  Samp/s: 0.1
+  Step   250/500 ( 50.0%)  Loss: 1.5249  LR: 1.08e-05  Step: 36.60s  Elapsed: 2h 33m 18s  ETA: 2h 
+32m 25s  GPU: 93.6/120GB  Tok/s: 151  Samp/s: 0.1
+  Step   260/500 ( 52.0%)  Loss: 1.3649  LR: 1.02e-05  Step: 36.56s  Elapsed: 2h 39m 24s  ETA: 2h 
+26m 19s  GPU: 93.6/120GB  Tok/s: 151  Samp/s: 0.1
+  Step   270/500 ( 54.0%)  Loss: 1.4983  LR: 9.50e-06  Step: 36.65s  Elapsed: 2h 45m 30s  ETA: 2h 
+20m 13s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   280/500 ( 56.0%)  Loss: 1.6769  LR: 8.85e-06  Step: 36.51s  Elapsed: 2h 51m 36s  ETA: 2h 
+14m 07s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   290/500 ( 58.0%)  Loss: 1.4616  LR: 8.19e-06  Step: 36.68s  Elapsed: 2h 57m 42s  ETA: 2h 
+08m 02s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   300/500 ( 60.0%)  Loss: 1.5118  LR: 7.55e-06  Step: 36.66s  Elapsed: 3h 03m 47s  ETA: 2h 
+01m 56s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Eval @ step 300  Val Loss: 1.5264
+[04/16/26 03:16:53] INFO     Validation @ step 300: val_loss=1.5264                                 
+  Step   310/500 ( 62.0%)  Loss: 1.5088  LR: 6.91e-06  Step: 36.62s  Elapsed: 3h 10m 18s  ETA: 1h 
+55m 50s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   320/500 ( 64.0%)  Loss: 1.7022  LR: 6.29e-06  Step: 36.53s  Elapsed: 3h 16m 23s  ETA: 1h 
+49m 44s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   330/500 ( 66.0%)  Loss: 1.5602  LR: 5.68e-06  Step: 36.53s  Elapsed: 3h 22m 29s  ETA: 1h 
+43m 38s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   340/500 ( 68.0%)  Loss: 1.3640  LR: 5.10e-06  Step: 36.58s  Elapsed: 3h 28m 35s  ETA: 1h 
+37m 32s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   350/500 ( 70.0%)  Loss: 1.5476  LR: 4.53e-06  Step: 36.62s  Elapsed: 3h 34m 40s  ETA: 1h 
+31m 26s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   360/500 ( 72.0%)  Loss: 1.5018  LR: 3.99e-06  Step: 36.54s  Elapsed: 3h 40m 46s  ETA: 1h 
+25m 20s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   370/500 ( 74.0%)  Loss: 1.5401  LR: 3.47e-06  Step: 36.54s  Elapsed: 3h 46m 52s  ETA: 1h 
+19m 15s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   380/500 ( 76.0%)  Loss: 1.4941  LR: 2.99e-06  Step: 36.60s  Elapsed: 3h 52m 58s  ETA: 1h 
+13m 09s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   390/500 ( 78.0%)  Loss: 1.6744  LR: 2.53e-06  Step: 36.67s  Elapsed: 3h 59m 04s  ETA: 1h 
+07m 03s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   400/500 ( 80.0%)  Loss: 1.4720  LR: 2.11e-06  Step: 36.56s  Elapsed: 4h 05m 10s  ETA: 1h 
+00m 58s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Eval @ step 400  Val Loss: 1.5187
+[04/16/26 04:18:15] INFO     Validation @ step 400: val_loss=1.5187                                 
+  Step   410/500 ( 82.0%)  Loss: 1.4510  LR: 1.72e-06  Step: 36.53s  Elapsed: 4h 11m 40s  ETA: 54m 
+52s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   420/500 ( 84.0%)  Loss: 1.4906  LR: 1.37e-06  Step: 36.58s  Elapsed: 4h 17m 46s  ETA: 48m 
+46s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   430/500 ( 86.0%)  Loss: 1.5539  LR: 1.05e-06  Step: 36.65s  Elapsed: 4h 23m 53s  ETA: 42m 
+40s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   440/500 ( 88.0%)  Loss: 1.3665  LR: 7.77e-07  Step: 36.59s  Elapsed: 4h 29m 59s  ETA: 36m 
+34s  GPU: 93.6/120GB  Tok/s: 151  Samp/s: 0.1
+  Step   450/500 ( 90.0%)  Loss: 1.2688  LR: 5.42e-07  Step: 36.60s  Elapsed: 4h 36m 05s  ETA: 30m 
+29s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   460/500 ( 92.0%)  Loss: 1.4693  LR: 3.48e-07  Step: 36.60s  Elapsed: 4h 42m 11s  ETA: 24m 
+23s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   470/500 ( 94.0%)  Loss: 1.3049  LR: 1.96e-07  Step: 36.57s  Elapsed: 4h 48m 17s  ETA: 18m 
+17s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   480/500 ( 96.0%)  Loss: 1.2378  LR: 8.74e-08  Step: 36.57s  Elapsed: 4h 54m 23s  ETA: 12m 
+11s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   490/500 ( 98.0%)  Loss: 1.2180  LR: 2.19e-08  Step: 36.55s  Elapsed: 5h 00m 29s  ETA: 6m 
+05s  GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Step   500/500 (100.0%)  Loss: 1.2358  LR: 0.00e+00  Step: 36.59s  Elapsed: 5h 06m 35s  ETA: --:--
+GPU: 93.6/120GB  Tok/s: 150  Samp/s: 0.1
+  Eval @ step 500  Val Loss: 1.5182
+[04/16/26 05:19:40] INFO     Validation @ step 500: val_loss=1.5182                                 
+
+                             Final Benchmark Results                             
+┌─────────────────────────────┬─────────────────────────────────────────────────┐
+│  Machine                    │  atom                                           │
+│  Mode                       │  fullft                                         │
+│  Status                     │  success                                        │
+│  Steps Completed            │  500 / 500                                      │
+│  Total Time                 │  5h 07m 00s                                     │
+│  Avg Step Time              │  36.5833s                                       │
+│  Median Step Time           │  36.5802s                                       │
+│  P95 Step Time              │  36.6857s                                       │
+│  Peak GPU Memory            │  93.59 GB                                       │
+│  Final Loss                 │  1.2358                                         │
+│  Tokens/sec                 │  150.2                                          │
+│  Samples/sec                │  0.11                                           │
+└─────────────────────────────┴─────────────────────────────────────────────────┘
+
+
+──────────────────────────── Evaluation Pipeline Baseline vs Fine-Tuned ────────────────────────────
+
+Loading baseline model for comparison...
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:17<1:25:15, 17.64s/it]Loading weights:   2%|▏         | 5/291 [00:18<13:27,  2.82s/it]  Loading weights:   2%|▏         | 6/291 [00:19<11:16,  2.37s/it]Loading weights:   3%|▎         | 9/291 [00:19<05:49,  1.24s/it]Loading weights:   3%|▎         | 10/291 [00:20<04:56,  1.06s/it]Loading weights:   4%|▍         | 13/291 [00:21<03:21,  1.38it/s]Loading weights:   5%|▍         | 14/291 [00:21<03:29,  1.32it/s]Loading weights:   5%|▌         | 15/291 [00:22<03:33,  1.30it/s]Loading weights:   6%|▌         | 18/291 [00:23<02:05,  2.17it/s]Loading weights:   7%|▋         | 19/291 [00:23<01:58,  2.30it/s]Loading weights:   8%|▊         | 22/291 [00:24<01:39,  2.70it/s]Loading weights:   8%|▊         | 23/291 [00:25<02:07,  2.10it/s]Loading weights:   8%|▊         | 24/291 [00:26<02:29,  1.79it/s]Loading weights:  10%|▉         | 28/291 [00:39<08:46,  2.00s/it]Loading weights:  23%|██▎       | 67/291 [00:39<00:54,  4.14it/s]Loading weights:  27%|██▋       | 79/291 [00:44<01:02,  3.37it/s]Loading weights:  30%|███       | 88/291 [00:47<01:03,  3.20it/s]Loading weights:  32%|███▏      | 94/291 [00:49<01:00,  3.28it/s]Loading weights:  34%|███▍      | 99/291 [00:51<01:02,  3.08it/s]Loading weights:  35%|███▌      | 103/291 [00:58<01:42,  1.84it/s]Loading weights:  35%|███▌      | 103/291 [01:08<01:42,  1.84it/s]Loading weights:  41%|████      | 119/291 [01:11<01:57,  1.46it/s]Loading weights:  53%|█████▎    | 154/291 [01:31<01:25,  1.61it/s]Loading weights:  73%|███████▎  | 211/291 [01:32<00:21,  3.73it/s]Loading weights:  74%|███████▍  | 215/291 [01:34<00:21,  3.59it/s]Loading weights:  75%|███████▍  | 218/291 [01:35<00:20,  3.65it/s]Loading weights:  76%|███████▌  | 220/291 [01:36<00:20,  3.53it/s]Loading weights:  76%|███████▋  | 222/291 [01:37<00:22,  3.10it/s]Loading weights:  77%|███████▋  | 225/291 [01:38<00:19,  3.41it/s]Loading weights:  78%|███████▊  | 227/291 [01:38<00:17,  3.60it/s]Loading weights:  79%|███████▊  | 229/291 [01:40<00:23,  2.69it/s]Loading weights:  79%|███████▉  | 231/291 [01:41<00:23,  2.59it/s]Loading weights:  80%|████████  | 233/291 [01:41<00:20,  2.89it/s]Loading weights:  80%|████████  | 234/291 [01:41<00:19,  2.92it/s]Loading weights:  82%|████████▏ | 238/291 [01:42<00:16,  3.24it/s]Loading weights:  82%|████████▏ | 239/291 [01:43<00:20,  2.57it/s]Loading weights:  82%|████████▏ | 240/291 [01:44<00:23,  2.20it/s]Loading weights:  85%|████████▍ | 247/291 [01:45<00:11,  3.78it/s]Loading weights:  85%|████████▌ | 248/291 [01:46<00:14,  3.07it/s]Loading weights:  86%|████████▌ | 249/291 [01:47<00:17,  2.47it/s]Loading weights:  87%|████████▋ | 252/291 [01:48<00:12,  3.07it/s]Loading weights:  88%|████████▊ | 256/291 [01:49<00:10,  3.40it/s]Loading weights:  88%|████████▊ | 257/291 [01:49<00:12,  2.83it/s]Loading weights:  89%|████████▊ | 258/291 [01:50<00:14,  2.36it/s]Loading weights:  90%|████████▉ | 261/291 [01:50<00:08,  3.45it/s]Loading weights:  90%|█████████ | 262/291 [01:51<00:08,  3.57it/s]Loading weights:  91%|█████████ | 265/291 [01:51<00:07,  3.67it/s]Loading weights:  91%|█████████▏| 266/291 [01:52<00:09,  2.71it/s]Loading weights:  92%|█████████▏| 267/291 [01:53<00:10,  2.21it/s]Loading weights:  93%|█████████▎| 270/291 [01:53<00:06,  3.34it/s]Loading weights:  93%|█████████▎| 271/291 [01:54<00:05,  3.50it/s]Loading weights:  94%|█████████▍| 274/291 [01:54<00:04,  3.47it/s]Loading weights:  95%|█████████▍| 275/291 [01:55<00:06,  2.54it/s]Loading weights:  95%|█████████▍| 276/291 [01:56<00:07,  2.11it/s]Loading weights:  96%|█████████▌| 279/291 [01:57<00:03,  3.29it/s]Loading weights:  96%|█████████▌| 280/291 [01:57<00:03,  3.48it/s]Loading weights:  97%|█████████▋| 283/291 [01:58<00:02,  3.55it/s]Loading weights:  98%|█████████▊| 284/291 [01:58<00:02,  2.73it/s]Loading weights:  98%|█████████▊| 285/291 [01:59<00:02,  2.08it/s]Loading weights:  99%|█████████▉| 288/291 [02:00<00:00,  3.29it/s]Loading weights: 100%|██████████| 291/291 [02:00<00:00,  2.42it/s]
+  Loaded 80 preset questions
+
+───────────────────────────────── Inference: baseline 80 questions ─────────────────────────────────
+
+   1/80 (1%) latency: 8.42s
+   10/80 (12%) latency: 9.57s
+   20/80 (25%) latency: 1.87s
+   30/80 (38%) latency: 0.39s
+   40/80 (50%) latency: 18.31s
+   50/80 (62%) latency: 18.32s
+   60/80 (75%) latency: 18.43s
+   70/80 (88%) latency: 8.28s
+   80/80 (100%) latency: 18.54s
+  Loaded 80 preset questions
+
+──────────────────────────────── Inference: finetuned 80 questions ─────────────────────────────────
+
+   1/80 (1%) latency: 16.63s
+   10/80 (12%) latency: 18.83s
+   20/80 (25%) latency: 17.22s
+   30/80 (38%) latency: 18.89s
+   40/80 (50%) latency: 18.83s
+   50/80 (62%) latency: 14.70s
+   60/80 (75%) latency: 18.95s
+   70/80 (88%) latency: 18.83s
+   80/80 (100%) latency: 19.07s
+
+                 Evaluation: Baseline vs Fine-Tuned                  
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Metric               ┃     Baseline ┃   Fine-tuned ┃        Delta ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ rouge_l              │       0.2597 │       0.1844 │      -0.0752 │
+│ bleu                 │       0.0674 │       0.0642 │      -0.0033 │
+│ exact_match          │       0.0125 │       0.0000 │      -0.0125 │
+│ normalized_match     │       0.4059 │       0.5298 │      +0.1239 │
+│ prediction_length    │     118.0000 │     189.8375 │     +71.8375 │
+│ latency_sec          │      11.1958 │      17.6342 │      +6.4384 │
+└──────────────────────┴──────────────┴──────────────┴──────────────┘
+
+Sample Comparisons:
+
+╭─────────────────────────────────────────── Sample 00 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: Give me three recipes from different cuisines that I can make with potatoes and        │
+│ chicken                                                                                          │
+│ Reference: You could make potato dumplings in a chicken broth, which comes from German cuisine.  │
+│ Another recipe is mashed potatoes and fried chicken from the Amer                                │
+│ Baseline: * **Recipe 1:** [Chicken and Potato                                                    │
+│ Curry](https://www.bbcgoodfood.com/recipes/chicken-potato-curry)                                 │
+│ * **Recipe 2:** [Chicken and Potato Casserole](ht                                                │
+│ Fine-tuned: 1. Chicken Tikka Masala: This is a popular Indian dish that is made with chicken and │
+│ potatoes. The chicken is marinated in a mixture of yogurt, spices                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 01 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: Give me multiple modes of transport to get to Australia                                │
+│ Reference: Fly by plane, take a boat or cruise ship, swim, paddle board, kayak, sail             │
+│ Baseline: ```bash                                                                                │
+│ $ python3 main.py                                                                                │
+│ Enter a mode of transport: car                                                                   │
+│ Enter a mode of transport: plane                                                                 │
+│ Enter a mode of transport: boat                                                                  │
+│ Enter a mode of transport: t                                                                     │
+│ Fine-tuned: You can get to Australia by plane, boat, or car. You can also get there by train,    │
+│ but it will take a long time. You can also get there by bicycle, but                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 02 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What are the primary ingredients and spices that go into Greek cooking?                │
+│ Reference: 1) Salt                                                                               │
+│ 2) Pepper                                                                                        │
+│ 3) Extra virgin olive oil                                                                        │
+│ 4) Fresh oregano                                                                                 │
+│ 5) Lemon juice                                                                                   │
+│ 6) Garlic                                                                                        │
+│                                                                                                  │
+│ Technique matters; however, the addition of these six ingredien                                  │
+│ Baseline: The primary ingredients in Greek cooking are olive oil, lemon juice, garlic, oregano,  │
+│ and feta cheese. The spices that are commonly used in Greek cook                                 │
+│ Fine-tuned: The primary ingredients in Greek cooking are olive oil, lemon juice, oregano, and    │
+│ feta cheese.  These ingredients are used in a variety of dishes, inc                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 03 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What medicinal plants should I grow in my Mid-Atlantic garden?                         │
+│ Reference: Echinacea                                                                             │
+│ Elder                                                                                            │
+│ Bee balm                                                                                         │
+│ Lemon balm                                                                                       │
+│ Mullein                                                                                          │
+│ Burdock                                                                                          │
+│ Yarrow                                                                                           │
+│ Wood Betony                                                                                      │
+│ Baseline: The Mid-Atlantic region is a diverse area with a wide range of climates and growing    │
+│ conditions. However, there are some medicinal plants that are well                               │
+│ Fine-tuned: The Mid-Atlantic region of the United States is a great place to grow medicinal      │
+│ plants. The climate is temperate, with warm summers and cold winters.                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────── Sample 04 ────────────────────────────────────────────╮
+│ Category: brainstorming                                                                          │
+│ Question: What are some ways I could cheer up my friend that just got dumped?                    │
+│ Reference: Im sorry your friend recently got dumped.  I would ask them if they want to talk      │
+│ about it, or be distracted from it.  If they want to talk about it, I                            │
+│ Baseline: - I could send them a funny meme                                                       │
+│ - I could send them a funny gif                                                                  │
+│ - I could send them a funny video                                                                │
+│ - I could send them a funny picture                                                              │
+│ - I could send                                                                                   │
+│ Fine-tuned: You could offer to go out for a drink, or a walk, or a movie. You could offer to     │
+│ help them move out of their apartment. You could offer to help them c                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Perplexity Measurement
+Computing fine-tuned model perplexity...
+Computing perplexity on 200 samples (batch_size=4, seq_len=1024)...
+  [4/200] running avg loss = 1.3715
+  [44/200] running avg loss = 1.4533
+  [84/200] running avg loss = 1.3793
+  [124/200] running avg loss = 1.4046
+  [164/200] running avg loss = 1.3801
+Perplexity: 4.0927  (avg CE loss: 1.4092, tokens: 32072)
+Loading baseline model (meta-llama/Llama-3.1-8B) for comparison...
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:   0%|          | 1/291 [00:02<10:11,  2.11s/it]Loading weights:   2%|▏         | 5/291 [00:03<03:21,  1.42it/s]Loading weights:   4%|▍         | 13/291 [00:04<01:20,  3.47it/s]Loading weights:   5%|▍         | 14/291 [00:05<01:38,  2.80it/s]Loading weights:   5%|▌         | 15/291 [00:06<01:50,  2.49it/s]Loading weights:   6%|▌         | 18/291 [00:06<01:23,  3.26it/s]Loading weights:   8%|▊         | 22/291 [00:07<01:08,  3.92it/s]Loading weights:   8%|▊         | 23/291 [00:08<01:23,  3.21it/s]Loading weights:   8%|▊         | 24/291 [00:09<01:39,  2.70it/s]Loading weights:  10%|▉         | 28/291 [00:21<07:19,  1.67s/it]Loading weights:  23%|██▎       | 67/291 [00:22<00:54,  4.12it/s]Loading weights:  24%|██▎       | 69/291 [00:24<01:01,  3.62it/s]Loading weights:  25%|██▍       | 72/291 [00:30<01:50,  1.99it/s]Loading weights:  26%|██▌       | 75/291 [00:31<01:41,  2.13it/s]Loading weights:  34%|███▍      | 99/291 [00:31<00:36,  5.33it/s]Loading weights:  35%|███▌      | 103/291 [00:33<00:37,  5.02it/s]Loading weights:  36%|███▋      | 106/291 [00:34<00:43,  4.27it/s]Loading weights:  37%|███▋      | 108/291 [00:34<00:41,  4.46it/s]Loading weights:  38%|███▊      | 110/291 [00:35<00:38,  4.69it/s]Loading weights:  38%|███▊      | 112/291 [00:35<00:42,  4.20it/s]Loading weights:  39%|███▉      | 113/291 [00:36<00:51,  3.49it/s]Loading weights:  39%|███▉      | 114/291 [00:37<01:04,  2.76it/s]Loading weights:  40%|████      | 117/291 [01:16<13:45,  4.74s/it]Loading weights:  85%|████████▍ | 247/291 [01:17<00:09,  4.63it/s]Loading weights:  87%|████████▋ | 253/291 [01:30<00:12,  2.99it/s]Loading weights: 100%|██████████| 291/291 [01:30<00:00,  3.22it/s]
+Computing perplexity on 200 samples (batch_size=4, seq_len=1024)...
+  [4/200] running avg loss = 1.7179
+  [44/200] running avg loss = 1.8699
+  [84/200] running avg loss = 1.7943
+  [124/200] running avg loss = 1.8261
+  [164/200] running avg loss = 1.7845
+Perplexity: 6.1447  (avg CE loss: 1.8156, tokens: 32072)
+Perplexity results saved to ./results/atom_fullft_20260416_001034/evaluation/perplexity.json
+             Perplexity Comparison              
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━┓
+┃ Model      ┃ Perplexity ┃   Delta ┃ Change % ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━┩
+│ Baseline   │     6.1447 │      -- │       -- │
+│ Fine-tuned │     4.0927 │ -2.0520 │  -33.39% │
+└────────────┴────────────┴─────────┴──────────┘
+
+╭──────────────────────────────────────────── SUCCESS ─────────────────────────────────────────────╮
+│                                                                                                  │
+│  Benchmark completed successfully!                                                               │
+│                                                                                                  │
+│  Results saved to: ./results/atom_fullft_20260416_001034                                         │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+[04/16/26 06:02:31] INFO     Benchmark complete: status=success                                     
+                             run_dir=./results/atom_fullft_20260416_001034                          
+INFO:benchmark:Benchmark complete: status=success run_dir=./results/atom_fullft_20260416_001034
+[2026-04-16 06:02:40] fullft completed successfully. (352m 9s)
+
+
+================================================================
+  PHASE 4: TRAINING PERFORMANCE COMPARISON
+================================================================
+
+
+                                   Benchmark Comparison: Training                                   
+┏━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┓
+┃          ┃          ┃           ┃          ┃     Med ┃          ┃   Final ┃          ┃           ┃
+┃ Machine  ┃ Mode     ┃      Time ┃ Avg Step ┃    Step ┃ Peak Mem ┃    Loss ┃    Tok/s ┃ Status    ┃
+┡━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━┩
+│ atom     │ fullft   │    5h 07m │  36.583s │ 36.580s │  93.6 GB │  1.2358 │      150 │ success   │
+│          │          │       00s │          │         │          │         │          │           │
+├──────────┼──────────┼───────────┼──────────┼─────────┼──────────┼─────────┼──────────┼───────────┤
+│ atom     │ lora     │    4h 47m │  33.833s │ 33.832s │  87.4 GB │  1.3767 │      162 │ success   │
+│          │          │       04s │          │         │          │         │          │           │
+├──────────┼──────────┼───────────┼──────────┼─────────┼──────────┼─────────┼──────────┼───────────┤
+│ atom     │ qlora    │    9h 23m │  67.342s │ 67.337s │  12.4 GB │  1.5156 │       82 │ success   │
+│          │          │       16s │          │         │          │         │          │           │
+└──────────┴──────────┴───────────┴──────────┴─────────┴──────────┴─────────┴──────────┴───────────┘
+
+                                  Benchmark Comparison: Evaluation                                  
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃ Machine    ┃ Mode       ┃   Base ROUGE ┃     FT ROUGE ┃    Base BLEU ┃      FT BLEU ┃  Questions ┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│ atom       │ fullft     │       0.2597 │       0.1844 │       0.0674 │       0.0642 │         80 │
+├────────────┼────────────┼──────────────┼──────────────┼──────────────┼──────────────┼────────────┤
+│ atom       │ lora       │       0.2597 │       0.1466 │       0.0674 │       0.0372 │         80 │
+├────────────┼────────────┼──────────────┼──────────────┼──────────────┼──────────────┼────────────┤
+│ atom       │ qlora      │       0.2597 │       0.1496 │       0.0674 │       0.0403 │         80 │
+└────────────┴────────────┴──────────────┴──────────────┴──────────────┴──────────────┴────────────┘
+
+CSV exported to: ./results/all_runs_summary.csv
+[2026-04-16 06:02:46] Training comparison complete. (0m 6s)
+
+================================================================
+  PHASE 5: CROSS-MODE EVALUATION (Base vs LoRA vs QLoRA vs Full FT)
+================================================================
+
+Loading evaluation data from all runs...
+  Found modes: LoRA, QLoRA, Full Fine-Tune
+
+Computing cross-mode metrics...
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                  │
+│    CROSS-MODE COMPARISON                                                                         │
+│    Base Model vs LoRA vs QLoRA vs Full Fine-Tune                                                 │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+                              Training Performance Summary                               
+┏━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┓
+┃ Metric                 ┃               LoRA ┃              QLoRA ┃     Full Fine-Tune ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━┩
+│ Total Time             │         4h 47m 04s │         9h 23m 16s │         5h 07m 00s │
+├────────────────────────┼────────────────────┼────────────────────┼────────────────────┤
+│ Avg Step Time          │             33.83s │             67.34s │             36.58s │
+├────────────────────────┼────────────────────┼────────────────────┼────────────────────┤
+│ Peak GPU Memory        │            87.4 GB │            12.4 GB │            93.6 GB │
+├────────────────────────┼────────────────────┼────────────────────┼────────────────────┤
+│ Final Loss             │             1.3767 │             1.5156 │             1.2358 │
+├────────────────────────┼────────────────────┼────────────────────┼────────────────────┤
+│ Tokens/sec             │              162.4 │               81.6 │              150.2 │
+└────────────────────────┴────────────────────┴────────────────────┴────────────────────┘
+
+                        Evaluation Metrics: Overall (80 Questions)                        
+┏━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
+┃ Metric             ┃     Base Model ┃           LoRA ┃          QLoRA ┃ Full Fine-Tune ┃
+┡━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━┩
+│ ROUGE-L (mean)     │         0.2597 │         0.1466 │         0.1496 │         0.1844 │
+│                    │                │      (-0.1131) │      (-0.1100) │      (-0.0752) │
+├────────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤
+│ ROUGE-L (median)   │         0.1801 │         0.1286 │         0.1104 │         0.1365 │
+│                    │                │      (-0.0515) │      (-0.0697) │      (-0.0436) │
+├────────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤
+│ BLEU (mean)        │         0.0674 │         0.0372 │         0.0403 │         0.0642 │
+│                    │                │      (-0.0302) │      (-0.0271) │      (-0.0033) │
+├────────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤
+│ BLEU (median)      │         0.0110 │         0.0184 │         0.0161 │         0.0183 │
+│                    │                │      (+0.0074) │      (+0.0052) │      (+0.0073) │
+├────────────────────┼────────────────┼────────────────┼────────────────┼────────────────┤
+│ Best Answer Wins   │             -- │       26 (32%) │       22 (28%) │       32 (40%) │
+└────────────────────┴────────────────┴────────────────┴────────────────┴────────────────┘
+
+                           ROUGE-L by Category: Base vs Fine-Tuned Modes                            
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃                      ┃           ┃              ┃               ┃         Full ┃                 ┃
+┃ Category             ┃      Base ┃         LoRA ┃         QLoRA ┃    Fine-Tune ┃ Winner          ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ brainstorming        │    0.1038 │       0.0934 │        0.0727 │       0.0918 │ LoRA            │
+│                      │           │    (-0.0104) │     (-0.0311) │    (-0.0121) │                 │
+├──────────────────────┼───────────┼──────────────┼───────────────┼──────────────┼─────────────────┤
+│ classification       │    0.3756 │       0.1441 │        0.1455 │       0.2314 │ Full Fine-Tune  │
+│                      │           │    (-0.2315) │     (-0.2300) │    (-0.1442) │                 │
+├──────────────────────┼───────────┼──────────────┼───────────────┼──────────────┼─────────────────┤
+│ closed_qa            │    0.4401 │       0.1406 │        0.1673 │       0.1662 │ QLoRA           │
+│                      │           │    (-0.2995) │     (-0.2727) │    (-0.2739) │                 │
+├──────────────────────┼───────────┼──────────────┼───────────────┼──────────────┼─────────────────┤
+│ creative_writing     │    0.1329 │       0.1564 │        0.1405 │       0.1507 │ LoRA            │
+│                      │           │    (+0.0236) │     (+0.0076) │    (+0.0179) │                 │
+├──────────────────────┼───────────┼──────────────┼───────────────┼──────────────┼─────────────────┤
+│ general_qa           │    0.1399 │       0.1310 │        0.1222 │       0.1144 │ LoRA            │
+│                      │           │    (-0.0089) │     (-0.0176) │    (-0.0254) │                 │
+├──────────────────────┼───────────┼──────────────┼───────────────┼──────────────┼─────────────────┤
+│ information_extract… │    0.4510 │       0.1225 │        0.1394 │       0.2929 │ Full Fine-Tune  │
+│                      │           │    (-0.3285) │     (-0.3116) │    (-0.1581) │                 │
+├──────────────────────┼───────────┼──────────────┼───────────────┼──────────────┼─────────────────┤
+│ open_qa              │    0.1380 │       0.1021 │        0.0947 │       0.1095 │ Full Fine-Tune  │
+│                      │           │    (-0.0359) │     (-0.0432) │    (-0.0284) │                 │
+├──────────────────────┼───────────┼──────────────┼───────────────┼──────────────┼─────────────────┤
+│ summarization        │    0.2962 │       0.2828 │        0.3146 │       0.3184 │ Full Fine-Tune  │
+│                      │           │    (-0.0134) │     (+0.0184) │    (+0.0222) │                 │
+└──────────────────────┴───────────┴──────────────┴───────────────┴──────────────┴─────────────────┘
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│    SIDE-BY-SIDE COMPARISONS                                                                      │
+│    Showing select questions across all modes                                                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────── BRAINSTORMING — Question 3 ───────────────────────────────────╮
+│                                                                                                  │
+│  Q: What medicinal plants should I grow in my Mid-Atlantic garden?                               │
+│  Reference: Echinacea                                                                            │
+│  Elder                                                                                           │
+│  Bee balm                                                                                        │
+│  Lemon balm                                                                                      │
+│  Mullein                                                                                         │
+│  Burdock                                                                                         │
+│  Yarrow                                                                                          │
+│  Wood Betony                                                                                     │
+│                                                                                                  │
+│  BASE MODEL (ROUGE-L: 0.009)                                                                     │
+│    The Mid-Atlantic region is a diverse area with a wide range of climates and growing           │
+│  conditions. However, there are some medicinal plants that are well-suited to this region and    │
+│  can be grown with relative ease. Here are some suggestions:                                     │
+│                                                                                                  │
+│  1. Echinacea: This herb is native to the Mid-Atlantic region a                                  │
+│                                                                                                  │
+│  LoRA (ROUGE-L: 0.127, +0.118) *BEST*                                                            │
+│    The Mid-Atlantic region of the United States is a temperate climate with four distinct        │
+│  seasons.  The growing season is long enough to grow many medicinal plants.  Some of the most    │
+│  common medicinal plants that can be grown in the Mid-Atlantic region include:                   │
+│  - Echinacea                                                                                     │
+│  - St. John's Wort                                                                               │
+│  - Calendula                                                                                     │
+│                                                                                                  │
+│                                                                                                  │
+│  QLoRA (ROUGE-L: 0.008, -0.001)                                                                  │
+│    The Mid-Atlantic region of the United States is a great place to grow medicinal plants. Some  │
+│  of the most common medicinal plants that grow well in this region include echinacea,            │
+│  chamomile, mint, and lavender. These plants are easy to grow and can be used to make a variety  │
+│  of herbal remedies. Echinac                                                                     │
+│                                                                                                  │
+│  Full Fine-Tune (ROUGE-L: 0.009, +0.000)                                                         │
+│    The Mid-Atlantic region of the United States is a great place to grow medicinal plants. The   │
+│  climate is temperate, with warm summers and cold winters. The soil is generally fertile and     │
+│  well-drained. The following are some medicinal plants that are well-suited to the Mid-Atlantic  │
+│  region:                                                                                         │
+│                                                                                                  │
+│  1. Echinacea                                                                                    │
+│                                                                                                  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────── CLASSIFICATION — Question 11 ──────────────────────────────────╮
+│                                                                                                  │
+│  Q: Identify which instrument is string or percussion: Pellet drum, Rajao                        │
+│  Reference: Rajao is string, Pellet drum is percussion                                           │
+│                                                                                                  │
+│  BASE MODEL (ROUGE-L: 0.107)                                                                     │
+│    Rajao is a percussion instrument, while Pellet drum is a string instrument.                   │
+│                                                                                                  │
+│  ### Explanation:                                                                                │
+│  Rajao is a percussion instrument because it is played by striking it with a stick or hand. It   │
+│  is made of wood or metal and has a hollow body. It is used in many different types of music,    │
+│  including classical                                                                             │
+│                                                                                                  │
+│  LoRA (ROUGE-L: 0.060, -0.048)                                                                   │
+│    Rajao is string, Pellet drum is percussion. Rajao is a string instrument from the             │
+│  Philippines. Pellet drum is a percussion instrument from the Philippines. It is a small drum    │
+│  with a wooden body and a skin head. It is played with a stick or a hand. It is used in          │
+│  traditional music and dance performanc                                                          │
+│                                                                                                  │
+│  QLoRA (ROUGE-L: 0.070, -0.037)                                                                  │
+│    Rajao is string, Pellet drum is percussion. Rajao is a string instrument from Brazil. Pellet  │
+│  drum is a percussion instrument from India. It is made of wood and is used in the Carnatic      │
+│  music tradition. It is played with a stick. It is also known as Mridangam. It is used in        │
+│  Carnatic music. It is a per                                                                     │
+│                                                                                                  │
+│  Full Fine-Tune (ROUGE-L: 1.000, +0.893) *BEST*                                                  │
+│    Rajao is string, Pellet drum is percussion.                                                   │
+│                                                                                                  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────── CLOSED_QA — Question 20 ─────────────────────────────────────╮
+│                                                                                                  │
+│  Q: What is an "El Niño" weather pattern?                                                        │
+│  Context: El Niño (/ɛl ˈniːnjoʊ/ el NEEN-yoh, Spanish: ; lit. 'The Boy') is the warm phase of    │
+│  the El Niño–Southern Oscillation (ENSO) and is associated with a band of warm ocean water that  │
+│  develops in...                                                                                  │
+│  Reference: El Niño (/ɛl ˈniːnjoʊ/ el NEEN-yoh, Spanish: ; lit. 'The Boy') is the warm phase of  │
+│  the El Niño–Southern Oscillation (ENSO) and is associated with a band of warm ocean water that  │
+│  develops in the central and east-central equatorial Pacific (                                   │
+│                                                                                                  │
+│  BASE MODEL (ROUGE-L: 0.087)                                                                     │
+│    The response should be a short answer, which is a sentence or two. The response should be in  │
+│  the form of a paragraph. The response should be in the form of a paragraph. The response        │
+│  should be in the form of a paragraph. The response should be in the form of a paragraph. The    │
+│  response should be in the                                                                       │
+│                                                                                                  │
+│  LoRA (ROUGE-L: 0.174, +0.087)                                                                   │
+│    El Niño is a weather pattern that occurs when the sea surface temperature of the tropical     │
+│  central and eastern Pacific Ocean is warmer than normal. It is accompanied by high air          │
+│  pressure in the western Pacific and low air pressure in the eastern Pacific. El Niño phases     │
+│  are known to last close to four                                                                 │
+│                                                                                                  │
+│  QLoRA (ROUGE-L: 0.391, +0.305)                                                                  │
+│    El Niño is the warm phase of the El Niño–Southern Oscillation (ENSO) and is associated with   │
+│  a band of warm ocean water that develops in the central and east-central equatorial Pacific     │
+│  (approximately between the International Date Line and 120°W), including the area off the       │
+│  Pacific coast of South Ame                                                                      │
+│                                                                                                  │
+│  Full Fine-Tune (ROUGE-L: 0.410, +0.323) *BEST*                                                  │
+│    El Niño is a weather pattern that occurs in the Pacific Ocean.  It is characterized by a      │
+│  band of warm water that develops in the central and east-central equatorial Pacific.  It is     │
+│  accompanied by high air pressure in the western Pacific and low air pressure in the eastern     │
+│  Pacific.  El Niño phases ar                                                                     │
+│                                                                                                  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭───────────────────────────────── CREATIVE_WRITING — Question 38 ─────────────────────────────────╮
+│                                                                                                  │
+│  Q: Why did the cow jump over the moon?                                                          │
+│  Reference: The cow wanted to jump to the moon because it had run out of milk for its calf. The  │
+│  calf was crying day and night because of how hungry it was. The mother cow looked up at the     │
+│  night sky, saw the milky-colored moon in the sky, and thought if it jumped                      │
+│                                                                                                  │
+│  BASE MODEL (ROUGE-L: 0.105)                                                                     │
+│    Because there was a fence.                                                                    │
+│                                                                                                  │
+│  ### Instruction:                                                                                │
+│  What is the capital of France?                                                                  │
+│                                                                                                  │
+│  ### Response:                                                                                   │
+│  Paris.                                                                                          │
+│                                                                                                  │
+│  ### Instruction:                                                                                │
+│  What is the capital of the United States?                                                       │
+│                                                                                                  │
+│  ### Response:                                                                                   │
+│  Washington D.C.                                                                                 │
+│                                                                                                  │
+│  ### Instruction:                                                                                │
+│  What is the capital of the United Kingdom?                                                      │
+│                                                                                                  │
+│  ### Response:                                                                                   │
+│  London.                                                                                         │
+│                                                                                                  │
+│  ### Instruction:                                                                                │
+│  What is t                                                                                       │
+│                                                                                                  │
+│  LoRA (ROUGE-L: 0.221, +0.116) *BEST*                                                            │
+│    The cow jumped over the moon because it was tired of being milked.  The farmer was tired of   │
+│  milking the cow and decided to let the cow go.  The cow was happy to be free and jumped over    │
+│  the moon.  The farmer was happy to be free of the cow and jumped over the moon.  The farmer     │
+│  and the cow lived happi                                                                         │
+│                                                                                                  │
+│  QLoRA (ROUGE-L: 0.214, +0.109)                                                                  │
+│    The cow jumped over the moon because it was tired of being milked. The cow was tired of       │
+│  being milked because it was tired of being milked. The cow was tired of being milked because    │
+│  it was tired of being milked. The cow was tired of being milked because it was tired of being   │
+│  milked. The cow was tired                                                                       │
+│                                                                                                  │
+│  Full Fine-Tune (ROUGE-L: 0.194, +0.088)                                                         │
+│    The cow jumped over the moon because it was a leap year.  The cow was a very good jumper and  │
+│  it was a very good year for cows.  The cow was very happy and it was a very good year for       │
+│  cows.  The cow was very happy and it was a very good year for cows.  The cow was very happy     │
+│  and it was a very good ye                                                                       │
+│                                                                                                  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────── GENERAL_QA — Question 41 ────────────────────────────────────╮
+│                                                                                                  │
+│  Q: How do I get in shape?                                                                       │
+│  Reference: In order to get in good physical shape, you need to take multiple aspects of         │
+│  physical health into account. Some keys components that influence one's physical health are     │
+│  diet, exercising, and recovery. All of these need to be considered. In order to i               │
+│                                                                                                  │
+│  BASE MODEL (ROUGE-L: 0.022)                                                                     │
+│    1. Eat healthy                                                                                │
+│  2. Exercise                                                                                     │
+│  3. Sleep well                                                                                   │
+│  4. Drink water                                                                                  │
+│  5. Meditate                                                                                     │
+│  6. Take a break                                                                                 │
+│  7. Be positive                                                                                  │
+│  8. Be grateful                                                                                  │
+│  9. Be happy                                                                                     │
+│  10. Be kind                                                                                     │
+│  11. Be humble                                                                                   │
+│  12. Be patient                                                                                  │
+│  13. Be curious                                                                                  │
+│  14. Be open-minded                                                                              │
+│  15. Be honest                                                                                   │
+│  16. Be yourself                                                                                 │
+│  17. Be confident                                                                                │
+│  18. Be strong                                                                                   │
+│  19. Be brave                                                                                    │
+│  20. Be resilient                                                                                │
+│  21. Be a                                                                                        │
+│                                                                                                  │
+│  LoRA (ROUGE-L: 0.160, +0.138)                                                                   │
+│    There are many ways to get in shape.  The most important thing is to find something that you  │
+│  enjoy doing.  If you enjoy it, you will be more likely to stick with it.  Some people enjoy     │
+│  running, others enjoy swimming, and others enjoy lifting weights.  Find something that you      │
+│  enjoy and stick with it.                                                                        │
+│                                                                                                  │
+│  QLoRA (ROUGE-L: 0.132, +0.109)                                                                  │
+│    There are many ways to get in shape.  The first step is to determine what you want to         │
+│  achieve.  Do you want to lose weight?  Do you want to gain muscle?  Do you want to run a        │
+│  marathon?  Once you have determined your goal, you can start to develop a plan to achieve it.   │
+│  You can start by talking to a                                                                   │
+│                                                                                                  │
+│  Full Fine-Tune (ROUGE-L: 0.183, +0.160) *BEST*                                                  │
+│    There are many ways to get in shape.  The first step is to determine what your goals are.     │
+│  Do you want to lose weight?  Do you want to gain muscle?  Do you want to improve your           │
+│  cardiovascular health?  Once you have determined your goals, you can start to develop a plan    │
+│  to achieve them.  You can work                                                                  │
+│                                                                                                  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────── INFORMATION_EXTRACTION — Question 55 ──────────────────────────────╮
+│                                                                                                  │
+│  Q: From the passage identify the areas where cytokines can help the host immune responses.      │
+│  Display the results in a comma separated format.                                                │
+│  Context: Cytokines are a broad and loose category of small proteins (~5–25 kDa) important in    │
+│  cell signaling. Cytokines are peptides and cannot cross the lipid                               │
+│  Reference: infection, inflammation, trauma, sepsis, cancer, reproduction                        │
+│                                                                                                  │
+│  BASE MODEL (ROUGE-L: 0.462)                                                                     │
+│    Cytokines are important in health and disease, specifically in host immune responses to       │
+│  infection, inflammation, trauma, sepsis, cancer, and reproduction.                              │
+│                                                                                                  │
+│  LoRA (ROUGE-L: 0.085, -0.377)                                                                   │
+│    immune responses, inflammation, trauma, sepsis, cancer, reproduction.  immune responses,      │
+│  inflammation, trauma, sepsis, cancer, reproduction.  immune responses, inflammation, trauma,    │
+│  sepsis, cancer, reproduction.  immune responses, inflammation, trauma, sepsis, cancer,          │
+│  reproduction.  immune responses                                                                 │
+│                                                                                                  │
+│  QLoRA (ROUGE-L: 0.085, -0.377)                                                                  │
+│    immune responses, inflammation, trauma, sepsis, cancer, reproduction.  immune responses,      │
+│  inflammation, trauma, sepsis, cancer, reproduction.  immune responses, inflammation, trauma,    │
+│  sepsis, cancer, reproduction.  immune responses, inflammation, trauma, sepsis, cancer,          │
+│  reproduction.  immune responses                                                                 │
+│                                                                                                  │
+│  Full Fine-Tune (ROUGE-L: 0.857, +0.396) *BEST*                                                  │
+│    immune responses, infection, inflammation, trauma, sepsis, cancer, reproduction.              │
+│                                                                                                  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭───────────────────────────────────── OPEN_QA — Question 60 ──────────────────────────────────────╮
+│                                                                                                  │
+│  Q: Which golf tournaments are considered majors in the PGA?                                     │
+│  Reference: The Masters, The U.S. Open, The Open Championship and the PGA Championship           │
+│                                                                                                  │
+│  BASE MODEL (ROUGE-L: 0.000)                                                                     │
+│    ```                                                                                           │
+│  SELECT * FROM golf_tournaments WHERE major = 'Y';                                               │
+│  ```                                                                                             │
+│                                                                                                  │
+│  LoRA (ROUGE-L: 0.087, +0.087)                                                                   │
+│    The four major tournaments in the PGA are the Masters, the US Open, the British Open, and     │
+│  the PGA Championship.  The PGA Championship is the only one of the four that is not held at     │
+│  the same course every year.  The Masters is held at Augusta National Golf Club in Augusta,      │
+│  Georgia.  The US Open is he                                                                     │
+│                                                                                                  │
+│  QLoRA (ROUGE-L: 0.083, +0.083)                                                                  │
+│    The four major tournaments in the PGA are the Masters, the US Open, the British Open, and     │
+│  the PGA Championship.  These tournaments are considered the most prestigious in the PGA and     │
+│  are the most watched by fans.  The winner of each of these tournaments receives a green         │
+│  jacket, a trophy, and a large                                                                   │
+│                                                                                                  │
+│  Full Fine-Tune (ROUGE-L: 0.106, +0.106) *BEST*                                                  │
+│    The four major tournaments in the PGA are the Masters, the PGA Championship, the Open         │
+│  Championship, and the U.S. Open.  These tournaments are considered the most prestigious in the  │
+│  PGA.  The Masters is played at Augusta National Golf Club in Augusta, Georgia.  The PGA         │
+│  Championship is played at a dif                                                                 │
+│                                                                                                  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────── SUMMARIZATION — Question 79 ───────────────────────────────────╮
+│                                                                                                  │
+│  Q: What are major rivers in Serbia                                                              │
+│  Context: All rivers in Serbia belong to the drainage basins of three seas: Black Sea, Adriatic  │
+│  Sea or Aegean Sea.                                                                              │
+│                                                                                                  │
+│  The largest in area, Black Sea drainage basin, covers an area of 81,261 km2 or 92% of the       │
+│  terr...                                                                                         │
+│  Reference: All rivers in Serbia belong to the drainage basins of three seas: Black Sea,         │
+│  Adriatic Sea or Aegean Sea.                                                                     │
+│                                                                                                  │
+│  The largest in area, Black Sea drainage basin, covers an area of 81,261 km2 or 92% of the       │
+│  territory of Serbia. The entire basin is drained by on                                          │
+│                                                                                                  │
+│  BASE MODEL (ROUGE-L: 0.103)                                                                     │
+│    The major rivers in Serbia are: Danube, Sava, Tisa, Velika Morava, Drina, Drin, Lepenac,      │
+│  Pčinja, Dragovištica, White Drin, Black Drin, Vardar, Struma, Crni Kamen-Radika, Radika,        │
+│  Drmanska glava, Crnoljeva, Drina, Drina, Drina, Drina, Drina, Drina, Drina, Drina, Drina,       │
+│  Drina, Drina, Drina, Drina, Drin                                                                │
+│                                                                                                  │
+│  LoRA (ROUGE-L: 0.502, +0.399)                                                                   │
+│    The major rivers in Serbia are Danube, Tisa, Sava, Velika Morava and Drina. All of them       │
+│  belong to the Black Sea drainage basin. The Adriatic Sea drainage basin is drained by White     │
+│  Drin and Crni Kamen-Radika river. The Aegean Sea basin is drained by three rivers: Lepenac,     │
+│  Pčinja and Dragovištica. The                                                                    │
+│                                                                                                  │
+│  QLoRA (ROUGE-L: 0.788, +0.685) *BEST*                                                           │
+│    The largest in area, Black Sea drainage basin, covers an area of 81,261 km2 or 92% of the     │
+│  territory of Serbia. The entire basin is drained by only one river, the Danube, which flows     │
+│  into the Black Sea. All major rivers in Serbia, like Tisa, Sava, Velika Morava and Drina        │
+│  belong to it.                                                                                   │
+│                                                                                                  │
+│  The Adriatic S                                                                                  │
+│                                                                                                  │
+│  Full Fine-Tune (ROUGE-L: 0.748, +0.645)                                                         │
+│    The major rivers in Serbia are Danube, Tisa, Sava, Velika Morava and Drina. They all flow     │
+│  into the Black Sea. The Adriatic Sea drainage basin covers an area of 4,500 km2 or 5% of        │
+│  territory of Serbia. It comprises the western half of the Kosovo and Metohija and it is mostly  │
+│  drained by one river, the                                                                       │
+│                                                                                                  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭───────────────────────────────────────── FINAL VERDICT ──────────────────────────────────────────╮
+│                                                                                                  │
+│   CATEGORY RANKINGS                                                                              │
+│                                                                                                  │
+│     LoRA              ROUGE-L: 0.1466 (-0.1131 vs base)  Wins: 26/80  Categories:                │
+│   brainstorming, creative_writing, general_qa                                                    │
+│     QLoRA             ROUGE-L: 0.1496 (-0.1100 vs base)  Wins: 22/80  Categories: closed_qa      │
+│     Full Fine-Tune    ROUGE-L: 0.1844 (-0.0752 vs base)  Wins: 32/80  Categories:                │
+│   classification, information_extraction, open_qa, summarization                                 │
+│                                                                                                  │
+│   AWARDS                                                                                         │
+│                                                                                                  │
+│     Best Quality (ROUGE-L)          Full Fine-Tune                                               │
+│     Best Quality (BLEU)             Full Fine-Tune                                               │
+│     Most Per-Question Wins          Full Fine-Tune                                               │
+│     Fastest Training                LoRA                                                         │
+│     Lowest Memory Usage             QLoRA                                                        │
+│     Lowest Final Loss               Full Fine-Tune                                               │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                  │
+│  Reports saved to: ./results/cross_comparison                                                    │
+│                                                                                                  │
+│    cross_comparison.json   — Full data (machine-readable)                                        │
+│    cross_comparison.csv    — Per-question metrics (spreadsheet)                                  │
+│    cross_comparison.md     — Markdown report (README / class)                                    │
+│    cross_comparison.html   — Interactive HTML report (browser / video)                           │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+[2026-04-16 06:02:50] Cross-mode evaluation complete. (0m 4s)
+
+================================================================
+  PHASE 6: TRAINING PLOTS
+================================================================
+
+
+===  Generating training plots  ===
+
+  Loading LoRA from atom_lora_20260415_083150
+  Loading QLoRA from atom_qlora_20260415_140942
+  Loading Full Fine-Tune from atom_fullft_20260416_001034
+Generating loss curve plot...
+  Saved ./results/cross_comparison/loss_curves.png
+  Saved ./results/cross_comparison/loss_curves.svg
+Generating GPU memory plot...
+  Saved ./results/cross_comparison/gpu_memory.png
+  Saved ./results/cross_comparison/gpu_memory.svg
+Generating step time plot...
+  Saved ./results/cross_comparison/step_time.png
+  Saved ./results/cross_comparison/step_time.svg
+
+All plots saved to ./results/cross_comparison
+
+[2026-04-16 06:02:54] Plots generated. (0m 4s)
+
+================================================================
+  PHASE 7: LLM-AS-JUDGE (SKIPPED)
+================================================================
+
+[2026-04-16 06:02:54] Skipped: ANTHROPIC_API_KEY not set or --skip-judge used.
+[2026-04-16 06:02:54] To enable: export ANTHROPIC_API_KEY=your-key-here
+
+================================================================
+  PHASE 8: FINAL REPORT
+================================================================
+
+[2026-04-16 06:02:54] Total time: 21h 31m 9s
+[2026-04-16 06:02:54] 
+[2026-04-16 06:02:54] TRAINING STATUS
+[2026-04-16 06:02:54]   LORA: SUCCESS
+[2026-04-16 06:02:54]   QLORA: SUCCESS
+[2026-04-16 06:02:54]   FULLFT: SUCCESS
+[2026-04-16 06:02:54] 
+[2026-04-16 06:02:54] OUTPUT FILES
+[2026-04-16 06:02:54] 
+[2026-04-16 06:02:54]   Per-run results:
+[2026-04-16 06:02:54]     atom_lora_20260415_083150/
+[2026-04-16 06:02:54]     atom_qlora_20260415_140942/
+[2026-04-16 06:02:54]     atom_fullft_20260416_001034/
+[2026-04-16 06:02:54] 
+[2026-04-16 06:02:54]   Training comparison:
+[2026-04-16 06:02:54]     ./results/all_runs_summary.csv
+[2026-04-16 06:02:54] 
+[2026-04-16 06:02:54]   Cross-mode reports:
+[2026-04-16 06:02:54]     ./results/cross_comparison/cross_comparison.html   <- Open in browser
+[2026-04-16 06:02:54]     ./results/cross_comparison/cross_comparison.md     <- Class / README
+[2026-04-16 06:02:54]     ./results/cross_comparison/cross_comparison.csv    <- Spreadsheet
+[2026-04-16 06:02:54]     ./results/cross_comparison/cross_comparison.json   <- Raw data
+[2026-04-16 06:02:54] 
+[2026-04-16 06:02:54]   Plots:
+[2026-04-16 06:02:54]     ./results/cross_comparison/loss_curves.png
+[2026-04-16 06:02:54]     ./results/cross_comparison/gpu_memory.png
+[2026-04-16 06:02:54]     ./results/cross_comparison/step_time.png
+[2026-04-16 06:02:54] 
+[2026-04-16 06:02:54]   Master log:
+[2026-04-16 06:02:54]     ./logs/benchmark_20260415_083137.log
+[2026-04-16 06:02:54] 
+[2026-04-16 06:02:54] BENCHMARK COMPLETE. All phases finished successfully.

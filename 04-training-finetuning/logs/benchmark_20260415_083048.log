@@ -1,0 +1,31 @@
+
+================================================================
+  PHASE 1: PRE-FLIGHT CHECKS
+================================================================
+
+[2026-04-15 08:30:49] Machine label:  atom
+[2026-04-15 08:30:49] Max steps:      500
+[2026-04-15 08:30:49] Modes:          lora qlora fullft
+[2026-04-15 08:30:49] Results dir:    ./results
+[2026-04-15 08:30:49] Skip training:  false
+[2026-04-15 08:30:49] Skip judge:     false
+[2026-04-15 08:30:49] Dry run:        false
+[2026-04-15 08:30:49] Master log:     ./logs/benchmark_20260415_083048.log
+[2026-04-15 08:30:49] 
+[2026-04-15 08:30:49] Python:         Python 3.10.18
+[2026-04-15 08:30:55] CUDA:           13.0
+[2026-04-15 08:30:55] GPU:            NVIDIA GB10 (120 GB)
+[2026-04-15 08:30:56] HuggingFace:    pendakwahteknologi
+[2026-04-15 08:31:01] Dependencies:   OK
+[2026-04-15 08:31:01] Anthropic API:  not set (LLM judge will be skipped)
+[2026-04-15 08:31:01] 
+[2026-04-15 08:31:01] All checks passed.
+
+================================================================
+  PHASE 2: DATA PREPARATION
+================================================================
+
+[2026-04-15 08:31:01] Preparing dataset and evaluation questions...
+
+─────────────────────────────────────── Dataset Preparation ────────────────────────────────────────
+

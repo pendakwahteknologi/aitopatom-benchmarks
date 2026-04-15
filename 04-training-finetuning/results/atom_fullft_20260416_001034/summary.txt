@@ -1,0 +1,24 @@
+============================================================
+BENCHMARK SUMMARY
+============================================================
+Machine:              atom
+Mode:                 fullft
+Model:                meta-llama/Llama-3.1-8B
+Dataset:              databricks/databricks-dolly-15k
+Status:               success
+
+Steps completed:      500 / 500
+Total time:           18420.2s (307.0m)
+Avg step time:        36.5833s
+Median step time:     36.5802s
+P95 step time:        36.6857s
+Peak GPU memory:      93.59 GB
+Final loss:           1.2358
+Tokens/sec:           150.2
+Samples/sec:          0.11
+
+Batch size:           4 x 8 = 32
+Sequence length:      1024
+Seed:                 42
+
+============================================================

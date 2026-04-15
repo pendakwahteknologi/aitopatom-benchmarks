@@ -1,0 +1,8 @@
+{
+  "baseline_perplexity": 6.1447,
+  "finetuned_perplexity": 4.1704,
+  "delta": -1.9743,
+  "improvement_pct": -32.13,
+  "test_samples": 200,
+  "test_data": "test.jsonl"
+}

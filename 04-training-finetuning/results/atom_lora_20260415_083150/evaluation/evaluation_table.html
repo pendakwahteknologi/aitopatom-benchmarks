@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<title>Evaluation Comparison</title>
+<style>
+body { font-family: monospace; margin: 20px; background: #1a1a2e; color: #e0e0e0; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #444; padding: 8px; text-align: left; font-size: 12px; }
+th { background: #16213e; color: #00d4ff; }
+tr:nth-child(even) { background: #0f3460; }
+</style></head>
+<body>
+<h1>Side-by-Side Evaluation</h1>
+<table>
+<tr><th>ID</th><th>Category</th><th>Instruction</th><th>Reference</th>
+<th>Baseline</th><th>Fine-tuned</th><th>Base ROUGE-L</th><th>FT ROUGE-L</th></tr>
+<tr><td>0</td><td>brainstorming</td><td>Give me three recipes from different cuisines that I can make with potatoes and </td><td>You could make potato dumplings in a chicken broth, which comes from German cuisine. Another recipe </td><td>* **Recipe 1:** [Chicken and Potato Curry](https://www.bbcgoodfood.com/recipes/chicken-potato-curry)</td><td>1. Chicken Tikka Masala - Indian
+2. Chicken and Potatoes - American
+3. Chicken and Potatoes - French</td><td>0.200</td><td>0.104</td></tr><tr><td>1</td><td>brainstorming</td><td>Give me multiple modes of transport to get to Australia</td><td>Fly by plane, take a boat or cruise ship, swim, paddle board, kayak, sail</td><td>```bash
+$ python3 main.py
+Enter a mode of transport: car
+Enter a mode of transport: plane
+Enter a mo</td><td>You can get to Australia by plane, boat, or car. You can also get there by train, but it is a very l</td><td>0.029</td><td>0.035</td></tr><tr><td>2</td><td>brainstorming</td><td>What are the primary ingredients and spices that go into Greek cooking?</td><td>1) Salt
+2) Pepper
+3) Extra virgin olive oil
+4) Fresh oregano
+5) Lemon juice
+6) Garlic
+
+Technique mat</td><td>The primary ingredients in Greek cooking are olive oil, lemon juice, garlic, oregano, and feta chees</td><td>The primary ingredients in Greek cooking are olive oil, lemon, garlic, oregano, and feta cheese.  Th</td><td>0.096</td><td>0.112</td></tr><tr><td>3</td><td>brainstorming</td><td>What medicinal plants should I grow in my Mid-Atlantic garden?</td><td>Echinacea
+Elder
+Bee balm
+Lemon balm
+Mullein
+Burdock
+Yarrow
+Wood Betony</td><td>The Mid-Atlantic region is a diverse area with a wide range of climates and growing conditions. Howe</td><td>The Mid-Atlantic region of the United States is a temperate climate with four distinct seasons.  The</td><td>0.009</td><td>0.127</td></tr><tr><td>4</td><td>brainstorming</td><td>What are some ways I could cheer up my friend that just got dumped?</td><td>Im sorry your friend recently got dumped.  I would ask them if they want to talk about it, or be dis</td><td>- I could send them a funny meme
+- I could send them a funny gif
+- I could send them a funny video
+-</td><td>1. Listen to them and let them vent
+2. Offer to go out for a drink
+3. Offer to go for a walk
+4. Offe</td><td>0.057</td><td>0.049</td></tr><tr><td>5</td><td>brainstorming</td><td>How do you motivate and focus a team to exceed expectations during a terrible ec</td><td>Set a goal, vision, create plans to execute, don’t over complicate it. Win as a team and lose as tea</td><td>I have been in the same situation. I was the CEO of a company that was in the process of being acqui</td><td>The first step is to understand the situation.  The team needs to understand the economic situation </td><td>0.071</td><td>0.040</td></tr><tr><td>6</td><td>brainstorming</td><td>What is success</td><td>Satisfaction levels define the success, success defined for one person may not be true for other</td><td>Success is a state of mind. It is a state of mind that is achieved by the individual. It is a state </td><td>Success is a relative term. It is subjective and depends on the individual. Success can be defined a</td><td>0.008</td><td>0.058</td></tr><tr><td>7</td><td>brainstorming</td><td>What are some items you can put on a bookshelf, other than books, to make it nic</td><td>Peppering a bookshelf with items other than books can be aesthetically pleasing. Some ideas for item</td><td>I can put some decorative items on a bookshelf, such as a vase, a candle, a small statue, or a small</td><td>Some items you can put on a bookshelf, other than books, to make it nice looking are: 
+- A vase with</td><td>0.166</td><td>0.167</td></tr><tr><td>8</td><td>brainstorming</td><td>What are the measurements needed to fit pants?</td><td>The main three measurements for pants are the waist, the length, and the inseam. There any many othe</td><td>The measurements needed to fit pants are the waist, hip, inseam, and rise. The waist is the measurem</td><td>The measurements needed to fit pants are waist, hip, and inseam. The waist is the measurement around</td><td>0.116</td><td>0.110</td></tr><tr><td>9</td><td>brainstorming</td><td>Who is the most popular president ever in the USA?</td><td>The most popular president ever in the USA is Franklin D. Roosevelt. He was president from 1933 to 1</td><td>The most popular president ever in the USA is Abraham Lincoln. He was the 16th president of the Unit</td><td>Abraham Lincoln is the most popular president in the USA. He is the only president to be elected to </td><td>0.286</td><td>0.131</td></tr><tr><td>10</td><td>classification</td><td>Which of the following are noble gases: helium, sodium, neon, oxygen, argon, hyd</td><td>The noble gases are - helium, neon, argon, krypton, xenon, radon.</td><td>helium, neon, argon, krypton, xenon, radon
+
+### Explanation:
+Noble gases are the elements in the rig</td><td>The noble gases are helium, neon, argon, krypton, xenon, and radon. The others are not noble gases. </td><td>0.462</td><td>0.112</td></tr><tr><td>11</td><td>classification</td><td>Identify which instrument is string or percussion: Pellet drum, Rajao</td><td>Rajao is string, Pellet drum is percussion</td><td>Rajao is a percussion instrument, while Pellet drum is a string instrument.
+
+### Explanation:
+Rajao </td><td>Rajao is string, Pellet drum is percussion. Rajao is a string instrument from the Philippines. Pelle</td><td>0.107</td><td>0.060</td></tr><tr><td>12</td><td>classification</td><td>I dont think I should pursue higher education. From the following, what are some</td><td>Pros:
+skill development
+respect in society
+degree to show mastery of a subject
+Set you up for lifelo</td><td>degree to show mastery of a subject
+Takes money
+Hard work is required
+Losing out on entrepreneurial </td><td>Pros of getting a masters education:
+- degree to show mastery of a subject
+- skill development
+- Set</td><td>0.311</td><td>0.235</td></tr><tr><td>13</td><td>classification</td><td>Classify each method of communication as "verbal" or "written": e-mail, phone ca</td><td>E-mail: Written
+Phone Call: Verbal
+Slack Chat: Written
+Zoom Meeting: Verbal
+Text: Written
+Post Mail:</td><td>verbal: phone call, zoom meeting, text
+written: e-mail, slack chat, post mail</td><td>e-mail: written
+phone call: verbal
+slack chat: written
+zoom meeting: verbal
+text: written
+post mail:</td><td>0.533</td><td>0.141</td></tr><tr><td>14</td><td>classification</td><td>Tell me which of these is a Country, a City, a River, or a Mountain: New York, N</td><td>New York - City
+Nile - River
+Amazon - River
+Kilimanjaro - Mountain
+USA - Country
+Spain - Country
+Ita</td><td>```
+Country: USA, Spain, Italy, France, Brazil
+City: New York, Rome, Prague, Zurich, San Francisco, </td><td>New York: City
+Nile: River
+Amazon: River
+Kilimanjaro: Mountain
+USA: Country
+Spain: Country
+Italy: Co</td><td>0.235</td><td>0.369</td></tr><tr><td>15</td><td>classification</td><td>Identify which car manufacturer is Japanese or American: RAM, Toyota Motor Corpo</td><td>RAM is American, Toyota Motor Corporation is Japanese</td><td>RAM is an American car manufacturer, Toyota Motor Corporation is a Japanese car manufacturer.
+
+### E</td><td>RAM is American, Toyota Motor Corporation is Japanese. Both are car manufacturers. RAM is a brand of</td><td>0.432</td><td>0.094</td></tr><tr><td>16</td><td>classification</td><td>Classify the following as either red wines or white wines: Cabernet Sauvignon, P</td><td>Red wines: Cabernet Sauvignon, Merlot, Syrah, Shiraz
+White wines: Pinot Blanc, Riesling, Chardonnay,</td><td>Red wines: Cabernet Sauvignon, Merlot, Syrah, Shiraz
+White wines: Pinot Blanc, Riesling, Chardonnay,</td><td>Cabernet Sauvignon, Merlot, Syrah, Shiraz are red wines. Pinot Blanc, Riesling, Chardonnay, Pinot Gr</td><td>0.374</td><td>0.250</td></tr><tr><td>17</td><td>classification</td><td>Tell me whether these are pasta types or pizza types: macaroni, rigatoni, marghe</td><td>Pasta: macaroni, rigatoni, orzo, spaghetti
+Pizza: margherita, pepperoni, stuffed crust, Hawaiian</td><td>```
+pasta
+pasta
+pizza
+pizza
+pasta
+pasta
+pizza
+pizza
+```</td><td>Pasta: macaroni, rigatoni, orzo, spaghetti
+Pizza: margherita, pepperoni, stuffed crust, Hawaiian
+
+Th</td><td>0.211</td><td>0.107</td></tr><tr><td>18</td><td>classification</td><td>Which is a species of fish? Steelhead or Metalhead</td><td>Steelhead</td><td>Steelhead is a species of fish. Metalhead is a band.
+
+### Explanation:
+Steelhead is a species of fis</td><td>Steelhead is a species of fish. Metalhead is not a species of fish. Metalhead is a fictional charact</td><td>0.091</td><td>0.009</td></tr><tr><td>19</td><td>classification</td><td>Categorize the below types of animals based on whether they are domestic or non-</td><td>domestic : dog, cat
+non-domestic : badgers, cougars</td><td>```
+domestic = ['dog', 'cat']
+non_domestic = ['badgers', 'cougars']
+```</td><td>Domestic: dog, cat
+Non-Domestic: badgers, cougars
+
+Note: The above categorization is based on the co</td><td>1.000</td><td>0.064</td></tr><tr><td>20</td><td>closed_qa</td><td>What is an "El Niño" weather pattern?</td><td>El Niño (/ɛl ˈniːnjoʊ/ el NEEN-yoh, Spanish: [el ˈniɲo]; lit. 'The Boy') is the warm phase of the El</td><td>The response should be a short answer, which is a sentence or two. The response should be in the for</td><td>El Niño is a weather pattern that occurs when the sea surface temperature of the tropical central an</td><td>0.087</td><td>0.174</td></tr><tr><td>21</td><td>closed_qa</td><td>Given that preserving human brains for more than a century is fairly uncommon, w</td><td>One reason for preserving the brain may have been to study structural abnormalities that could have </td><td>The motivation for preserving Guiteau's brain was to study the brain of a murderer. Guiteau was a la</td><td>Preserving Guiteau's brain was likely done to study the brain of a murderer.  It is also possible th</td><td>0.171</td><td>0.071</td></tr><tr><td>22</td><td>closed_qa</td><td>How was art used for manipulative purpose in racial discuss in the 20th century?</td><td>In the 19th to 20th century, Europeans commonly use artworks to portray prejudice towards Middle Eas</td><td>The artwork, predominantly paintings, were portrayed in order to instill prejudice in the Western po</td><td>Art was used to portray the Arab and Asian communities as strange, foreign and exotic through Orient</td><td>0.090</td><td>0.078</td></tr><tr><td>23</td><td>closed_qa</td><td>Given this paragraph, what were the regional release dates for Viva Piñata: Part</td><td>Viva Piñata: Party Animals was released for the Xbox 360 gaming console on October 30, 2007 in North</td><td>The regional release dates for Viva Piñata: Party Animals are: North America: October 30, 2007, Aust</td><td>Viva Piñata: Party Animals was released on October 30, 2007, in North America, November 15 in Austra</td><td>0.554</td><td>0.321</td></tr><tr><td>24</td><td>closed_qa</td><td>When was Rhual constructed?</td><td>Rhual was constructed in 1634 by Evan Edwards.</td><td>The response should be a single integer, the year in which Rhual was constructed.</td><td>Rhual was constructed in 1634. It was built by Evan Edwards, a member of a well established Flintshi</td><td>0.273</td><td>0.072</td></tr><tr><td>25</td><td>closed_qa</td><td>What new economies developed because of the anti-slave treaties?</td><td>Instead of exporting slaves, Africa began exporting palm oil, cocoa, timber, and gold.</td><td>The new economies that developed because of the anti-slave treaties were palm oil, cocoa, timber and</td><td>The new economies that developed because of the anti-slave treaties were palm oil, cocoa, timber and</td><td>0.516</td><td>0.098</td></tr><tr><td>26</td><td>closed_qa</td><td>Given a reference text about Michał Rozenfeld, tell me what he did before the wa</td><td>Michał Rozenfeld studied psychology before being sent to the Warsaw Ghetto during the war. He is bur</td><td>Michał Rozenfeld was a Jewish resistance activist during the Second World War, participant of the Wa</td><td>Michał Rozenfeld was a Jewish resistance activist during the Second World War, participant of the Wa</td><td>0.143</td><td>0.143</td></tr><tr><td>27</td><td>closed_qa</td><td>Where did peanut butter and jelly sandwiches originate?</td><td>In 1901, the Boston Cooking School Magazine published the first known reference for a peanut butter </td><td>The first known reference for a peanut butter and jelly sandwich appeared in the Boston Cooking Scho</td><td>The first known reference for a peanut butter and jelly sandwich appeared in the Boston Cooking Scho</td><td>0.734</td><td>0.332</td></tr><tr><td>28</td><td>closed_qa</td><td>Given a reference text about Mussa Azzan Zungu, tell me his current position.</td><td>Mussa Azzan Zungu's current position is Deputy Speaker of Tanzania National Assembly.</td><td>Mussa Azzan Zungu is the Deputy Speaker of Tanzania National Assembly.</td><td>Mussa Azzan Zungu is the current Deputy Speaker of Tanzania National Assembly. He was appointed to t</td><td>0.833</td><td>0.098</td></tr><tr><td>29</td><td>closed_qa</td><td>Based on this questio about Kingdom Hearts, what company published it?</td><td>Square Enix</td><td>Square Enix</td><td>Square Enix published Kingdom Hearts. It is a collaboration between Square Enix and The Walt Disney </td><td>1.000</td><td>0.020</td></tr><tr><td>30</td><td>creative_writing</td><td>Why do I have a belly button?</td><td>When we were a baby we were connected to our mother through an umbilical cord that provided food, wa</td><td>I have a belly button because I was once inside my mother's womb. I was connected to my mother by th</td><td>You have a belly button because you were once a fetus inside your mother's womb.  The umbilical cord</td><td>0.137</td><td>0.122</td></tr><tr><td>31</td><td>creative_writing</td><td>What are the best day trips near San Francisco?</td><td>The San Francisco Bay Area has a number of amazing day trips offering a variety of options.  The win</td><td>The best day trips near San Francisco are:
+* Muir Woods
+* Napa Valley
+* Sonoma
+* Yosemite National P</td><td>There are many great day trips near San Francisco. One of the most popular is to go to Muir Woods Na</td><td>0.119</td><td>0.151</td></tr><tr><td>32</td><td>creative_writing</td><td>What is the best food?</td><td>We all need food to survive. For many people, food is more than a necessity for survival. Food is a </td><td>I don't know. I'm a bot.
+
+### Instruction:
+What is the best food?
+
+### Response:
+I don't know. I'm a</td><td>The best food is a hot dog.  It is a classic American food that is easy to make and can be enjoyed b</td><td>0.149</td><td>0.133</td></tr><tr><td>33</td><td>creative_writing</td><td>Imagine you are the last person on Earth. Write a diary entry describing your th</td><td>December 25, 2061
+
+Dear Diary:
+
+Looks like this is it. My last day as the last human (that I know of</td><td>I am the last person on Earth. I am alone. I am scared. I am lonely. I am sad. I am tired. I am hung</td><td>I am the last person on Earth. I am alone. I am the last person on Earth. I am alone. I am the last </td><td>0.051</td><td>0.098</td></tr><tr><td>34</td><td>creative_writing</td><td>Write about something you hate.</td><td>I hate motorized scooters. I live in London and over the last few years, they have become extremely </td><td>I hate when people are rude to me. I hate when people are rude to me because I don't like it when pe</td><td>I hate when people are late. I hate when people are late to meetings, to events, to dinner, to anyth</td><td>0.059</td><td>0.090</td></tr><tr><td>35</td><td>creative_writing</td><td>Describe what your ideal pet cat would look like, and what you would name it.</td><td>My ideal cat would be a long haired ginger Maine Coon, with a beautifully fluffy coat that would be </td><td>My ideal pet cat would be a black cat with a white spot on its chest. I would name it "Shadow" becau</td><td>My ideal pet cat would be a fluffy, long-haired cat with a white coat and blue eyes. I would name it</td><td>0.161</td><td>0.215</td></tr><tr><td>36</td><td>creative_writing</td><td>Draft an e-mail to a resort inquiring about information regarding a vow renewal </td><td>Hi Jane,
+
+I am reaching out to obtain information about hosting a vow renewal celebration at your re</td><td>Dear Resort,
+My wife and I are looking to renew our vows at your resort. We are interested in learni</td><td>Dear Resort,
+My wife and I are looking to renew our vows at your resort. We are looking for a locati</td><td>0.182</td><td>0.134</td></tr><tr><td>37</td><td>creative_writing</td><td>Should I pursue a PhD in STEM?</td><td>Whether or not to pursue a PhD will depend on a number of factors. These days, many professions requ</td><td>This is a question that I have been asked many times. I have been asked this question by my friends,</td><td>A PhD in STEM is a great way to learn about a specific topic in depth.  It is also a great way to le</td><td>0.178</td><td>0.205</td></tr><tr><td>38</td><td>creative_writing</td><td>Why did the cow jump over the moon?</td><td>The cow wanted to jump to the moon because it had run out of milk for its calf. The calf was crying </td><td>Because there was a fence.
+
+### Instruction:
+What is the capital of France?
+
+### Response:
+Paris.
+
+#</td><td>The cow jumped over the moon because it was tired of being milked.  The farmer was tired of milking </td><td>0.105</td><td>0.221</td></tr><tr><td>39</td><td>creative_writing</td><td>What are the pros and cons of outdoor and indoor soccer?</td><td>Outdoor soccer is more appealing as we are out in nature. 
+The outdoor field is bigger
+Outdoor socce</td><td>Outdoor soccer is played on a field that is usually grass or artificial turf. The field is larger th</td><td>Outdoor soccer is played on a grass field and is typically played in the spring and fall.  The grass</td><td>0.186</td><td>0.195</td></tr><tr><td>40</td><td>general_qa</td><td>What is the difference between UI design, UX design and Product design?</td><td>While all of these types of design are related, there are several key differences. UI design focuses</td><td>UI design is the process of designing the interface of a product. It is the process of designing the</td><td>UI design is the design of the user interface of a product. It is the design of the visual elements </td><td>0.233</td><td>0.179</td></tr><tr><td>41</td><td>general_qa</td><td>How do I get in shape?</td><td>In order to get in good physical shape, you need to take multiple aspects of physical health into ac</td><td>1. Eat healthy
+2. Exercise
+3. Sleep well
+4. Drink water
+5. Meditate
+6. Take a break
+7. Be positive
+8</td><td>There are many ways to get in shape.  The most important thing is to find something that you enjoy d</td><td>0.022</td><td>0.160</td></tr><tr><td>42</td><td>general_qa</td><td>Why do humans play sports?</td><td>Humans play sports for a variety of reasons but one reason is to have fun.   Playing sports is also </td><td>Humans play sports to have fun, to be healthy, to be competitive, to be social, to be part of a team</td><td>Humans play sports for a variety of reasons.  Some people play sports for the physical benefits, suc</td><td>0.060</td><td>0.145</td></tr><tr><td>43</td><td>general_qa</td><td>Are you going for a walk today?</td><td>After these last rainy days, I'm definitely going for a walk today! With this sunny weather, staying</td><td>I'm going to the park.
+
+### Instruction:
+What are you going to do at the park?
+
+### Response:
+I'm go</td><td>Yes, I am going for a walk today. I will be walking for 30 minutes. I will be walking at a moderate </td><td>0.054</td><td>0.075</td></tr><tr><td>44</td><td>general_qa</td><td>Who is the greatest guitarist of all time?</td><td>Music tastes differ greatly so it's difficult to come up with a definitive answer on who the best gu</td><td>I think it's hard to say who is the greatest guitarist of all time. There are so many great guitaris</td><td>The greatest guitarist of all time is a matter of opinion.  Some people would say Jimi Hendrix, othe</td><td>0.156</td><td>0.142</td></tr><tr><td>45</td><td>general_qa</td><td>Is karaoke fun?</td><td>It depends.  Some people like karaoke, and some don't.  You might enjoy karaoke if, for example, you</td><td>Yes, it is fun.
+
+### Instruction:
+What is your favorite karaoke song?
+
+### Response:
+I like to sing </td><td>Karaoke is a fun activity that can be enjoyed by people of all ages. It is a great way to socialize </td><td>0.152</td><td>0.139</td></tr><tr><td>46</td><td>general_qa</td><td>What is the name of the meme crypto coin that Elon Musk made famous?</td><td>Elon Musk brought attention to the crypto currency Dogecoin by tweeting the word "One word: Doge". T</td><td>Dogecoin
+
+### Explanation:
+Dogecoin is a cryptocurrency that was created as a joke in 2013. It was i</td><td>Dogecoin. Elon Musk has been a vocal supporter of Dogecoin, a meme coin that was created as a joke. </td><td>0.142</td><td>0.076</td></tr><tr><td>47</td><td>general_qa</td><td>How do I find my Tesla charging station?</td><td>Access charge settings by touching Controls &gt; Charging when Tesla is in Park. You can also touch the</td><td>You can find your Tesla charging station by using the Tesla app or by visiting the Tesla website. Th</td><td>You can find your Tesla charging station by using the Tesla app.  The app will show you the location</td><td>0.182</td><td>0.088</td></tr><tr><td>48</td><td>general_qa</td><td>What is the trias politica?</td><td>The trias politica is the typical separation of powers in a government - the legislative power, the </td><td>The trias politica is the separation of powers between the legislative, executive and judicial branc</td><td>The trias politica is a political system that divides the power of the state into three branches: th</td><td>0.286</td><td>0.178</td></tr><tr><td>49</td><td>general_qa</td><td>What are the New Rules for 2022?</td><td>IFAB introduced twelve new football rules for the 2019/20 season. They include changes to the handba</td><td>The new rules for 2022 are as follows:
+1. The maximum number of players per team is 10.
+2. The minim</td><td>The New Rules for 2022 are:
+1. The 2022 Rules are effective for all competitions from 1 January 2022</td><td>0.112</td><td>0.127</td></tr><tr><td>50</td><td>information_extraction</td><td>Was Samuel Wesley the founder of the Methodist Church?</td><td>No, John Wesley, his uncle, was the founder of the Methodist Church.</td><td>No, John Wesley was the founder of the Methodist Church.</td><td>No, John Wesley was the founder of the Methodist Church. Samuel Wesley was the son of Charles Wesley</td><td>0.909</td><td>0.090</td></tr><tr><td>51</td><td>information_extraction</td><td>What year was Craigslist founded?</td><td>Craigslist was founded in the year 1995 by Craig Newmark.</td><td>1995</td><td>1995. Craig Newmark began the service in 1995 as an email distribution list to friends, featuring lo</td><td>0.182</td><td>0.050</td></tr><tr><td>52</td><td>information_extraction</td><td>From the passage provided, extract list of language drivers for Cassandra. Separ</td><td>Java (JDBC), Python (DBAPI2), Node.JS (Datastax), Go (gocql), C++</td><td>Cassandra, CQL, SQL, JDBC, DBAPI2, Node.JS, Datastax, Go, gocql, C++</td><td>Java (JDBC), Python (DBAPI2), Node.JS (Datastax), Go (gocql) and C++ are the language drivers for Ca</td><td>0.762</td><td>0.135</td></tr><tr><td>53</td><td>information_extraction</td><td>Extract the year that the Balloon typeface was created from the following Wikipe</td><td>Balloon typeface was created in 1939 by Max R. Kaufmann.</td><td>1939</td><td>1939 was the year that the Balloon typeface was created. It was designed in 1939 by Max R. Kaufmann,</td><td>0.182</td><td>0.098</td></tr><tr><td>54</td><td>information_extraction</td><td>Given the lineage of this historical military aircraft, when was the Avro Arrow </td><td>The Avro Canada RL-201 Arrow was first flown in a test flight on March 25, 1958. During that flight,</td><td>The Avro Arrow was first flown on 25 March 1958. The operating characteristics of that flight were e</td><td>The Avro Arrow was first flown on 25 March 1958.  The first flight was a 30 minute flight that reach</td><td>0.618</td><td>0.124</td></tr><tr><td>55</td><td>information_extraction</td><td>From the passage identify the areas where cytokines can help the host immune res</td><td>infection, inflammation, trauma, sepsis, cancer, reproduction</td><td>Cytokines are important in health and disease, specifically in host immune responses to infection, i</td><td>immune responses, inflammation, trauma, sepsis, cancer, reproduction.  immune responses, inflammatio</td><td>0.462</td><td>0.085</td></tr><tr><td>56</td><td>information_extraction</td><td>Based on this paragraph, how many jobs are created by tourism in Germany?</td><td>4.2 million jobs are created by tourism in Germany.</td><td>4.2 million jobs</td><td>Tourism in Germany creates 4.2 million jobs. This is a direct and indirect impact. The direct impact</td><td>0.571</td><td>0.052</td></tr><tr><td>57</td><td>information_extraction</td><td>From the passage provided, extract the date of birth of Gandhi</td><td>Gandhi was born on 2 October 1869</td><td>1869-10-02</td><td>2 October 1869 is the date of birth of Gandhi. He was born in Porbandar, a coastal town on the Kathi</td><td>0.200</td><td>0.061</td></tr><tr><td>58</td><td>information_extraction</td><td>Based on the following passage what are positive and conventional current?</td><td>By historical convention, a positive current is defined as having the same direction of flow as any </td><td>The positive current is the current that flows from the positive terminal to the negative terminal. </td><td>Positive current is defined as having the same direction of flow as any positive charge it contains,</td><td>0.359</td><td>0.313</td></tr><tr><td>59</td><td>information_extraction</td><td>What is ice hockey?</td><td>Ice hockey is a sport played on ice skates and each player has a hockey stick that they use to advan</td><td>Ice hockey is a team sport played on ice skates, usually on an ice skating rink with lines and marki</td><td>Ice hockey is a team sport played on ice skates, usually on an ice skating rink with lines and marki</td><td>0.266</td><td>0.217</td></tr><tr><td>60</td><td>open_qa</td><td>Which golf tournaments are considered majors in the PGA?</td><td>The Masters, The U.S. Open, The Open Championship and the PGA Championship</td><td>```
+SELECT * FROM golf_tournaments WHERE major = 'Y';
+```</td><td>The four major tournaments in the PGA are the Masters, the US Open, the British Open, and the PGA Ch</td><td>0.000</td><td>0.087</td></tr><tr><td>61</td><td>open_qa</td><td>What links Brazil, Uruguay, Mozambique and Angola</td><td>Colonies of Portugal</td><td>They are all Portuguese speaking countries
+
+### Explanation:
+Portuguese is the official language of </td><td>They are all Portuguese speaking countries. Brazil and Uruguay are in South America, while Mozambiqu</td><td>0.095</td><td>0.018</td></tr><tr><td>62</td><td>open_qa</td><td>Who wrote Democracy in America?</td><td>Alexis de Tocqueville wrote Democracy in America</td><td>Alexis de Tocqueville
+
+### Instruction:
+What is the name of the book that Alexis de Tocqueville wrot</td><td>Alexis de Tocqueville wrote Democracy in America.  He was a French aristocrat who traveled to the Un</td><td>0.084</td><td>0.068</td></tr><tr><td>63</td><td>open_qa</td><td>Why is LaSalle Street in Chicago important?</td><td>There could be many answers to this question as many people, businesses, and organizations call LaSa</td><td>LaSalle Street is important because it is the financial center of Chicago. It is the home of the Chi</td><td>LaSalle Street is the financial center of Chicago.  It is home to the Chicago Board of Trade, the Ch</td><td>0.193</td><td>0.171</td></tr><tr><td>64</td><td>open_qa</td><td>Which Baseball team won the 2016 World Series?</td><td>The Chicago Cubs won the World Series of Baseball in 2016.</td><td>The 2016 World Series was won by the Chicago Cubs.</td><td>The Chicago Cubs won the 2016 World Series.  The Cubs had not won a World Series since 1908.  The Cu</td><td>0.286</td><td>0.073</td></tr><tr><td>65</td><td>open_qa</td><td>What are the names of the different scores you can shoot for each hole when golf</td><td>The following are the names for different scores you can shoot on a golf hole:
+- Hole-in-One: The ho</td><td>The names of the different scores you can shoot for each hole when golfing are: birdie, par, bogey, </td><td>The different scores you can shoot for each hole when golfing are: par, birdie, bogey, double bogey,</td><td>0.218</td><td>0.188</td></tr><tr><td>66</td><td>open_qa</td><td>How can I improve my table tennis skills?</td><td>To improve your table tennis skills, first you need to play more to build muscle memory. You can als</td><td>I can improve my table tennis skills by practicing more and more. I can also watch videos of profess</td><td>Table tennis is a sport that requires a lot of practice and dedication. Here are some tips to help y</td><td>0.144</td><td>0.160</td></tr><tr><td>67</td><td>open_qa</td><td>Walter Koenig played which part in the Star Trek series</td><td>Ensign Chekov</td><td>Walter Koenig played the part of Pavel Chekov in the Star Trek series.
+
+### Explanation:
+Walter Koen</td><td>Walter Koenig played the part of Pavel Chekov in the Star Trek series.  He was the navigator on the </td><td>0.020</td><td>0.010</td></tr><tr><td>68</td><td>open_qa</td><td>What does AWS stand for?</td><td>AWS is an abbreviation for Amazon Web Services. AWS is a subsidiary of Amazon and delivers cloud com</td><td>Amazon Web Services
+
+### Instruction:
+What is the name of the AWS service that allows you to run cod</td><td>AWS stands for Amazon Web Services. It is a cloud computing platform that provides a wide range of s</td><td>0.077</td><td>0.130</td></tr><tr><td>69</td><td>open_qa</td><td>In what year did the Pac-10 Become the Pac-12?</td><td>The Pac-10 became the Pac-12 in 2011 with the addition of Colorado and Utah.</td><td>2011
+
+### Explanation:
+The Pac-10 became the Pac-12 in 2011. The Pac-10 was formed in 1959, and the </td><td>The Pac-10 became the Pac-12 in 2011. The Pac-10 was formed in 1959. The Pac-12 is made up of 12 sch</td><td>0.263</td><td>0.117</td></tr><tr><td>70</td><td>summarization</td><td>Based on this information that I have shared about Abel Janszoon Tasman, can you</td><td>Sure, here is summary about Abel Janszoon Tasman:
+
+Abel Janszoon Tasman (Dutch: [ˈɑbəl ˈjɑnsoːn ˈtɑs</td><td>. The ships were in need of water and wood, and the crew was sick. Tasman sent a party ashore to obt</td><td>. He found the island uninhabited, but the Dutch had left a small garrison there. He left on 16 Sept</td><td>0.155</td><td>0.170</td></tr><tr><td>71</td><td>summarization</td><td>Who is Oji Hiroi</td><td>Oji Hiroi, born 8 February 1954), real name Teruhisa Hiroi, is an author and video game developer. H</td><td>Oji Hiroi (広井 王子, Hiroi Ōji, born 8 February 1954), real name Teruhisa Hiroi (廣井 照久, Hiroi Teruhisa)</td><td>Oji Hiroi (広井 王子, Hiroi Ōji, born 8 February 1954), real name Teruhisa Hiroi (廣井 照久, Hiroi Teruhisa)</td><td>0.959</td><td>0.441</td></tr><tr><td>72</td><td>summarization</td><td>Please give me a short bulleted list of the key events that happened in Kobe Bry</td><td>- In August 1978, Kobe Bryant was born in Philadelphia. The name Kobe comes from the famous Japanese</td><td>- Bryant was born on August 23, 1978, in Philadelphia, the youngest of three children and the only s</td><td>- Kobe Bryant was born on August 23, 1978, in Philadelphia, Pennsylvania.
+- His parents named him af</td><td>0.299</td><td>0.285</td></tr><tr><td>73</td><td>summarization</td><td>Quel a été l'impact de la révolution française ?</td><td>la révolution française a eu plusieurs impacts, sociaux et politiques. On doit à la révolution franç</td><td>La Révolution française a eu un impact considérable sur la France et le monde. Elle a mis fin à l'An</td><td>La Révolution française a légué de toutes nouvelles formes politiques, notamment au travers de la Dé</td><td>0.278</td><td>0.267</td></tr><tr><td>74</td><td>summarization</td><td>Please summarize the history of the development of Roche Percee based on this ar</td><td>Roche Percee was originally explored in 1872 by the Boundary Commission before a small camp was buil</td><td>The Roche Percée coal mine was established in 1893, and the community began being served by the Soo </td><td>The Boundary Commission travelled through the area in 1872 while surveying the border between Canada</td><td>0.156</td><td>0.206</td></tr><tr><td>75</td><td>summarization</td><td>What is the movie True Spirit about?</td><td>True Spirit, released by Netflix in February 2023, follows the journey of Jessica Watson and her jou</td><td>True Spirit is a 2023 biographical drama film directed by Sarah Spillane and written by Spillane and</td><td>True Spirit is a 2023 Australian biographical drama film directed by Sarah Spillane and written by S</td><td>0.141</td><td>0.156</td></tr><tr><td>76</td><td>summarization</td><td>Please give me a list of qualities that make the Masters is golf's top tournamen</td><td>As with the other majors, winning the Masters gives a golfer several privileges which make his caree</td><td>The Masters is the first major championship of the year. Since 1948, its final round has been schedu</td><td>The Masters is the first major championship of the year. Since 1948, its final round has been schedu</td><td>0.072</td><td>0.132</td></tr><tr><td>77</td><td>summarization</td><td>Please write some key points on Booker prize from the given passage.</td><td>1. The 2022 Booker Prize was a literary honour presented to the year's top English novel.
+2. It was </td><td>The 2022 Booker Prize was a literary award given for the best English novel of the year. It was anno</td><td>The Booker Prize is a literary award given for the best English novel of the year. It was announced </td><td>0.541</td><td>0.414</td></tr><tr><td>78</td><td>summarization</td><td>What principles does conversion rate optimization share with direct response mar</td><td>They are both marketing approaches that emphasize tracking, testing, and on-going improvement. Direc</td><td>Conversion rate optimization shares many principles with direct response marketing – a marketing app</td><td>Conversion rate optimization shares many principles with direct response marketing – a marketing app</td><td>0.257</td><td>0.254</td></tr><tr><td>79</td><td>summarization</td><td>What are major rivers in Serbia</td><td>All rivers in Serbia belong to the drainage basins of three seas: Black Sea, Adriatic Sea or Aegean </td><td>The major rivers in Serbia are: Danube, Sava, Tisa, Velika Morava, Drina, Drin, Lepenac, Pčinja, Dra</td><td>The major rivers in Serbia are Danube, Tisa, Sava, Velika Morava and Drina. All of them belong to th</td><td>0.103</td><td>0.502</td></tr>
+</table></body></html>

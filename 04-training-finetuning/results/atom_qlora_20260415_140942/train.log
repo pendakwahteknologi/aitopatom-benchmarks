@@ -1,0 +1,57 @@
+2026-04-15 14:13:03 | DEBUG    | Step 1/500 loss=2.2061 lr=8.00e-06 step_time=68.45s gpu_mem=12635MB
+2026-04-15 14:23:08 | DEBUG    | Step 10/500 loss=1.9998 lr=8.00e-05 step_time=67.28s gpu_mem=12739MB
+2026-04-15 14:34:20 | DEBUG    | Step 20/500 loss=1.7767 lr=1.60e-04 step_time=67.21s gpu_mem=12739MB
+2026-04-15 14:45:33 | DEBUG    | Step 30/500 loss=1.8254 lr=2.00e-04 step_time=68.22s gpu_mem=12739MB
+2026-04-15 14:56:46 | DEBUG    | Step 40/500 loss=1.7807 lr=2.00e-04 step_time=67.22s gpu_mem=12739MB
+2026-04-15 15:07:58 | DEBUG    | Step 50/500 loss=1.7903 lr=1.99e-04 step_time=67.24s gpu_mem=12739MB
+2026-04-15 15:19:11 | DEBUG    | Step 60/500 loss=1.6918 lr=1.97e-04 step_time=67.19s gpu_mem=12739MB
+2026-04-15 15:30:24 | DEBUG    | Step 70/500 loss=1.6851 lr=1.96e-04 step_time=67.18s gpu_mem=12739MB
+2026-04-15 15:41:36 | DEBUG    | Step 80/500 loss=1.5910 lr=1.93e-04 step_time=67.20s gpu_mem=12739MB
+2026-04-15 15:52:49 | DEBUG    | Step 90/500 loss=1.6421 lr=1.91e-04 step_time=67.35s gpu_mem=12739MB
+2026-04-15 16:04:01 | DEBUG    | Step 100/500 loss=1.7272 lr=1.88e-04 step_time=67.32s gpu_mem=12739MB
+2026-04-15 16:04:26 | INFO     | Validation @ step 100: val_loss=1.7426
+2026-04-15 16:15:39 | DEBUG    | Step 110/500 loss=1.6355 lr=1.85e-04 step_time=67.31s gpu_mem=12751MB
+2026-04-15 16:26:52 | DEBUG    | Step 120/500 loss=1.7539 lr=1.81e-04 step_time=67.24s gpu_mem=12751MB
+2026-04-15 16:38:05 | DEBUG    | Step 130/500 loss=1.6524 lr=1.77e-04 step_time=67.36s gpu_mem=12751MB
+2026-04-15 16:49:18 | DEBUG    | Step 140/500 loss=1.6154 lr=1.72e-04 step_time=67.41s gpu_mem=12751MB
+2026-04-15 17:00:32 | DEBUG    | Step 150/500 loss=1.5027 lr=1.68e-04 step_time=67.38s gpu_mem=12751MB
+2026-04-15 17:11:47 | DEBUG    | Step 160/500 loss=1.5681 lr=1.63e-04 step_time=67.45s gpu_mem=12751MB
+2026-04-15 17:23:01 | DEBUG    | Step 170/500 loss=1.6581 lr=1.57e-04 step_time=67.59s gpu_mem=12751MB
+2026-04-15 17:34:15 | DEBUG    | Step 180/500 loss=1.6041 lr=1.52e-04 step_time=67.38s gpu_mem=12751MB
+2026-04-15 17:45:30 | DEBUG    | Step 190/500 loss=1.4916 lr=1.46e-04 step_time=67.35s gpu_mem=12751MB
+2026-04-15 17:56:44 | DEBUG    | Step 200/500 loss=1.7377 lr=1.40e-04 step_time=67.51s gpu_mem=12751MB
+2026-04-15 17:57:09 | INFO     | Validation @ step 200: val_loss=1.7295
+2026-04-15 18:08:23 | DEBUG    | Step 210/500 loss=1.4285 lr=1.34e-04 step_time=67.43s gpu_mem=12751MB
+2026-04-15 18:19:38 | DEBUG    | Step 220/500 loss=1.4843 lr=1.28e-04 step_time=67.43s gpu_mem=12751MB
+2026-04-15 18:30:52 | DEBUG    | Step 230/500 loss=1.6430 lr=1.21e-04 step_time=67.36s gpu_mem=12751MB
+2026-04-15 18:42:06 | DEBUG    | Step 240/500 loss=1.5969 lr=1.15e-04 step_time=67.52s gpu_mem=12751MB
+2026-04-15 18:53:21 | DEBUG    | Step 250/500 loss=1.6127 lr=1.08e-04 step_time=67.48s gpu_mem=12751MB
+2026-04-15 19:04:35 | DEBUG    | Step 260/500 loss=1.5308 lr=1.02e-04 step_time=67.50s gpu_mem=12751MB
+2026-04-15 19:15:49 | DEBUG    | Step 270/500 loss=1.5385 lr=9.50e-05 step_time=67.41s gpu_mem=12751MB
+2026-04-15 19:27:02 | DEBUG    | Step 280/500 loss=1.7223 lr=8.85e-05 step_time=67.37s gpu_mem=12751MB
+2026-04-15 19:38:16 | DEBUG    | Step 290/500 loss=1.4868 lr=8.19e-05 step_time=67.31s gpu_mem=12751MB
+2026-04-15 19:49:30 | DEBUG    | Step 300/500 loss=1.5051 lr=7.55e-05 step_time=67.47s gpu_mem=12751MB
+2026-04-15 19:49:55 | INFO     | Validation @ step 300: val_loss=1.7189
+2026-04-15 20:01:08 | DEBUG    | Step 310/500 loss=1.5387 lr=6.91e-05 step_time=67.46s gpu_mem=12751MB
+2026-04-15 20:12:22 | DEBUG    | Step 320/500 loss=1.7255 lr=6.29e-05 step_time=67.36s gpu_mem=12751MB
+2026-04-15 20:23:36 | DEBUG    | Step 330/500 loss=1.6559 lr=5.68e-05 step_time=67.38s gpu_mem=12751MB
+2026-04-15 20:34:49 | DEBUG    | Step 340/500 loss=1.4202 lr=5.10e-05 step_time=67.33s gpu_mem=12751MB
+2026-04-15 20:46:03 | DEBUG    | Step 350/500 loss=1.6286 lr=4.53e-05 step_time=67.33s gpu_mem=12751MB
+2026-04-15 20:57:17 | DEBUG    | Step 360/500 loss=1.5985 lr=3.99e-05 step_time=67.32s gpu_mem=12751MB
+2026-04-15 21:08:30 | DEBUG    | Step 370/500 loss=1.5714 lr=3.47e-05 step_time=67.23s gpu_mem=12751MB
+2026-04-15 21:19:44 | DEBUG    | Step 380/500 loss=1.5119 lr=2.99e-05 step_time=67.35s gpu_mem=12751MB
+2026-04-15 21:30:57 | DEBUG    | Step 390/500 loss=1.7629 lr=2.53e-05 step_time=67.29s gpu_mem=12751MB
+2026-04-15 21:42:10 | DEBUG    | Step 400/500 loss=1.5606 lr=2.11e-05 step_time=67.37s gpu_mem=12751MB
+2026-04-15 21:42:35 | INFO     | Validation @ step 400: val_loss=1.7167
+2026-04-15 21:53:48 | DEBUG    | Step 410/500 loss=1.4854 lr=1.72e-05 step_time=67.28s gpu_mem=12751MB
+2026-04-15 22:05:01 | DEBUG    | Step 420/500 loss=1.5104 lr=1.37e-05 step_time=67.37s gpu_mem=12751MB
+2026-04-15 22:16:14 | DEBUG    | Step 430/500 loss=1.6701 lr=1.05e-05 step_time=67.35s gpu_mem=12751MB
+2026-04-15 22:27:28 | DEBUG    | Step 440/500 loss=1.4701 lr=7.77e-06 step_time=67.30s gpu_mem=12751MB
+2026-04-15 22:38:41 | DEBUG    | Step 450/500 loss=1.4939 lr=5.42e-06 step_time=67.25s gpu_mem=12751MB
+2026-04-15 22:49:54 | DEBUG    | Step 460/500 loss=1.7258 lr=3.48e-06 step_time=67.24s gpu_mem=12751MB
+2026-04-15 23:01:07 | DEBUG    | Step 470/500 loss=1.5443 lr=1.96e-06 step_time=67.23s gpu_mem=12751MB
+2026-04-15 23:12:20 | DEBUG    | Step 480/500 loss=1.5218 lr=8.74e-07 step_time=67.26s gpu_mem=12751MB
+2026-04-15 23:23:33 | DEBUG    | Step 490/500 loss=1.4176 lr=2.19e-07 step_time=67.24s gpu_mem=12751MB
+2026-04-15 23:34:46 | DEBUG    | Step 500/500 loss=1.5156 lr=0.00e+00 step_time=67.30s gpu_mem=12751MB
+2026-04-15 23:35:11 | INFO     | Validation @ step 500: val_loss=1.7157
+2026-04-16 00:10:30 | INFO     | Benchmark complete: status=success run_dir=./results/atom_qlora_20260415_140942

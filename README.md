@@ -50,7 +50,7 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 | 01 | **Model Scaling** | 183.6 tok/s (1.5B) to 4.3 tok/s (72B) — all 7 models run, 1–24% faster than GX10 | [Details](#01--inference-model-scaling) |
 | 02 | **Engine Comparison** | Ollama 47.1 tok/s vs llama.cpp 44.9 vs vLLM 12.8 — all 3 engines working | [Details](#02--inference-engine-comparison) |
 | 03 | **llama.cpp Multi-Quant** | 6,946 tok/s PP (3B Q4) · 12 configs · 5–20% faster than GX10 | [Details](#03--inference-llamacpp-multi-quantization) |
-| 04 | **Fine-Tuning** | **Testing ongoing** — LoRA / QLoRA / Full FT to match GX10 | [Details](#04--training-fine-tuning) |
+| 04 | **Fine-Tuning** | LoRA 162 tok/s · Full FT 150 tok/s · QLoRA 82 tok/s — matches GX10 within 2% | [Details](#04--training-fine-tuning) |
 | 05 | **Token per Watt** | 2.16 tok/W peak · RM 0.07 per 1M tokens · 4 models x 3 quants | [Details](#05--efficiency-token-per-watt) |
 | 06 | **Embedding Throughput** | 3,417 chunks/s GPU · 34.4x faster than CPU | [Details](#06--inference-embedding-throughput) |
 | 07 | **Image & Video Gen** | 49.7 img/min (512x512) · 1024x1024 in 4.2s · video skipped (ARM CPU bottleneck) | [Details](#07--image--video-generation) |
@@ -132,17 +132,15 @@ See [`03-inference-llama-cpp/results/benchmark_20260414_190923.csv`](03-inferenc
 
 ## 04 — Training: Fine-Tuning
 
-> **Testing ongoing.** Re-running with Llama 3.1 8B to match GX10 benchmark parameters (LoRA / QLoRA / Full Fine-Tune, full training run).
+> Three fine-tuning methods on **Llama 3.1 8B**, 500 steps, matching GX10. Full Fine-Tune uses **93.6 GB** — only possible with unified memory. **ATOM matches GX10 within 2%** on all training metrics.
 
-### GX10 Reference (to be compared)
+| Mode | ATOM Time | ATOM tok/s | GX10 tok/s | Peak Memory |
+|------|----------|----------:|-----------:|------------:|
+| **LoRA** | 4h 47m | **162.4** | 161.9 | 87.4 GB |
+| **Full FT** | 5h 07m | 150.2 | 150.7 | 93.6 GB |
+| **QLoRA** | 9h 23m | 81.6 | 83.0 | **12.4 GB** |
 
-| Mode | Time | Peak GPU | tok/s |
-|------|------|----------|------:|
-| LoRA | 4h 47m | 87.4 GB | 164 |
-| Full FT | 5h 05m | 93.6 GB | 151 |
-| QLoRA | 9h 13m | 12.4 GB | 83 |
-
-<sub>Results will be updated once the ATOM training run completes.</sub>
+Full Fine-Tune wins on quality (lowest loss 1.2358, 40% of best answers on 80 evaluation questions).
 
 ---
 
@@ -381,7 +379,7 @@ aitopatom-benchmarks/
 ├── 01-inference-model-scaling/        Ollama · 7 models · 1.5B to 72B + GX10 comparison
 ├── 02-inference-engine-comparison/    Ollama 47.1 vs llama.cpp 44.9 vs vLLM 12.8
 ├── 03-inference-llama-cpp/            4 models x 3 quants · 48 measurements
-├── 04-training-finetuning/            LoRA · QLoRA · Full FT · TESTING ONGOING
+├── 04-training-finetuning/            LoRA · QLoRA · Full FT · matches GX10 within 2%
 ├── 05-efficiency-token-per-watt/      4 models x 3 quants · power monitoring · cost
 ├── 06-inference-embedding/            GPU 3,417 chunks/s · 34.4x faster than CPU
 ├── 07-image-video-generation/         Z-Image-Turbo · 49.7 img/min · video skipped

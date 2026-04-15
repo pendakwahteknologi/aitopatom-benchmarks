@@ -1,0 +1,490 @@
+{
+  "config": {
+    "machine_label": "atom",
+    "mode": "lora",
+    "model": "meta-llama/Llama-3.1-8B",
+    "dataset": "databricks/databricks-dolly-15k",
+    "num_questions": 80,
+    "temperature": 0.0,
+    "max_new_tokens": 256,
+    "do_sample": false
+  },
+  "baseline": {
+    "overall": {
+      "rouge_l": {
+        "mean": 0.25966263899582553,
+        "count": 80
+      },
+      "bleu": {
+        "mean": 0.067437040800146,
+        "count": 80
+      },
+      "exact_match": {
+        "mean": 0.0125,
+        "count": 80
+      },
+      "normalized_match": {
+        "mean": 0.4059086648128848,
+        "count": 80
+      },
+      "prediction_length": {
+        "mean": 118.0,
+        "count": 80
+      },
+      "latency_sec": {
+        "mean": 11.228887500000004,
+        "count": 80
+      }
+    },
+    "total_samples": 80,
+    "by_category": {
+      "brainstorming": {
+        "rouge_l": {
+          "mean": 0.10380997126694518,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.014825377158655742,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.17545091147699246,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 180.3,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 16.482100000000003,
+          "count": 10
+        }
+      },
+      "classification": {
+        "rouge_l": {
+          "mean": 0.37555521758426563,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.06702861834373694,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.6320771820771821,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 59.8,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 6.860000000000001,
+          "count": 10
+        }
+      },
+      "closed_qa": {
+        "rouge_l": {
+          "mean": 0.440068852444068,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.17223372091232236,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.1,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.566498778998779,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 83.2,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 7.707099999999999,
+          "count": 10
+        }
+      },
+      "creative_writing": {
+        "rouge_l": {
+          "mean": 0.1328791701638706,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.016007191660038965,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.19179744442675245,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 194.6,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 17.517400000000002,
+          "count": 10
+        }
+      },
+      "general_qa": {
+        "rouge_l": {
+          "mean": 0.13985035295370335,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.009294511477166556,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.21943430465641667,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 159.2,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 14.678500000000003,
+          "count": 10
+        }
+      },
+      "information_extraction": {
+        "rouge_l": {
+          "mean": 0.4509845485396956,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.11380110442585507,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.6160271445101166,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 31.2,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 3.1509,
+          "count": 10
+        }
+      },
+      "open_qa": {
+        "rouge_l": {
+          "mean": 0.13798100822678006,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.022574086809238763,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.44845418470418463,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 105.9,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 9.7834,
+          "count": 10
+        }
+      },
+      "summarization": {
+        "rouge_l": {
+          "mean": 0.29617199078727563,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.12373171561415344,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.39752936765265534,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 129.8,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 13.6517,
+          "count": 10
+        }
+      }
+    }
+  },
+  "finetuned": {
+    "overall": {
+      "rouge_l": {
+        "mean": 0.14660479069246674,
+        "count": 80
+      },
+      "bleu": {
+        "mean": 0.037203012912428224,
+        "count": 80
+      },
+      "exact_match": {
+        "mean": 0.0,
+        "count": 80
+      },
+      "normalized_match": {
+        "mean": 0.5387458691626087,
+        "count": 80
+      },
+      "prediction_length": {
+        "mean": 198.1,
+        "count": 80
+      },
+      "latency_sec": {
+        "mean": 19.7312,
+        "count": 80
+      }
+    },
+    "total_samples": 80,
+    "by_category": {
+      "brainstorming": {
+        "rouge_l": {
+          "mean": 0.0933644926964869,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.004105597387735175,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.2917729766879914,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 202.2,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 19.674500000000002,
+          "count": 10
+        }
+      },
+      "classification": {
+        "rouge_l": {
+          "mean": 0.14405090256039016,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.04220414880010645,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.9611248011248013,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 190.5,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 19.688599999999997,
+          "count": 10
+        }
+      },
+      "closed_qa": {
+        "rouge_l": {
+          "mean": 0.14060606643228973,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.03797351372866835,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.6709859584859584,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 196.0,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 19.812099999999997,
+          "count": 10
+        }
+      },
+      "creative_writing": {
+        "rouge_l": {
+          "mean": 0.15643715889346888,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.0163717147397604,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.23324710725110118,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 218.5,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 19.6585,
+          "count": 10
+        }
+      },
+      "general_qa": {
+        "rouge_l": {
+          "mean": 0.13096583548768875,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.013997075125496541,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.2834934439958447,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 201.6,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 19.6577,
+          "count": 10
+        }
+      },
+      "information_extraction": {
+        "rouge_l": {
+          "mean": 0.12251633491792176,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.04040741204824663,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.7455993370234857,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 180.8,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 19.8149,
+          "count": 10
+        }
+      },
+      "open_qa": {
+        "rouge_l": {
+          "mean": 0.1021167572571923,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.024668996633183334,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.6148358585858585,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 205.5,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 19.6602,
+          "count": 10
+        }
+      },
+      "summarization": {
+        "rouge_l": {
+          "mean": 0.28278077729429596,
+          "count": 10
+        },
+        "bleu": {
+          "mean": 0.11789564483622902,
+          "count": 10
+        },
+        "exact_match": {
+          "mean": 0.0,
+          "count": 10
+        },
+        "normalized_match": {
+          "mean": 0.5089074701458263,
+          "count": 10
+        },
+        "prediction_length": {
+          "mean": 189.7,
+          "count": 10
+        },
+        "latency_sec": {
+          "mean": 19.8831,
+          "count": 10
+        }
+      }
+    }
+  }
+}
