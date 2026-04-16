@@ -142,6 +142,26 @@ See [`03-inference-llama-cpp/results/benchmark_20260414_190923.csv`](03-inferenc
 
 Full Fine-Tune wins on quality (lowest loss 1.2358, 40% of best answers on 80 evaluation questions).
 
+### Training Loss Curves
+
+<div align="center">
+<img src="04-training-finetuning/results/cross_comparison/loss_curves.png" width="700" alt="Training loss curves for LoRA, QLoRA, and Full Fine-Tune"/>
+<br><sub>Full Fine-Tune achieves the lowest loss (1.24). QLoRA converges slowest but uses 7x less memory.</sub>
+</div>
+
+### GPU Memory Usage
+
+<div align="center">
+<img src="04-training-finetuning/results/cross_comparison/gpu_memory.png" width="700" alt="GPU memory usage comparison"/>
+<br><sub>QLoRA: 12.4 GB · LoRA: 87.4 GB · Full FT: 93.6 GB — all fit in the GB10's 120 GB unified memory.</sub>
+</div>
+
+<details>
+<summary>Run details</summary>
+
+See [`04-training-finetuning/results/all_runs_summary.csv`](04-training-finetuning/results/all_runs_summary.csv) and [`04-training-finetuning/results/cross_comparison/`](04-training-finetuning/results/cross_comparison/) for full metrics, HTML report, and evaluation results.
+</details>
+
 ---
 
 ## 05 — Efficiency: Token per Watt
@@ -251,16 +271,16 @@ See [`06-inference-embedding/results/embedding-throughput-summary.csv`](06-infer
 </tr>
 </table>
 
-### Text-to-Video: Wan 2.2 T2V 14B
+### Text-to-Video: Wan 2.2 T2V 14B (Previous Run)
 
-4 steps with LightX2V LoRA, fp8 precision.
+4 steps with LightX2V LoRA, fp8 precision. **Note:** Video generation timed out (3+ hours) on the latest re-run due to CPU-bound VAE decoding on ARM. Results below are from a previous run.
 
 | Resolution | Frames | Time | FPS |
 |------------|-------:|-----:|----:|
 | 480x480 | 17 | 48.3s* | 0.35 |
 | 640x640 | 33 | 28.4s | **1.16** |
 
-<sub>*After model warm-up. First run includes model loading (~164s).</sub>
+<sub>*After model warm-up. First run includes model loading (~164s). Re-run timed out after 3+ hours — ARM CPU bottleneck in VAE decoding.</sub>
 
 #### Video Frames (640x640, 33 frames)
 
