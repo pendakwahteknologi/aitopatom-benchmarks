@@ -29,6 +29,15 @@ SUMMARY_CSV="$RESULTS_DIR/thermal_summary_${TIMESTAMP}.csv"
 
 mkdir -p "$RESULTS_DIR" "$SCRIPT_DIR/logs"
 
+# HF token for gated models
+if [ -z "${HF_TOKEN:-}" ]; then
+    if [ -f "$HOME/.cache/huggingface/token" ]; then
+        export HF_TOKEN=$(cat "$HOME/.cache/huggingface/token")
+    else
+        echo "WARNING: HF_TOKEN not set and no token file found."
+    fi
+fi
+
 VLLM_IMAGE="nvcr.io/nvidia/vllm:26.01-py3"
 VLLM_PORT=8000
 VLLM_CONTAINER="vllm-thermal"
@@ -82,6 +91,12 @@ get_nvme_temp() {
     echo "${temp:-0}"
 }
 
+stop_vllm() {
+    log "Stopping vLLM container..."
+    sudo docker rm -f "$VLLM_CONTAINER" 2>/dev/null || true
+    sleep 5
+}
+
 # Temperature monitoring background process
 monitor_temps() {
     local phase="$1"
@@ -116,14 +131,25 @@ generate_load() {
         input_text="Hi"
     fi
 
+    # Build request JSON once
+    local req_json=$(python3 -c "
+import json
+print(json.dumps({
+    'model': '$MODEL_ID',
+    'messages': [{'role': 'user', 'content': '''$input_text'''}],
+    'max_tokens': $osl,
+    'temperature': 0.0
+}))
+")
+
     while [ "$(date +%s)" -lt "$end_time" ]; do
         for i in $(seq 1 $CONCURRENT_REQUESTS); do
             curl -s --max-time 60 \
                 http://localhost:${VLLM_PORT}/v1/chat/completions \
                 -H "Content-Type: application/json" \
-                -d "{\"model\":\"$MODEL_ID\",\"messages\":[{\"role\":\"user\",\"content\":\"$input_text\"}],\"max_tokens\":$osl,\"temperature\":0.0}" > /dev/null 2>&1 &
+                -d "$req_json" > /dev/null 2>&1 &
         done
-        wait
+        wait || true
     done
 }
 
@@ -136,6 +162,10 @@ echo "  $(date)"                                    | tee -a "$LOG_FILE"
 echo "  Phase duration: ${PHASE_DURATION}s ($(( PHASE_DURATION / 60 )) min)" | tee -a "$LOG_FILE"
 echo "  Model: $MODEL_ID"                          | tee -a "$LOG_FILE"
 echo "============================================" | tee -a "$LOG_FILE"
+
+# Clean up any leftover containers on this port
+sudo docker rm -f "$VLLM_CONTAINER" 2>/dev/null || true
+sudo docker rm -f "vllm-bench10" 2>/dev/null || true
 
 # CSV header
 echo "timestamp,phase,gpu_temp_c,gpu_power_w,gpu_util_pct,cpu_temp_c,nvme_temp_c" > "$THERMAL_CSV"
@@ -153,22 +183,41 @@ sudo docker run -d --name "$VLLM_CONTAINER" \
     --runtime nvidia --gpus all \
     --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 \
     -v "${CACHE_DIR}:/root/.cache" \
+    -e HF_TOKEN="${HF_TOKEN:-}" \
     -p ${VLLM_PORT}:8000 \
     --entrypoint python3 \
     "$VLLM_IMAGE" \
     -m vllm.entrypoints.openai.api_server \
     --model "$MODEL_ID" \
     --max-model-len 4096 \
-    --dtype auto 2>&1 | tee -a "$LOG_FILE"
+    --dtype auto \
+    --gpu-memory-utilization 0.8 2>&1 | tee -a "$LOG_FILE"
 
 log "Waiting for vLLM..."
-for i in $(seq 1 300); do
+vllm_ready=false
+for i in $(seq 1 1200); do
     if curl -s http://localhost:${VLLM_PORT}/health > /dev/null 2>&1; then
         log "vLLM ready (took ${i}s)"
+        vllm_ready=true
         break
+    fi
+    # Check if container crashed early
+    if ! sudo docker ps -q -f name="$VLLM_CONTAINER" | grep -q .; then
+        log "ERROR: vLLM container exited prematurely"
+        sudo docker logs --tail 30 "$VLLM_CONTAINER" 2>&1 | tee -a "$LOG_FILE"
+        break
+    fi
+    if [ $((i % 60)) -eq 0 ]; then
+        log "Still waiting... (${i}s)"
     fi
     sleep 1
 done
+
+if [ "$vllm_ready" = false ]; then
+    log "FATAL: vLLM failed to start. Cannot run thermal stress test."
+    stop_vllm
+    exit 1
+fi
 sleep 5
 
 # ---- Phase 1: Prefill Heavy ----
@@ -211,9 +260,6 @@ log "Final cooldown: 120s"
 monitor_temps "cooldown_final" "$THERMAL_CSV" 120
 
 # ---- Stop vLLM ----
-stop_vllm() {
-    sudo docker rm -f "$VLLM_CONTAINER" 2>/dev/null || true
-}
 stop_vllm
 
 # ============================================================================
@@ -224,10 +270,10 @@ log "============================================"
 log "THERMAL STRESS TEST COMPLETE"
 log "============================================"
 
-python3 << 'PYEOF'
+python3 - "$THERMAL_CSV" << 'PYEOF'
 import csv, sys
 
-csv_path = "$THERMAL_CSV"
+csv_path = sys.argv[1]
 
 phases = {}
 with open(csv_path, "r") as f:
@@ -236,12 +282,11 @@ with open(csv_path, "r") as f:
         phase = row["phase"]
         if phase not in phases:
             phases[phase] = {"gpu_temp": [], "gpu_power": [], "cpu_temp": [], "nvme_temp": []}
-        for key in ["gpu_temp_c", "gpu_power_w", "cpu_temp_c", "nvme_temp_c"]:
+        for key, pkey in [("gpu_temp_c","gpu_temp"), ("gpu_power_w","gpu_power"), ("cpu_temp_c","cpu_temp"), ("nvme_temp_c","nvme_temp")]:
             try:
                 val = float(row[key])
                 if val > 0:
-                    short_key = key.replace("_c","").replace("_w","").replace("_pct","")
-                    phases[phase][short_key.replace("gpu_temp","gpu_temp").replace("gpu_power","gpu_power").replace("cpu_temp","cpu_temp").replace("nvme_temp","nvme_temp")].append(val)
+                    phases[phase][pkey].append(val)
             except:
                 pass
 
@@ -250,10 +295,10 @@ print("-" * 65)
 for phase in ["idle", "prefill_heavy", "equal", "decode_heavy"]:
     if phase in phases:
         p = phases[phase]
-        gpu_t = f"{max(p.get('gpu_temp',[0])):.0f}C" if p.get('gpu_temp') else "N/A"
-        gpu_p = f"{max(p.get('gpu_power',[0])):.1f}W" if p.get('gpu_power') else "N/A"
-        cpu_t = f"{max(p.get('cpu_temp',[0])):.0f}C" if p.get('cpu_temp') else "N/A"
-        nvme_t = f"{max(p.get('nvme_temp',[0])):.0f}C" if p.get('nvme_temp') else "N/A"
+        gpu_t = f"{max(p['gpu_temp']):.0f}C" if p['gpu_temp'] else "N/A"
+        gpu_p = f"{max(p['gpu_power']):.1f}W" if p['gpu_power'] else "N/A"
+        cpu_t = f"{max(p['cpu_temp']):.0f}C" if p['cpu_temp'] else "N/A"
+        nvme_t = f"{max(p['nvme_temp']):.0f}C" if p['nvme_temp'] else "N/A"
         print(f"{phase:<20} {gpu_t:>10} {gpu_p:>11} {cpu_t:>10} {nvme_t:>11}")
 PYEOF
 

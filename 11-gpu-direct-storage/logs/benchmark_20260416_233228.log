@@ -1,0 +1,26 @@
+============================================
+  ATOM Benchmark #11: GPU Direct Storage
+  Thu 16 Apr 2026 11:32:28 PM +08
+============================================
+[2026-04-16 23:32:28] gdsio found: /usr/local/cuda-13.0/gds/tools/gdsio
+[2026-04-16 23:32:28] WARNING: NVIDIA-FS driver not loaded.
+[2026-04-16 23:32:28] Attempting to load nvidia-fs module...
+[2026-04-16 23:32:28] nvidia-fs loaded successfully — testing GPU Direct Storage
+[2026-04-16 23:32:28] 
+[2026-04-16 23:32:28] NVMe device:
+NAME      SIZE MODEL                      ROTA
+nvme0n1   3.7T SAMSUNG MZALC4T0HBL1-00B07    0
+[2026-04-16 23:32:28] 
+[2026-04-16 23:32:28] GPU: NVIDIA GB10
+[2026-04-16 23:32:28] Test file location: /tmp/gdsio_test_file (/dev/nvme0n1p2 3.7T)
+[2026-04-16 23:32:28] 
+[2026-04-16 23:32:28] Creating test file (4G)...
+4294967296 bytes (4.3 GB, 4.0 GiB) copied, 5.4753 s, 784 MB/s
+[2026-04-16 23:32:34] Test file ready: /tmp/gdsio_test_file (4.0G)
+[2026-04-16 23:32:34] 
+[2026-04-16 23:32:34] ============================================
+[2026-04-16 23:32:34] TRANSFER MODE: gpu_direct (x=0)
+[2026-04-16 23:32:34] ============================================
+[2026-04-16 23:32:34] 
+[2026-04-16 23:32:34] --- gpu_direct | read 16K ---
+[2026-04-16 23:32:34]   [1/192] gpu_direct read 16K threads=1 rep=1

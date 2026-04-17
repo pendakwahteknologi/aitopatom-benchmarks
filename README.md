@@ -2,9 +2,9 @@
 
 # Gigabyte AI Top ATOM Benchmark Suite
 
-### 8 AI Benchmarks on the NVIDIA Grace Blackwell Superchip
+### 12 AI Benchmarks on the NVIDIA Grace Blackwell Superchip
 
-**Inference** · **Training** · **Efficiency** · **Image Generation** · **Video Generation** · **Voice** · **Coding**
+**Inference** · **Training** · **Efficiency** · **Image Generation** · **Voice** · **Coding** · **Storage** · **Thermal**
 
 ---
 
@@ -56,6 +56,9 @@ Gigabyte Grace Blackwell Desktop AI (ATOM)
 | 07 | **Image & Video Gen** | 49.7 img/min (512x512) · 1024x1024 in 4.2s · video skipped (ARM CPU bottleneck) | [Details](#07--image--video-generation) |
 | 08 | **Voice STT & TTS** | TTS: 2,012 chars/s · STT: 1.84x realtime | [Details](#08--voice-stt--tts) |
 | 09 | **Coding LLM Webpage** | Qwen3-Coder:30b 71.3 tok/s · full webpage in 56s | [Details](#09--coding-llm-webpage-generation) |
+| 10 | **vLLM Multi-Batch Serving** | *Pending — script ready, not yet run* | [Details](#10--vllm-online-serving) |
+| 11 | **GPU Direct Storage** | 10.73 GiB/s read · 8.19 GiB/s write (CPU->GPU path) | [Details](#11--gpu-direct-storage) |
+| 12 | **Thermal Stress Test** | GPU peak 74C · CPU peak 80C · no throttling under 30min sustained load | [Details](#12--thermal-stress-test) |
 
 ---
 
@@ -392,6 +395,81 @@ Download the HTML files from [`09-coding-llm-webpage/outputs/`](09-coding-llm-we
 
 ---
 
+## 10 — vLLM Online Serving
+
+> Multi-batch serving benchmark with vLLM across multiple models and workload profiles.
+
+**Status: Pending** — script ready, not yet run. Tests 4 models (Llama-3.1-8B, Qwen2.5-7B, GPT-OSS-20B, GPT-OSS-120B) across 3 workload profiles and 7 batch sizes.
+
+---
+
+## 11 — GPU Direct Storage
+
+> NVMe-to-GPU transfer speed using NVIDIA GDSIO. **10.73 GiB/s peak read**, **9.06 GiB/s peak write** on Samsung 3.7TB NVMe.
+
+| Test | Peak GiB/s | Best Threads | StorageReview Ref |
+|------|----------:|:------------:|-----------------:|
+| Read 1M | **10.73** | 16 | 11.60 |
+| Write 1M | **8.19** | 8-16 | 12.23 |
+| Read 16K | **7.83** | 128 | 6.84 |
+| Write 16K | **9.06** | 128 | 6.54 |
+
+> **Note:** GPU Direct Storage (x=0) is not functional on GB10 desktop Blackwell — nvidia-fs driver loads but cuFile fails. Results use the CPU->GPU (x=2) path. ATOM **exceeds** StorageReview on small-block IO (16K) while trailing on large-block sequential (1M).
+
+<details>
+<summary>Full thread scaling (1M block size)</summary>
+
+| Threads | Read GiB/s | Write GiB/s |
+|--------:|----------:|-----------:|
+| 1 | 6.23 | 3.82 |
+| 2 | 5.90 | 5.80 |
+| 4 | 8.04 | 7.38 |
+| 8 | 10.59 | 8.01 |
+| 16 | **10.73** | 8.02 |
+| 32 | 10.63 | 7.96 |
+| 64 | 9.64 | 7.70 |
+| 128 | 9.03 | 7.45 |
+
+</details>
+
+<details>
+<summary>Raw data</summary>
+
+See [`11-gpu-direct-storage/results/gdsio_20260416_235052.csv`](11-gpu-direct-storage/results/gdsio_20260416_235052.csv) for all 96 measurements.
+</details>
+
+---
+
+## 12 — Thermal Stress Test
+
+> 30 minutes of sustained AI workload across 3 phases. **GPU peaks at 74C, CPU at 80C — no thermal throttling.** Runs significantly cooler than StorageReview's reference.
+
+| Phase | GPU Peak | GPU Avg | Power Peak | CPU Peak | NVMe Peak |
+|-------|--------:|-------:|----------:|--------:|---------:|
+| Idle | 44C | 42.9C | 3.7W | 46C | 40C |
+| **Prefill Heavy** | **74C** | 69.6C | **53.9W** | **80C** | **52C** |
+| Equal ISL/OSL | 68C | 65.9C | 37.4W | 75C | 51C |
+| Decode Heavy | 69C | 66.0C | 39.8W | 74C | 50C |
+
+### vs StorageReview Reference
+
+| Component | ATOM Peak | StorageReview Peak |
+|-----------|----------:|-------------------:|
+| GPU | **74C** | 81C (-7C) |
+| CPU | **80C** | 90C (-10C) |
+| NVMe | **52C** | 59.8C (-8C) |
+| GPU Power | **53.9W** | 75.5W (-29%) |
+
+> All temperatures remain well within safe operating limits. Prefill-heavy workloads (ISL=2048) are the most demanding, pushing GPU power to 53.9W. Equal and decode phases run ~6C cooler.
+
+<details>
+<summary>Raw data</summary>
+
+See [`12-thermal-stress/results/thermal_20260417_010722.csv`](12-thermal-stress/results/thermal_20260417_010722.csv) for 1,689 temperature samples at 1s intervals.
+</details>
+
+---
+
 ## Repository Structure
 
 ```
@@ -404,7 +482,10 @@ aitopatom-benchmarks/
 ├── 06-inference-embedding/            GPU 3,417 chunks/s · 34.4x faster than CPU
 ├── 07-image-video-generation/         Z-Image-Turbo · 49.7 img/min · video skipped
 ├── 08-voice-stt-tts/                  TTS 2,012 chars/s · STT 1.84x realtime
-└── 09-coding-llm-webpage/            3 coding LLMs · qwen3-coder:30b 71.3 tok/s
+├── 09-coding-llm-webpage/            3 coding LLMs · qwen3-coder:30b 71.3 tok/s
+├── 10-vllm-serving/                   vLLM multi-batch serving · pending
+├── 11-gpu-direct-storage/             GDSIO · 10.73 GiB/s read · 8.19 GiB/s write
+└── 12-thermal-stress/                 GPU 74C peak · CPU 80C · no throttling
 ```
 
 Each benchmark includes:

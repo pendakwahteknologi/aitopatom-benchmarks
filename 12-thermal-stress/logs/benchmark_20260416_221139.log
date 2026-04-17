@@ -1,0 +1,14 @@
+============================================
+  ATOM Benchmark #12: Thermal Stress Test
+  Thu 16 Apr 2026 10:11:39 PM +08
+  Phase duration: 600s (10 min)
+  Model: Qwen/Qwen2.5-7B-Instruct
+============================================
+[2026-04-16 22:11:39] 
+[2026-04-16 22:11:39] Phase 0: IDLE BASELINE (60s)
+[2026-04-16 22:12:40] 
+[2026-04-16 22:12:40] Starting vLLM with Qwen/Qwen2.5-7B-Instruct...
+b6535d932d3f2a267f139a46533bbeec90f4f7b46a464ee5bb781a61f11df2ff
+docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: could not apply required modification to OCI specification: error modifying OCI spec: failed to create the automatic CDI modifier: failed to generate CDI spec for mode "auto": failed to construct device spec generators: failed to get full GPU device editors: error visiting device: error getting MIG mode: GPU requires reset
+
+Run 'docker run --help' for more information

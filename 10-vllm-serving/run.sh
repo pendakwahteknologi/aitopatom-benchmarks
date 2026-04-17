@@ -31,6 +31,15 @@ RESULTS_JSON="$RESULTS_DIR/vllm_serving_${TIMESTAMP}.json"
 
 mkdir -p "$RESULTS_DIR" "$SCRIPT_DIR/logs"
 
+# HF token for gated models (Llama)
+if [ -z "${HF_TOKEN:-}" ]; then
+    if [ -f "$HOME/.cache/huggingface/token" ]; then
+        export HF_TOKEN=$(cat "$HOME/.cache/huggingface/token")
+    else
+        echo "WARNING: HF_TOKEN not set and no token file found. Gated models will fail."
+    fi
+fi
+
 VLLM_IMAGE="nvcr.io/nvidia/vllm:26.01-py3"
 VLLM_PORT=8000
 VLLM_CONTAINER="vllm-bench10"
@@ -54,7 +63,7 @@ WORKLOADS["decode_heavy"]="1,2048"
 WORKLOAD_ORDER=("prefill_heavy" "equal" "decode_heavy")
 
 BATCH_SIZES=(1 2 4 8 16 32 64)
-N_REQUESTS=100  # requests per batch size test
+N_REQUESTS=100  # minimum requests per batch size test
 
 # ============================================================================
 # Helper functions
@@ -76,11 +85,13 @@ start_vllm() {
 
     # Stop any existing container
     sudo docker rm -f "$VLLM_CONTAINER" 2>/dev/null || true
+    sleep 2
 
     sudo docker run -d --name "$VLLM_CONTAINER" \
         --runtime nvidia --gpus all \
         --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 \
         -v "${CACHE_DIR}:/root/.cache" \
+        -e HF_TOKEN="${HF_TOKEN:-}" \
         -p ${VLLM_PORT}:8000 \
         --entrypoint python3 \
         "$VLLM_IMAGE" \
@@ -88,16 +99,23 @@ start_vllm() {
         --model "$model_id" \
         --max-model-len 4096 \
         --dtype auto \
+        --gpu-memory-utilization 0.8 \
         $extra_args 2>&1 | tee -a "$LOG_FILE"
 
-    # Wait for ready
+    # Wait for ready (1200s — Blackwell needs extra time for KV cache + CUDA graphs)
     log "Waiting for vLLM to be ready..."
     local ready=false
-    for i in $(seq 1 600); do
+    for i in $(seq 1 1200); do
         if curl -s http://localhost:${VLLM_PORT}/health > /dev/null 2>&1; then
             log "vLLM ready (took ${i}s)"
             ready=true
             break
+        fi
+        # Check if container crashed early
+        if ! sudo docker ps -q -f name="$VLLM_CONTAINER" | grep -q .; then
+            log "ERROR: vLLM container exited prematurely"
+            sudo docker logs --tail 30 "$VLLM_CONTAINER" 2>&1 | tee -a "$LOG_FILE"
+            return 1
         fi
         if [ $((i % 60)) -eq 0 ]; then
             log "Still waiting... (${i}s)"
@@ -106,7 +124,7 @@ start_vllm() {
     done
 
     if [ "$ready" = false ]; then
-        log "ERROR: vLLM failed to start within 600s"
+        log "ERROR: vLLM failed to start within 1200s"
         sudo docker logs --tail 30 "$VLLM_CONTAINER" 2>&1 | tee -a "$LOG_FILE"
         return 1
     fi
@@ -134,42 +152,78 @@ run_benchmark() {
 
     log "  Bench: $model_name | $workload_name | batch=$batch_size | ISL=$isl OSL=$osl | n=$n_requests"
 
-    # Generate requests and measure
+    # Generate input text once (approximate ISL token count)
+    local input_text=""
+    if [ "$isl" -gt 1 ]; then
+        input_text=$(python3 -c "print(' '.join(['The quick brown fox jumps over the lazy dog.'] * ($isl // 10 + 1))[:$isl*4])")
+    else
+        input_text="Hi"
+    fi
+
+    # Build request JSON once
+    local req_json=$(python3 -c "
+import json
+print(json.dumps({
+    'model': '$model_id',
+    'messages': [{'role': 'user', 'content': '''$input_text'''}],
+    'max_tokens': $osl,
+    'temperature': 0.0
+}))
+")
+
     local start_ns=$(date +%s%N)
     local total_tokens=0
     local total_time=0
-    local ttft_sum=0
     local success=0
     local failed=0
 
-    for i in $(seq 1 $n_requests); do
-        # Generate input of ISL length (approximate with repeated words)
-        local input_text=""
-        if [ "$isl" -gt 1 ]; then
-            input_text=$(python3 -c "print(' '.join(['The quick brown fox jumps over the lazy dog.'] * ($isl // 10 + 1))[:$isl*4])")
-        else
-            input_text="Hi"
-        fi
+    # Send requests concurrently in batches to test vLLM's actual batching
+    local remaining=$n_requests
+    while [ "$remaining" -gt 0 ]; do
+        local concurrent=$batch_size
+        [ "$concurrent" -gt "$remaining" ] && concurrent="$remaining"
 
-        local req_start=$(date +%s%N)
+        # Launch concurrent requests
+        local pids=()
+        local tmpdir=$(mktemp -d)
+        for j in $(seq 1 $concurrent); do
+            local req_start=$(date +%s%N)
+            (
+                resp=$(curl -s --max-time 120 \
+                    http://localhost:${VLLM_PORT}/v1/chat/completions \
+                    -H "Content-Type: application/json" \
+                    -d "$req_json" 2>/dev/null)
+                req_end=$(date +%s%N)
+                req_time=$(python3 -c "print(round(($req_end - $req_start) / 1e9, 4))")
+                tokens=$(echo "$resp" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('usage',{}).get('completion_tokens',0))" 2>/dev/null || echo "0")
+                echo "$tokens $req_time" > "$tmpdir/$j"
+            ) &
+            pids+=($!)
+        done
 
-        local resp=$(curl -s --max-time 120 \
-            http://localhost:${VLLM_PORT}/v1/chat/completions \
-            -H "Content-Type: application/json" \
-            -d "{\"model\":\"$model_id\",\"messages\":[{\"role\":\"user\",\"content\":\"$input_text\"}],\"max_tokens\":$osl,\"temperature\":0.0}" 2>/dev/null)
+        # Wait for all concurrent requests
+        for pid in "${pids[@]}"; do
+            wait "$pid" 2>/dev/null || true
+        done
 
-        local req_end=$(date +%s%N)
-        local req_time=$(python3 -c "print(round(($req_end - $req_start) / 1e9, 4))")
+        # Collect results
+        for j in $(seq 1 $concurrent); do
+            if [ -f "$tmpdir/$j" ]; then
+                read tokens req_time < "$tmpdir/$j"
+                if [ "${tokens:-0}" -gt 0 ]; then
+                    total_tokens=$((total_tokens + tokens))
+                    total_time=$(python3 -c "print(round($total_time + $req_time, 4))")
+                    success=$((success + 1))
+                else
+                    failed=$((failed + 1))
+                fi
+            else
+                failed=$((failed + 1))
+            fi
+        done
+        rm -rf "$tmpdir"
 
-        local tokens=$(echo "$resp" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('usage',{}).get('completion_tokens',0))" 2>/dev/null || echo "0")
-
-        if [ "$tokens" -gt 0 ]; then
-            total_tokens=$((total_tokens + tokens))
-            total_time=$(python3 -c "print(round($total_time + $req_time, 4))")
-            success=$((success + 1))
-        else
-            failed=$((failed + 1))
-        fi
+        remaining=$((remaining - concurrent))
     done
 
     local end_ns=$(date +%s%N)
@@ -217,6 +271,7 @@ for model_name in "${MODEL_ORDER[@]}"; do
 
     if ! start_vllm "$model_id" "$model_name"; then
         log "SKIPPING $model_name — failed to start"
+        stop_vllm
         continue
     fi
 

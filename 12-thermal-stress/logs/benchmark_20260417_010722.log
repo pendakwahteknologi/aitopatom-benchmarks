@@ -1,0 +1,25 @@
+============================================
+  ATOM Benchmark #12: Thermal Stress Test
+  Fri 17 Apr 2026 01:07:22 AM +08
+  Phase duration: 600s (10 min)
+  Model: Qwen/Qwen2.5-7B-Instruct
+============================================
+[2026-04-17 01:07:23] 
+[2026-04-17 01:07:23] Phase 0: IDLE BASELINE (60s)
+[2026-04-17 01:08:23] 
+[2026-04-17 01:08:23] Starting vLLM with Qwen/Qwen2.5-7B-Instruct...
+dff97c4efa447f9ccaa70c63bc1ab264569d5897cf3e611b7ad08846b08ba5f3
+[2026-04-17 01:08:23] Waiting for vLLM...
+[2026-04-17 01:09:24] Still waiting... (60s)
+[2026-04-17 01:10:25] Still waiting... (120s)
+[2026-04-17 01:10:43] vLLM ready (took 137s)
+[2026-04-17 01:10:48] 
+[2026-04-17 01:10:48] Phase 1: PREFILL HEAVY (ISL=2048, OSL=1) — 600s
+[2026-04-17 01:20:48] 
+[2026-04-17 01:20:48] Cooldown: 60s
+[2026-04-17 01:21:48] 
+[2026-04-17 01:21:48] Phase 2: EQUAL ISL/OSL (ISL=512, OSL=512) — 600s
+[2026-04-17 01:31:48] 
+[2026-04-17 01:31:48] Cooldown: 60s
+[2026-04-17 01:32:48] 
+[2026-04-17 01:32:48] Phase 3: DECODE HEAVY (ISL=1, OSL=2048) — 600s

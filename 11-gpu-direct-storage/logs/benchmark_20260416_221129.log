@@ -1,0 +1,6 @@
+============================================
+  ATOM Benchmark #11: GPU Direct Storage
+  Thu 16 Apr 2026 10:11:29 PM +08
+============================================
+[2026-04-16 22:11:29] ERROR: gdsio not found at /usr/local/bin/gdsio
+[2026-04-16 22:11:29] Install with: sudo apt install gds-tools-13-0

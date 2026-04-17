@@ -1,0 +1,225 @@
+============================================
+  ATOM Benchmark #11: GPU Direct Storage
+  Thu 16 Apr 2026 11:50:52 PM +08
+============================================
+[2026-04-16 23:50:52] gdsio found: /usr/local/cuda-13.0/gds/tools/gdsio
+[2026-04-16 23:50:52] NVIDIA-FS driver: loaded
+[2026-04-16 23:50:53] GPU Direct Storage probe: FAIL (driver loaded but cuFile not functional on GB10)
+[2026-04-16 23:50:53] Testing CPU->GPU path only.
+[2026-04-16 23:50:53] 
+[2026-04-16 23:50:53] NVMe device:
+NAME      SIZE MODEL                      ROTA
+nvme0n1   3.7T SAMSUNG MZALC4T0HBL1-00B07    0
+[2026-04-16 23:50:53] 
+[2026-04-16 23:50:53] GPU: NVIDIA GB10
+[2026-04-16 23:50:53] Test file location: /tmp/gdsio_test_file (/dev/nvme0n1p2 3.7T)
+[2026-04-16 23:50:53] 
+[2026-04-16 23:50:53] Creating test file (1G)...
+1073741824 bytes (1.1 GB, 1.0 GiB) copied, 1.37551 s, 781 MB/s
+[2026-04-16 23:50:54] Test file ready: /tmp/gdsio_test_file (1.0G)
+[2026-04-16 23:50:54] 
+[2026-04-16 23:50:54] ============================================
+[2026-04-16 23:50:54] TRANSFER MODE: cpu_gpu (x=2)
+[2026-04-16 23:50:54] ============================================
+[2026-04-16 23:50:54] 
+[2026-04-16 23:50:54] --- cpu_gpu | read 16K ---
+[2026-04-16 23:50:54]   [1/96] cpu_gpu read 16K threads=1 rep=1
+[2026-04-16 23:51:14]     => 0.050578 GiB/s | 301.537552ms latency | GPU: 44C
+[2026-04-16 23:51:14]   [2/96] cpu_gpu read 16K threads=1 rep=2
+[2026-04-16 23:51:36]     => 0.047392 GiB/s | 321.955292ms latency | GPU: 44C
+[2026-04-16 23:51:36]   [3/96] cpu_gpu read 16K threads=1 rep=3
+[2026-04-16 23:51:56]     => 0.051568 GiB/s | 295.744278ms latency | GPU: 45C
+[2026-04-16 23:51:56]   [4/96] cpu_gpu read 16K threads=2 rep=1
+[2026-04-16 23:52:11]     => 0.091712 GiB/s | 423.381541ms latency | GPU: 45C
+[2026-04-16 23:52:11]   [5/96] cpu_gpu read 16K threads=2 rep=2
+[2026-04-16 23:52:22]     => 0.108597 GiB/s | 298.554713ms latency | GPU: 45C
+[2026-04-16 23:52:22]   [6/96] cpu_gpu read 16K threads=2 rep=3
+[2026-04-16 23:52:34]     => 0.108352 GiB/s | 299.523711ms latency | GPU: 45C
+[2026-04-16 23:52:34]   [7/96] cpu_gpu read 16K threads=4 rep=1
+[2026-04-16 23:52:39]     => 0.256581 GiB/s | 237.480996ms latency | GPU: 46C
+[2026-04-16 23:52:39]   [8/96] cpu_gpu read 16K threads=4 rep=2
+[2026-04-16 23:52:45]     => 0.202195 GiB/s | 309.454210ms latency | GPU: 46C
+[2026-04-16 23:52:45]   [9/96] cpu_gpu read 16K threads=4 rep=3
+[2026-04-16 23:52:53]     => 0.169911 GiB/s | 404.567606ms latency | GPU: 46C
+[2026-04-16 23:52:53]   [10/96] cpu_gpu read 16K threads=8 rep=1
+[2026-04-16 23:52:56]     => 0.489043 GiB/s | 250.126369ms latency | GPU: 46C
+[2026-04-16 23:52:56]   [11/96] cpu_gpu read 16K threads=8 rep=2
+[2026-04-16 23:52:59]     => 0.527140 GiB/s | 235.641614ms latency | GPU: 46C
+[2026-04-16 23:52:59]   [12/96] cpu_gpu read 16K threads=8 rep=3
+[2026-04-16 23:53:03]     => 0.443985 GiB/s | 280.781580ms latency | GPU: 46C
+[2026-04-16 23:53:03]   [13/96] cpu_gpu read 16K threads=16 rep=1
+[2026-04-16 23:53:05]     => 0.848649 GiB/s | 285.396967ms latency | GPU: 47C
+[2026-04-16 23:53:05]   [14/96] cpu_gpu read 16K threads=16 rep=2
+[2026-04-16 23:53:06]     => 0.851530 GiB/s | 284.538648ms latency | GPU: 47C
+[2026-04-16 23:53:06]   [15/96] cpu_gpu read 16K threads=16 rep=3
+[2026-04-16 23:53:08]     => 0.950062 GiB/s | 254.890472ms latency | GPU: 48C
+[2026-04-16 23:53:08]   [16/96] cpu_gpu read 16K threads=32 rep=1
+[2026-04-16 23:53:09]     => 1.439372 GiB/s | 334.144181ms latency | GPU: 48C
+[2026-04-16 23:53:09]   [17/96] cpu_gpu read 16K threads=32 rep=2
+[2026-04-16 23:53:10]     => 1.498885 GiB/s | 320.631210ms latency | GPU: 48C
+[2026-04-16 23:53:10]   [18/96] cpu_gpu read 16K threads=32 rep=3
+[2026-04-16 23:53:11]     => 1.422042 GiB/s | 338.288343ms latency | GPU: 48C
+[2026-04-16 23:53:11]   [19/96] cpu_gpu read 16K threads=64 rep=1
+[2026-04-16 23:53:12]     => 4.068700 GiB/s | 228.991152ms latency | GPU: 48C
+[2026-04-16 23:53:12]   [20/96] cpu_gpu read 16K threads=64 rep=2
+[2026-04-16 23:53:13]     => 4.419805 GiB/s | 210.483241ms latency | GPU: 48C
+[2026-04-16 23:53:13]   [21/96] cpu_gpu read 16K threads=64 rep=3
+[2026-04-16 23:53:14]     => 3.984860 GiB/s | 234.714027ms latency | GPU: 48C
+[2026-04-16 23:53:14]   [22/96] cpu_gpu read 16K threads=128 rep=1
+[2026-04-16 23:53:14]     => 7.767926 GiB/s | 229.948669ms latency | GPU: 48C
+[2026-04-16 23:53:14]   [23/96] cpu_gpu read 16K threads=128 rep=2
+[2026-04-16 23:53:15]     => 7.727932 GiB/s | 230.865188ms latency | GPU: 48C
+[2026-04-16 23:53:15]   [24/96] cpu_gpu read 16K threads=128 rep=3
+[2026-04-16 23:53:15]     => 7.831014 GiB/s | 227.812497ms latency | GPU: 48C
+[2026-04-16 23:53:15] 
+[2026-04-16 23:53:15] --- cpu_gpu | read 1M ---
+[2026-04-16 23:53:15]   [25/96] cpu_gpu read 1M threads=1 rep=1
+[2026-04-16 23:53:16]     => 6.366467 GiB/s | 152.764648ms latency | GPU: 48C
+[2026-04-16 23:53:16]   [26/96] cpu_gpu read 1M threads=1 rep=2
+[2026-04-16 23:53:17]     => 6.362294 GiB/s | 152.875000ms latency | GPU: 48C
+[2026-04-16 23:53:17]   [27/96] cpu_gpu read 1M threads=1 rep=3
+[2026-04-16 23:53:17]     => 5.959582 GiB/s | 154.545898ms latency | GPU: 48C
+[2026-04-16 23:53:17]   [28/96] cpu_gpu read 1M threads=2 rep=1
+[2026-04-16 23:53:18]     => 6.216159 GiB/s | 295.777613ms latency | GPU: 48C
+[2026-04-16 23:53:18]   [29/96] cpu_gpu read 1M threads=2 rep=2
+[2026-04-16 23:53:18]     => 5.669949 GiB/s | 337.691075ms latency | GPU: 48C
+[2026-04-16 23:53:18]   [30/96] cpu_gpu read 1M threads=2 rep=3
+[2026-04-16 23:53:19]     => 5.822270 GiB/s | 331.259237ms latency | GPU: 48C
+[2026-04-16 23:53:19]   [31/96] cpu_gpu read 1M threads=4 rep=1
+[2026-04-16 23:53:20]     => 8.291534 GiB/s | 436.169873ms latency | GPU: 48C
+[2026-04-16 23:53:20]   [32/96] cpu_gpu read 1M threads=4 rep=2
+[2026-04-16 23:53:20]     => 8.168698 GiB/s | 456.182818ms latency | GPU: 48C
+[2026-04-16 23:53:20]   [33/96] cpu_gpu read 1M threads=4 rep=3
+[2026-04-16 23:53:21]     => 7.661823 GiB/s | 476.911454ms latency | GPU: 48C
+[2026-04-16 23:53:21]   [34/96] cpu_gpu read 1M threads=8 rep=1
+[2026-04-16 23:53:21]     => 10.633269 GiB/s | 656.701087ms latency | GPU: 48C
+[2026-04-16 23:53:21]   [35/96] cpu_gpu read 1M threads=8 rep=2
+[2026-04-16 23:53:22]     => 10.667504 GiB/s | 654.444750ms latency | GPU: 48C
+[2026-04-16 23:53:22]   [36/96] cpu_gpu read 1M threads=8 rep=3
+[2026-04-16 23:53:22]     => 10.453476 GiB/s | 669.997877ms latency | GPU: 48C
+[2026-04-16 23:53:22]   [37/96] cpu_gpu read 1M threads=16 rep=1
+[2026-04-16 23:53:23]     => 10.612028 GiB/s | 1318.430279ms latency | GPU: 48C
+[2026-04-16 23:53:23]   [38/96] cpu_gpu read 1M threads=16 rep=2
+[2026-04-16 23:53:24]     => 10.729792 GiB/s | 1299.377871ms latency | GPU: 48C
+[2026-04-16 23:53:24]   [39/96] cpu_gpu read 1M threads=16 rep=3
+[2026-04-16 23:53:24]     => 10.657390 GiB/s | 1310.294663ms latency | GPU: 48C
+[2026-04-16 23:53:24]   [40/96] cpu_gpu read 1M threads=32 rep=1
+[2026-04-16 23:53:25]     => 10.575682 GiB/s | 2638.889900ms latency | GPU: 48C
+[2026-04-16 23:53:25]   [41/96] cpu_gpu read 1M threads=32 rep=2
+[2026-04-16 23:53:25]     => 10.610014 GiB/s | 2626.002936ms latency | GPU: 48C
+[2026-04-16 23:53:25]   [42/96] cpu_gpu read 1M threads=32 rep=3
+[2026-04-16 23:53:26]     => 10.698312 GiB/s | 2591.587636ms latency | GPU: 48C
+[2026-04-16 23:53:26]   [43/96] cpu_gpu read 1M threads=64 rep=1
+[2026-04-16 23:53:26]     => 9.603715 GiB/s | 5810.967137ms latency | GPU: 48C
+[2026-04-16 23:53:26]   [44/96] cpu_gpu read 1M threads=64 rep=2
+[2026-04-16 23:53:27]     => 9.680407 GiB/s | 5852.108197ms latency | GPU: 48C
+[2026-04-16 23:53:27]   [45/96] cpu_gpu read 1M threads=64 rep=3
+[2026-04-16 23:53:28]     => 9.647326 GiB/s | 5955.556908ms latency | GPU: 48C
+[2026-04-16 23:53:28]   [46/96] cpu_gpu read 1M threads=128 rep=1
+[2026-04-16 23:53:28]     => 10.442565 GiB/s | 13376.338430ms latency | GPU: 48C
+[2026-04-16 23:53:28]   [47/96] cpu_gpu read 1M threads=128 rep=2
+[2026-04-16 23:53:29]     => 8.332336 GiB/s | 13139.674712ms latency | GPU: 48C
+[2026-04-16 23:53:29]   [48/96] cpu_gpu read 1M threads=128 rep=3
+[2026-04-16 23:53:30]     => 8.322976 GiB/s | 15374.459542ms latency | GPU: 48C
+[2026-04-16 23:53:30] 
+[2026-04-16 23:53:30] --- cpu_gpu | write 16K ---
+[2026-04-16 23:53:30]   [49/96] cpu_gpu write 16K threads=1 rep=1
+[2026-04-16 23:53:44]     => 0.073646 GiB/s | 207.181503ms latency | GPU: 47C
+[2026-04-16 23:53:44]   [50/96] cpu_gpu write 16K threads=1 rep=2
+[2026-04-16 23:53:58]     => 0.073080 GiB/s | 208.649170ms latency | GPU: 47C
+[2026-04-16 23:53:58]   [51/96] cpu_gpu write 16K threads=1 rep=3
+[2026-04-16 23:54:24]     => 0.038965 GiB/s | 391.452667ms latency | GPU: 47C
+[2026-04-16 23:54:24]   [52/96] cpu_gpu write 16K threads=2 rep=1
+[2026-04-16 23:54:38]     => 0.096527 GiB/s | 377.127305ms latency | GPU: 47C
+[2026-04-16 23:54:38]   [53/96] cpu_gpu write 16K threads=2 rep=2
+[2026-04-16 23:54:51]     => 0.101943 GiB/s | 342.568143ms latency | GPU: 47C
+[2026-04-16 23:54:51]   [54/96] cpu_gpu write 16K threads=2 rep=3
+[2026-04-16 23:54:59]     => 0.138787 GiB/s | 219.605520ms latency | GPU: 47C
+[2026-04-16 23:54:59]   [55/96] cpu_gpu write 16K threads=4 rep=1
+[2026-04-16 23:55:04]     => 0.211128 GiB/s | 294.167120ms latency | GPU: 47C
+[2026-04-16 23:55:04]   [56/96] cpu_gpu write 16K threads=4 rep=2
+[2026-04-16 23:55:10]     => 0.207353 GiB/s | 300.060404ms latency | GPU: 47C
+[2026-04-16 23:55:10]   [57/96] cpu_gpu write 16K threads=4 rep=3
+[2026-04-16 23:55:16]     => 0.229485 GiB/s | 274.130457ms latency | GPU: 47C
+[2026-04-16 23:55:16]   [58/96] cpu_gpu write 16K threads=8 rep=1
+[2026-04-16 23:55:20]     => 0.401766 GiB/s | 309.856893ms latency | GPU: 47C
+[2026-04-16 23:55:20]   [59/96] cpu_gpu write 16K threads=8 rep=2
+[2026-04-16 23:55:22]     => 0.504185 GiB/s | 241.011992ms latency | GPU: 47C
+[2026-04-16 23:55:22]   [60/96] cpu_gpu write 16K threads=8 rep=3
+[2026-04-16 23:55:25]     => 0.444088 GiB/s | 275.227179ms latency | GPU: 47C
+[2026-04-16 23:55:25]   [61/96] cpu_gpu write 16K threads=16 rep=1
+[2026-04-16 23:55:27]     => 0.900036 GiB/s | 269.197641ms latency | GPU: 48C
+[2026-04-16 23:55:27]   [62/96] cpu_gpu write 16K threads=16 rep=2
+[2026-04-16 23:55:28]     => 0.928622 GiB/s | 260.888974ms latency | GPU: 48C
+[2026-04-16 23:55:28]   [63/96] cpu_gpu write 16K threads=16 rep=3
+[2026-04-16 23:55:30]     => 1.053754 GiB/s | 229.996143ms latency | GPU: 48C
+[2026-04-16 23:55:30]   [64/96] cpu_gpu write 16K threads=32 rep=1
+[2026-04-16 23:55:31]     => 1.535289 GiB/s | 313.044099ms latency | GPU: 48C
+[2026-04-16 23:55:31]   [65/96] cpu_gpu write 16K threads=32 rep=2
+[2026-04-16 23:55:32]     => 1.616205 GiB/s | 301.822305ms latency | GPU: 48C
+[2026-04-16 23:55:32]   [66/96] cpu_gpu write 16K threads=32 rep=3
+[2026-04-16 23:55:33]     => 1.565726 GiB/s | 306.850276ms latency | GPU: 48C
+[2026-04-16 23:55:33]   [67/96] cpu_gpu write 16K threads=64 rep=1
+[2026-04-16 23:55:34]     => 5.982067 GiB/s | 152.900762ms latency | GPU: 48C
+[2026-04-16 23:55:34]   [68/96] cpu_gpu write 16K threads=64 rep=2
+[2026-04-16 23:55:35]     => 6.280171 GiB/s | 145.017649ms latency | GPU: 49C
+[2026-04-16 23:55:35]   [69/96] cpu_gpu write 16K threads=64 rep=3
+[2026-04-16 23:55:35]     => 6.321822 GiB/s | 144.043604ms latency | GPU: 49C
+[2026-04-16 23:55:35]   [70/96] cpu_gpu write 16K threads=128 rep=1
+[2026-04-16 23:55:36]     => 8.338485 GiB/s | 212.814035ms latency | GPU: 48C
+[2026-04-16 23:55:36]   [71/96] cpu_gpu write 16K threads=128 rep=2
+[2026-04-16 23:55:36]     => 9.059464 GiB/s | 193.998938ms latency | GPU: 49C
+[2026-04-16 23:55:36]   [72/96] cpu_gpu write 16K threads=128 rep=3
+[2026-04-16 23:55:37]     => 8.360882 GiB/s | 211.528768ms latency | GPU: 49C
+[2026-04-16 23:55:37] 
+[2026-04-16 23:55:37] --- cpu_gpu | write 1M ---
+[2026-04-16 23:55:37]   [73/96] cpu_gpu write 1M threads=1 rep=1
+[2026-04-16 23:55:38]     => 2.657165 GiB/s | 366.737305ms latency | GPU: 48C
+[2026-04-16 23:55:38]   [74/96] cpu_gpu write 1M threads=1 rep=2
+[2026-04-16 23:55:39]     => 3.412096 GiB/s | 276.716797ms latency | GPU: 48C
+[2026-04-16 23:55:39]   [75/96] cpu_gpu write 1M threads=1 rep=3
+[2026-04-16 23:55:39]     => 5.395140 GiB/s | 171.447266ms latency | GPU: 48C
+[2026-04-16 23:55:39]   [76/96] cpu_gpu write 1M threads=2 rep=1
+[2026-04-16 23:55:40]     => 4.166706 GiB/s | 453.819414ms latency | GPU: 48C
+[2026-04-16 23:55:40]   [77/96] cpu_gpu write 1M threads=2 rep=2
+[2026-04-16 23:55:41]     => 6.647593 GiB/s | 274.346962ms latency | GPU: 49C
+[2026-04-16 23:55:41]   [78/96] cpu_gpu write 1M threads=2 rep=3
+[2026-04-16 23:55:41]     => 6.578493 GiB/s | 277.691608ms latency | GPU: 49C
+[2026-04-16 23:55:41]   [79/96] cpu_gpu write 1M threads=4 rep=1
+[2026-04-16 23:55:42]     => 7.493139 GiB/s | 485.724659ms latency | GPU: 49C
+[2026-04-16 23:55:42]   [80/96] cpu_gpu write 1M threads=4 rep=2
+[2026-04-16 23:55:42]     => 7.383443 GiB/s | 493.268987ms latency | GPU: 49C
+[2026-04-16 23:55:42]   [81/96] cpu_gpu write 1M threads=4 rep=3
+[2026-04-16 23:55:43]     => 7.259232 GiB/s | 499.213735ms latency | GPU: 49C
+[2026-04-16 23:55:43]   [82/96] cpu_gpu write 1M threads=8 rep=1
+[2026-04-16 23:55:43]     => 8.175123 GiB/s | 877.782403ms latency | GPU: 48C
+[2026-04-16 23:55:43]   [83/96] cpu_gpu write 1M threads=8 rep=2
+[2026-04-16 23:55:44]     => 7.682809 GiB/s | 938.984383ms latency | GPU: 48C
+[2026-04-16 23:55:44]   [84/96] cpu_gpu write 1M threads=8 rep=3
+[2026-04-16 23:55:45]     => 8.171724 GiB/s | 877.928920ms latency | GPU: 49C
+[2026-04-16 23:55:45]   [85/96] cpu_gpu write 1M threads=16 rep=1
+[2026-04-16 23:55:45]     => 8.191706 GiB/s | 1750.185118ms latency | GPU: 48C
+[2026-04-16 23:55:45]   [86/96] cpu_gpu write 1M threads=16 rep=2
+[2026-04-16 23:55:46]     => 7.676292 GiB/s | 1876.463972ms latency | GPU: 48C
+[2026-04-16 23:55:46]   [87/96] cpu_gpu write 1M threads=16 rep=3
+[2026-04-16 23:55:46]     => 8.184465 GiB/s | 1750.274091ms latency | GPU: 48C
+[2026-04-16 23:55:46]   [88/96] cpu_gpu write 1M threads=32 rep=1
+[2026-04-16 23:55:47]     => 8.194256 GiB/s | 3495.987479ms latency | GPU: 48C
+[2026-04-16 23:55:47]   [89/96] cpu_gpu write 1M threads=32 rep=2
+[2026-04-16 23:55:48]     => 7.526390 GiB/s | 3832.851177ms latency | GPU: 48C
+[2026-04-16 23:55:48]   [90/96] cpu_gpu write 1M threads=32 rep=3
+[2026-04-16 23:55:48]     => 8.167140 GiB/s | 3490.005975ms latency | GPU: 48C
+[2026-04-16 23:55:48]   [91/96] cpu_gpu write 1M threads=64 rep=1
+[2026-04-16 23:55:49]     => 7.915609 GiB/s | 7305.345369ms latency | GPU: 48C
+[2026-04-16 23:55:49]   [92/96] cpu_gpu write 1M threads=64 rep=2
+[2026-04-16 23:55:49]     => 7.254104 GiB/s | 7983.529433ms latency | GPU: 48C
+[2026-04-16 23:55:49]   [93/96] cpu_gpu write 1M threads=64 rep=3
+[2026-04-16 23:55:50]     => 7.925931 GiB/s | 7608.402773ms latency | GPU: 48C
+[2026-04-16 23:55:50]   [94/96] cpu_gpu write 1M threads=128 rep=1
+[2026-04-16 23:55:51]     => 7.334751 GiB/s | 16075.161979ms latency | GPU: 49C
+[2026-04-16 23:55:51]   [95/96] cpu_gpu write 1M threads=128 rep=2
+[2026-04-16 23:55:52]     => 7.515829 GiB/s | 15028.725837ms latency | GPU: 48C
+[2026-04-16 23:55:52]   [96/96] cpu_gpu write 1M threads=128 rep=3
+[2026-04-16 23:55:52]     => 7.508161 GiB/s | 15905.595647ms latency | GPU: 49C
+[2026-04-16 23:55:52] 
+[2026-04-16 23:55:52] Cleaning up test file...

@@ -1,0 +1,25 @@
+============================================
+  ATOM Benchmark #11: GPU Direct Storage
+  Thu 16 Apr 2026 11:35:52 PM +08
+============================================
+[2026-04-16 23:35:52] gdsio found: /usr/local/cuda-13.0/gds/tools/gdsio
+[2026-04-16 23:35:52] NVIDIA-FS driver: loaded
+[2026-04-16 23:35:52] GPU Direct Storage probe: FAIL (driver loaded but cuFile not functional on GB10)
+[2026-04-16 23:35:52] Testing CPU->GPU path only.
+[2026-04-16 23:35:52] 
+[2026-04-16 23:35:52] NVMe device:
+NAME      SIZE MODEL                      ROTA
+nvme0n1   3.7T SAMSUNG MZALC4T0HBL1-00B07    0
+[2026-04-16 23:35:52] 
+[2026-04-16 23:35:52] GPU: NVIDIA GB10
+[2026-04-16 23:35:52] Test file location: /tmp/gdsio_test_file (/dev/nvme0n1p2 3.7T)
+[2026-04-16 23:35:52] 
+[2026-04-16 23:35:52] Creating test file (4G)...
+[2026-04-16 23:35:52] Test file ready: /tmp/gdsio_test_file (4.1G)
+[2026-04-16 23:35:52] 
+[2026-04-16 23:35:52] ============================================
+[2026-04-16 23:35:52] TRANSFER MODE: cpu_gpu (x=2)
+[2026-04-16 23:35:52] ============================================
+[2026-04-16 23:35:52] 
+[2026-04-16 23:35:52] --- cpu_gpu | read 16K ---
+[2026-04-16 23:35:52]   [1/96] cpu_gpu read 16K threads=1 rep=1

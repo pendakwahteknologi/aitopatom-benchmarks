@@ -2,7 +2,7 @@
 
 Tests production-level serving throughput across batch sizes 1-64 using vLLM, matching the [StorageReview Gigabyte AI TOP ATOM review](https://www.storagereview.com/review/gigabyte-ai-top-atom-review) methodology.
 
-## Status: Pending
+## Status: Pending (script ready, not yet run)
 
 ## Hardware
 
